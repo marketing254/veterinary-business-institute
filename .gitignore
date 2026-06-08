@@ -1,0 +1,62 @@
+# dependencies
+/node_modules
+
+# next.js build output
+/.next/
+/out/
+
+# production / misc build
+/build
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env
+.env*.local
+
+# os / editor
+.DS_Store
+*.pem
+.vscode/
+.idea/
+
+# debug screenshots & scratch artifacts (kept on disk, not tracked)
+/output/
+/*.png
+.claude
+
+# legacy static prototype (superseded by the Next.js app)
+/index.html
+/script.js
+/styles.css
+
+# leftover merge source copy (not part of the app)
+/vet updated/
+
+# scraped site dumps / research artifacts (not source)
+marketing254.github.io_*.json
+marketing254.github.io_*.md
+artifact-snapshot.md
+reg-form-snapshot.md
+
+# generated autoresearch output
+site_autoresearch/latest-report.json
+site_autoresearch/results.tsv
+
+# python / notebook caches (vendor/autoresearch)
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+*.egg-info/
+
+# misc
+*.log
+Thumbs.db
+appscript.gs
+VBI_Manual_Setup_Guide.md
+dlappscript.gs

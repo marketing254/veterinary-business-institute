@@ -1,0 +1,683 @@
+.heroGrid {
+  align-items: start;
+}
+
+.newsStrip {
+  padding: 28px 0 0;
+}
+
+.newsStripInner {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+  gap: 18px;
+  align-items: stretch;
+}
+
+.newsIntro {
+  display: grid;
+  gap: 10px;
+}
+
+.newsIntro h2 {
+  margin: 0;
+  color: var(--forest-950);
+  font-size: clamp(1.5rem, 2.2vw, 2.3rem);
+  line-height: 1.05;
+}
+
+.newsCards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.newsCard {
+  display: grid;
+  gap: 8px;
+  padding: 18px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(63, 123, 79, 0.16);
+  box-shadow: var(--shadow-md);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.newsCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(47, 107, 69, 0.28);
+  box-shadow: var(--shadow-lg);
+}
+
+.newsCard strong {
+  color: var(--forest-950);
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.newsCard p {
+  margin: 0;
+  color: var(--ink-600);
+}
+
+.topJoinGrid,
+.heroPanel {
+  display: grid;
+}
+
+.topicTapeSection {
+  padding: 8px 0 0;
+  overflow: hidden;
+}
+
+.topicTape {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  padding: 0 28px 10px;
+  animation: tapeSlide 34s linear infinite;
+}
+
+.topicChip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: rgba(22, 44, 40, 0.08);
+  border: 1px solid rgba(22, 44, 40, 0.08);
+  color: var(--forest-900);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.topJoinGrid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.heroPanel {
+  gap: 20px;
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top right, rgba(63, 123, 79, 0.14), transparent 36%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.76));
+  border: 1px solid rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(16px);
+}
+
+.heroPanelHeader {
+  display: grid;
+  gap: 8px;
+}
+
+.heroPanelHeader strong {
+  color: var(--forest-950);
+  font-size: 1.6rem;
+  line-height: 1.15;
+}
+
+.metricRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.metricCard {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(63, 123, 79, 0.14);
+}
+
+.metricValue {
+  color: var(--forest-950);
+  font-size: 1.65rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.metricLabel {
+  color: var(--ink-700);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.signalStack {
+  display: grid;
+  gap: 12px;
+}
+
+.signalItem {
+  display: grid;
+  gap: 8px;
+  padding: 18px 18px 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 28px rgba(16, 35, 32, 0.08);
+}
+
+.signalItem strong {
+  color: var(--forest-950);
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+
+.signalItem p {
+  margin: 0;
+  color: var(--ink-700);
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+.topJoinSupport {
+  display: grid;
+  gap: 18px;
+}
+
+.streamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.streamCard {
+  overflow: hidden;
+  padding: 0;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.streamCard:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(47, 107, 69, 0.24);
+}
+
+.streamImage {
+  width: 100%;
+  aspect-ratio: 1.3 / 1;
+  object-fit: cover;
+  display: block;
+}
+
+.streamBody {
+  display: grid;
+  gap: 10px;
+  padding: 20px 22px 24px;
+}
+
+.streamMeta {
+  margin: 0;
+  color: var(--ink-500);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.streamBody h3 {
+  margin: 0;
+  color: var(--forest-950);
+  font-size: 1.18rem;
+  line-height: 1.35;
+}
+
+.streamBody p {
+  margin: 0;
+}
+
+.streamCta {
+  color: var(--teal-700);
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.formShell {
+  display: grid;
+  gap: 20px;
+  padding: 30px;
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at top left, rgba(63, 123, 79, 0.16), transparent 32%),
+    rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.84);
+  box-shadow: var(--shadow-lg);
+}
+
+.formShellDark {
+  color: rgba(255, 255, 255, 0.9);
+  background:
+    radial-gradient(circle at top left, rgba(63, 123, 79, 0.18), transparent 34%),
+    rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.formIntro {
+  display: grid;
+  gap: 10px;
+}
+
+.formIntro h3 {
+  margin: 0;
+  color: var(--forest-950);
+  font-size: 2rem;
+  line-height: 1.05;
+}
+
+.formIntro p,
+.formNote {
+  margin: 0;
+  color: var(--ink-700);
+  line-height: 1.75;
+}
+
+.formShellDark .formIntro h3,
+.formShellDark .formIntro p,
+.formShellDark .formNote {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.joinForm {
+  display: grid;
+  gap: 18px;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.formField {
+  display: grid;
+  gap: 8px;
+}
+
+.formField span {
+  color: var(--forest-900);
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.formShellDark .formField span {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.formField input,
+.formField select {
+  width: 100%;
+  min-height: 56px;
+  padding: 0 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(63, 123, 79, 0.18);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--forest-950);
+  font: inherit;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.formShellDark .formField input,
+.formShellDark .formField select {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.formField input:focus,
+.formField select:focus {
+  border-color: rgba(47, 107, 69, 0.45);
+  box-shadow: 0 0 0 4px rgba(47, 107, 69, 0.12);
+}
+
+.formFieldFull {
+  grid-column: 1 / -1;
+}
+
+.formButton {
+  width: 100%;
+}
+
+.formSuccess {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(63, 123, 79, 0.1);
+  color: var(--forest-900);
+  line-height: 1.65;
+}
+
+.formShellDark .formSuccess {
+  background: rgba(63, 123, 79, 0.16);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.joinGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.joinCard {
+  display: grid;
+  gap: 20px;
+}
+
+.joinList {
+  display: grid;
+  gap: 14px;
+}
+
+.joinItem {
+  display: grid;
+  gap: 6px;
+  padding: 18px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.joinItem strong {
+  color: rgba(255, 255, 255, 0.96);
+  font-size: 1rem;
+}
+
+.joinItem span {
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.65;
+}
+
+.founderCard {
+  display: grid;
+  gap: 18px;
+}
+
+.hostGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.9fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.hostCard,
+.platformCard {
+  display: grid;
+  gap: 18px;
+}
+
+.hostHeader {
+  display: grid;
+  grid-template-columns: 128px minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+}
+
+.hostImage {
+  width: 128px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 30px;
+}
+
+.hostHeader h2 {
+  margin: 0;
+  color: var(--forest-950);
+  font-size: clamp(1.7rem, 2.3vw, 2.4rem);
+  line-height: 1.05;
+}
+
+.hostRole {
+  margin: 8px 0 0;
+  color: var(--ink-500);
+}
+
+.hostBody {
+  margin: 0;
+  color: var(--ink-700);
+  line-height: 1.8;
+}
+
+.platformList {
+  display: grid;
+  gap: 12px;
+}
+
+.platformItem {
+  display: grid;
+  gap: 4px;
+  padding: 16px 18px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(63, 123, 79, 0.14);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.platformItem:hover {
+  transform: translateY(-2px);
+  border-color: rgba(47, 107, 69, 0.28);
+  box-shadow: var(--shadow-md);
+}
+
+.platformItem strong {
+  color: var(--forest-950);
+}
+
+.platformItem span {
+  color: var(--ink-600);
+}
+
+.founderHeader {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 16px;
+  align-items: center;
+}
+
+.founderImage {
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  object-fit: cover;
+}
+
+.founderRole {
+  margin: 6px 0 0;
+  color: var(--ink-500);
+}
+
+.founderQuote {
+  margin: 0;
+  color: var(--forest-900);
+  font-size: 1.08rem;
+  line-height: 1.8;
+}
+
+.socialRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.socialRow a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(63, 123, 79, 0.18);
+  color: var(--forest-900);
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.socialRow a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(47, 107, 69, 0.32);
+}
+
+.followSection {
+  display: grid;
+  gap: 30px;
+}
+
+.routeCard {
+  display: grid;
+  gap: 12px;
+}
+
+.routeLink {
+  color: var(--teal-700);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.followGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.followCard {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.followCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(47, 107, 69, 0.22);
+}
+
+.bottomJoinGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.bottomJoinCopy {
+  display: grid;
+  gap: 16px;
+}
+
+/* ============================================================
+   DARK MODE — restore contrast for community form when used on
+   pages that render against a dark page background (e.g. /webinars/registration).
+   The form card itself has a near-white surface; in dark mode the
+   --forest-* vars get remapped to light, which makes white-on-white text.
+   Force readable colors here.
+   ============================================================ */
+:global(html[data-theme="dark"]) .formShell {
+  background:
+    radial-gradient(circle at top left, rgba(126, 217, 163, 0.18), transparent 34%),
+    rgba(20, 38, 34, 0.92);
+  border-color: rgba(199, 226, 207, 0.14);
+  color: rgba(255, 255, 255, 0.92);
+}
+
+:global(html[data-theme="dark"]) .formShell .formIntro h3,
+:global(html[data-theme="dark"]) .formShell .formIntro p,
+:global(html[data-theme="dark"]) .formShell .formNote {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+:global(html[data-theme="dark"]) .formShell .formField span {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+:global(html[data-theme="dark"]) .formShell .formField input,
+:global(html[data-theme="dark"]) .formShell .formField select {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(199, 226, 207, 0.18);
+  color: #f1f7f3;
+}
+
+:global(html[data-theme="dark"]) .formShell .formField input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+:global(html[data-theme="dark"]) .formShell .formField select option {
+  background: #14241f;
+  color: #f1f7f3;
+}
+
+:global(html[data-theme="dark"]) .formShell .formField input:focus,
+:global(html[data-theme="dark"]) .formShell .formField select:focus {
+  border-color: rgba(126, 217, 163, 0.55);
+  box-shadow: 0 0 0 4px rgba(126, 217, 163, 0.16);
+}
+
+:global(html[data-theme="dark"]) .formShell .formSuccess {
+  background: rgba(126, 217, 163, 0.12);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@keyframes tapeSlide {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 1120px) {
+  .topJoinGrid,
+  .joinGrid,
+  .hostGrid,
+  .newsStripInner {
+    grid-template-columns: 1fr;
+  }
+
+  .bottomJoinGrid,
+  .followGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .streamGrid,
+  .metricRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .formGrid,
+  .metricRow,
+  .streamGrid,
+  .newsCards {
+    grid-template-columns: 1fr;
+  }
+
+  .followGrid,
+  .bottomJoinGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .hostHeader,
+  .founderHeader {
+    grid-template-columns: 1fr;
+  }
+
+  .topicTape {
+    animation-duration: 42s;
+  }
+}
+

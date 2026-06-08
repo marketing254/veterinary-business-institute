@@ -1,0 +1,110 @@
+{
+  "name": "VET — Event Registration → Zoom",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "vet-event-registration",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-in",
+      "name": "Webhook (from Apps Script)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 300],
+      "webhookId": "vet-event-registration"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "loose" },
+          "conditions": [
+            {
+              "leftValue": "={{ $json.body.webinar_id }}",
+              "rightValue": "",
+              "operator": { "type": "string", "operation": "notEmpty" }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "has-webinar",
+      "name": "Has Webinar ID?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [480, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://api.zoom.us/v2/webinars/{{ $json.body.webinar_id }}/registrants",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "zoomOAuth2Api",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"email\": \"{{ $json.body.email }}\",\n  \"first_name\": \"{{ $json.body.first_name }}\",\n  \"last_name\": \"{{ $json.body.last_name }}\",\n  \"phone\": \"{{ $json.body.phone }}\",\n  \"custom_questions\": [ { \"title\": \"Questions\", \"value\": \"{{ $json.body.questions }}\" } ]\n}",
+        "options": {}
+      },
+      "id": "zoom-registrant",
+      "name": "Zoom: Add Webinar Registrant",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 220]
+    },
+    {
+      "parameters": {
+        "fromEmail": "no-reply@veterinarybusinessinstitute.com",
+        "toEmail": "={{ $json.body.email }}",
+        "subject": "=You're registered: {{ $json.body.event_title }}",
+        "emailFormat": "text",
+        "text": "=Hi {{ $json.body.first_name }},\n\nYou're confirmed for \"{{ $json.body.event_title }}\" on {{ $json.body.event_date }}.\nYour Zoom join link will arrive in a separate email from Zoom.\n\nSee you there,\nVeterinary Business Institute",
+        "options": {}
+      },
+      "id": "confirm-email",
+      "name": "Confirmation Email (optional)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [960, 220],
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"ok\", \"zoom\": \"queued\" }",
+        "options": {}
+      },
+      "id": "respond-ok",
+      "name": "Respond OK",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [1200, 300]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={ \"status\": \"ok\", \"zoom\": \"skipped_no_webinar_id\" }",
+        "options": {}
+      },
+      "id": "respond-skip",
+      "name": "Respond (no Zoom)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [720, 420]
+    }
+  ],
+  "connections": {
+    "Webhook (from Apps Script)": { "main": [[{ "node": "Has Webinar ID?", "type": "main", "index": 0 }]] },
+    "Has Webinar ID?": {
+      "main": [
+        [{ "node": "Zoom: Add Webinar Registrant", "type": "main", "index": 0 }],
+        [{ "node": "Respond (no Zoom)", "type": "main", "index": 0 }]
+      ]
+    },
+    "Zoom: Add Webinar Registrant": { "main": [[{ "node": "Confirmation Email (optional)", "type": "main", "index": 0 }]] },
+    "Confirmation Email (optional)": { "main": [[{ "node": "Respond OK", "type": "main", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1" },
+  "pinData": {}
+}

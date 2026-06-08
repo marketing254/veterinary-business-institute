@@ -1,0 +1,86 @@
+{
+  "project": "vbi-site-autoresearch",
+  "reference": {
+    "name": "Dominate Law",
+    "url": "https://marketing254.github.io/dominatelaw-website/",
+    "patterns": [
+      "clear hero promise",
+      "repeated CTA pathways",
+      "host authority",
+      "content as conversion support",
+      "resource-hub taxonomy"
+    ]
+  },
+  "routes": [
+    {
+      "route": "/",
+      "file": "app/page.js",
+      "minSections": 7,
+      "minButtons": 7,
+      "minAssets": 4,
+      "keywords": ["veterinary business institute", "podcast", "panel", "webinar", "marketing", "practice"],
+      "internalLinks": ["/about", "/podcast", "/events", "/webinars", "/marketing", "/contact"]
+    },
+    {
+      "route": "/about",
+      "file": "app/about/page.js",
+      "minSections": 4,
+      "minButtons": 4,
+      "minAssets": 2,
+      "keywords": ["about", "business", "leadership", "marketing", "veterinary"],
+      "internalLinks": ["/podcast", "/events", "/webinars", "/marketing", "/contact"]
+    },
+    {
+      "route": "/podcast",
+      "file": "app/podcast/page.js",
+      "minSections": 4,
+      "minButtons": 4,
+      "minAssets": 5,
+      "keywords": ["podcast", "episode", "host", "leadership", "veterinary"],
+      "internalLinks": ["/webinars", "/marketing", "/about"]
+    },
+    {
+      "route": "/events",
+      "file": "app/events/page.js",
+      "minSections": 4,
+      "minButtons": 5,
+      "minAssets": 4,
+      "keywords": ["event", "panel", "vimeo", "veterinary", "leadership"],
+      "internalLinks": ["/webinars", "/podcast", "/marketing"]
+    },
+    {
+      "route": "/webinars",
+      "file": "app/webinars/page.js",
+      "minSections": 5,
+      "minButtons": 5,
+      "minAssets": 4,
+      "keywords": ["webinar", "replay", "archive", "practice", "veterinary"],
+      "internalLinks": ["/events", "/marketing", "/contact", "/podcast"]
+    },
+    {
+      "route": "/marketing",
+      "file": "app/marketing/page.js",
+      "minSections": 4,
+      "minButtons": 4,
+      "minAssets": 1,
+      "keywords": ["marketing", "audit", "strategy", "search", "practice"],
+      "internalLinks": ["/contact"]
+    },
+    {
+      "route": "/contact",
+      "file": "app/contact/page.js",
+      "minSections": 4,
+      "minButtons": 5,
+      "minAssets": 1,
+      "keywords": ["contact", "team", "partnership", "podcast", "strategy"],
+      "internalLinks": ["/podcast", "/events", "/webinars", "/marketing"]
+    }
+  ],
+  "globalChecks": [
+    "app/layout.js",
+    "app/components/SiteHeader.js",
+    "app/components/SiteFooter.js",
+    "app/globals.css",
+    "app/lib/site-data.js"
+  ]
+}
