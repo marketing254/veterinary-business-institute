@@ -36,6 +36,9 @@ jobs:
         env:
           # Tells next.config.mjs to apply the /veterinary-business-institute base path
           GITHUB_PAGES: "true"
+          # Apps Script /exec URL (for form writes + transcript proxy).
+          # Set repo variable: Settings → Secrets and variables → Actions → Variables.
+          NEXT_PUBLIC_APPS_SCRIPT_URL: ${{ vars.NEXT_PUBLIC_APPS_SCRIPT_URL }}
 
       - name: Disable Jekyll (so _next/ assets are served)
         run: touch out/.nojekyll

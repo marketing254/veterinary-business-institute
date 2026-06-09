@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { episodes, webinars, eventPanels } from "../lib/site-data";
 
 const DISMISS_KEY = "vbi-whats-new-dismissed";
@@ -67,14 +68,13 @@ export default function WhatsNewBanner() {
                 <p className="wnb-episode-title">{latestEpisode.title}</p>
               </div>
             </div>
-            <a
-              href={latestEpisode.href}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={`/podcast/episode-${latestEpisode.number}`}
+              onClick={handleDismiss}
               className="wnb-btn wnb-btn-primary"
             >
               &#9654; Listen Now
-            </a>
+            </Link>
           </div>
 
           {/* Divider */}
@@ -89,14 +89,9 @@ export default function WhatsNewBanner() {
             <p className="wnb-event-date">{latestWebinar.date}</p>
             <p className="wnb-event-title">{latestWebinar.title}</p>
             <p className="wnb-event-summary">{latestWebinar.summary}</p>
-            <a
-              href={latestWebinar.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="wnb-btn wnb-btn-outline"
-            >
+            <Link href="/webinars" onClick={handleDismiss} className="wnb-btn wnb-btn-outline">
               Watch Replay &rarr;
-            </a>
+            </Link>
           </div>
 
           {/* Divider */}
@@ -111,14 +106,13 @@ export default function WhatsNewBanner() {
             <p className="wnb-event-date">{latestPanel.date}</p>
             <p className="wnb-event-title">{latestPanel.title}</p>
             <p className="wnb-event-summary">{latestPanel.summary}</p>
-            <a
-              href={latestPanel.href}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={`/webinars/${latestPanel.slug}`}
+              onClick={handleDismiss}
               className="wnb-btn wnb-btn-outline"
             >
               Watch Now &rarr;
-            </a>
+            </Link>
           </div>
         </div>
       </div>

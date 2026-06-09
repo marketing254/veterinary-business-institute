@@ -1,67 +1,61 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+
+const CONSENT_KEY = "vbi-cookie-consent";
 
 export default function CookieBanner() {
   const [show, setShow] = useState(false);
+  const [visible, setVisible] = useState(false); // drives the slide-in
 
   useEffect(() => {
-    const consent = localStorage.getItem("vbi-cookie-consent");
-    if (!consent) {
+    if (!localStorage.getItem(CONSENT_KEY)) {
       setShow(true);
+      const t = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(t);
     }
   }, []);
 
-  const acceptCookies = () => {
-    localStorage.setItem("vbi-cookie-consent", "true");
-    // Notify <Analytics /> so tracking can load immediately, without a reload.
+  function decide(value) {
+    localStorage.setItem(CONSENT_KEY, value);
+    // Tell <Analytics /> so tracking can (de)activate without a reload.
     window.dispatchEvent(new Event("vbi-consent-change"));
-    setShow(false);
-  };
-
-  const declineCookies = () => {
-    localStorage.setItem("vbi-cookie-consent", "declined");
-    window.dispatchEvent(new Event("vbi-consent-change"));
-    setShow(false);
-  };
+    setVisible(false);
+    setTimeout(() => setShow(false), 320);
+  }
 
   if (!show) return null;
 
   return (
-    <div style={{
-      position: "fixed",
-      bottom: "20px",
-      left: "50%",
-      transform: "translateX(-50%)",
-      backgroundColor: "#102320",
-      color: "#ffffff",
-      padding: "1rem 1.5rem",
-      borderRadius: "12px",
-      display: "flex",
-      alignItems: "center",
-      gap: "1.5rem",
-      zIndex: 100,
-      width: "calc(100% - 40px)",
-      maxWidth: "800px",
-      boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-      justifyContent: "space-between",
-      flexWrap: "wrap"
-    }}>
-      <p style={{ margin: 0, fontSize: "0.95rem", flex: "1 1 auto" }}>
-        We use cookies to improve your experience, analyze local visibility trends, and suggest the right content for your practice.
-      </p>
-      <div style={{ display: "flex", gap: "0.75rem", flexShrink: 0 }}>
-        <button 
-          onClick={declineCookies} 
-          style={{ background: "transparent", border: "1px solid rgba(255,255,255,0.2)", color: "#fff", padding: "0.5rem 1rem", borderRadius: "8px", cursor: "pointer" }}
-        >
+    <div
+      className={`vbi-cookie${visible ? " is-visible" : ""}`}
+      role="dialog"
+      aria-label="Cookie consent"
+    >
+      <span className="vbi-cookie-icon" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5z" />
+          <circle cx="9" cy="11" r="1" />
+          <circle cx="14" cy="15" r="1" />
+          <circle cx="15.5" cy="9.5" r="1" />
+        </svg>
+      </span>
+
+      <div className="vbi-cookie-text">
+        <strong>We value your privacy</strong>
+        <p>
+          We use cookies to improve your experience and understand how the site is used. See our{" "}
+          <Link href="/privacy-policy">Privacy Policy</Link> for details.
+        </p>
+      </div>
+
+      <div className="vbi-cookie-actions">
+        <button type="button" className="vbi-cookie-btn vbi-cookie-decline" onClick={() => decide("declined")}>
           Decline
         </button>
-        <button 
-          onClick={acceptCookies} 
-          style={{ background: "#2f6b45", border: "none", color: "#fff", padding: "0.5rem 1rem", borderRadius: "8px", cursor: "pointer", fontWeight: "600" }}
-        >
-          Accept
+        <button type="button" className="vbi-cookie-btn vbi-cookie-accept" onClick={() => decide("accepted")}>
+          Accept All
         </button>
       </div>
     </div>

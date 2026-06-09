@@ -136,6 +136,42 @@ export function driveFileUrl(url) {
   return m ? `https://drive.google.com/uc?export=download&id=${m[1]}` : trimmed;
 }
 
+/** Build the plain-text export URL for a Google Doc share link. "" if not a Doc. */
+export function docExportUrl(url) {
+  const s = String(url || "");
+  const m = s.match(/\/d\/([\w-]{20,})/) || s.match(/[?&]id=([\w-]{20,})/);
+  return m ? `https://docs.google.com/document/d/${m[1]}/export?format=txt` : "";
+}
+
+/** Parse "[00:00:00.080 --> …] Speaker:\ntext" transcript text into segments. */
+export function parseTranscriptSegments(text) {
+  const clean = String(text || "").replace(/\r/g, "");
+  const re = /\[(\d{1,2}:\d{2}:\d{2})(?:\.\d+)?\s*-->\s*[\d:.]+\]/g;
+  const matches = [...clean.matchAll(re)];
+  if (!matches.length) {
+    return clean
+      .split(/\n{2,}/)
+      .map((t) => ({ time: "", speaker: "", text: t.trim() }))
+      .filter((s) => s.text);
+  }
+  const segs = [];
+  for (let i = 0; i < matches.length; i++) {
+    const cur = matches[i];
+    const start = cur.index + cur[0].length;
+    const end = i + 1 < matches.length ? matches[i + 1].index : clean.length;
+    let chunk = clean.slice(start, end).trim();
+    let speaker = "";
+    const sp = chunk.match(/^([A-Za-z][\w .'&-]{0,40}):\s*/);
+    if (sp) {
+      speaker = sp[1].trim();
+      chunk = chunk.slice(sp[0].length);
+    }
+    chunk = chunk.replace(/\s*\n\s*/g, " ").trim();
+    if (chunk) segs.push({ time: cur[1], speaker, text: chunk });
+  }
+  return segs;
+}
+
 /** Turn a Vimeo share/review URL into a player embed URL. */
 export function vimeoEmbed(url) {
   if (!url) return "";

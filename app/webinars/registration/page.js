@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { contactDetails, registrationEvents } from "../../lib/site-data";
+import { contactDetails, eventPanels } from "../../lib/site-data";
 import { withBasePath } from "../../lib/base-path";
 import CommunityJoinForm from "../../community/CommunityJoinForm";
+import LatestPanelImage from "../../components/live/LatestPanelImage";
 
-const heroImage = registrationEvents[0]?.image || withBasePath("/assets/panels/panel-01.jpg");
+// Hero image = the latest webinar replay's image, pulled live from the sheet.
+// Seeded with the newest panel from site-data for SSR/first paint.
+const heroFallback = eventPanels[0]?.image || withBasePath("/assets/panels/panel-01.jpg");
 
 export const metadata = {
   title: "Webinar Registration | Veterinary Business Institute",
@@ -27,11 +30,8 @@ export default function WebinarRegistrationPage() {
             </p>
           </div>
 
-          <div className="image-frame reg-hero-media">
-            <img src={heroImage} alt="Veterinary business webinar panel" />
-            <div className="marketing-seo-image-badge">
-              &#9733; Free to attend &middot; Replay sent to all registrants
-            </div>
+          <div className="reg-hero-art">
+            <LatestPanelImage fallback={heroFallback} alt="Latest veterinary webinar replay" className="reg-hero-art-img" />
           </div>
         </div>
       </section>

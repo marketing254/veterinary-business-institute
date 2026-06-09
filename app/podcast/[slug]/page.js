@@ -9,15 +9,29 @@ function PlatformIcon({ label }) {
   const l = (label || "").toLowerCase();
   if (l.includes("apple")) {
     return (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-        <path d="M12 2a10 10 0 0 0-3.3 19.44c-.05-.7-.1-1.86.02-2.66.11-.73.74-4.65.74-4.65s-.19-.38-.19-.94c0-.88.51-1.54 1.15-1.54.54 0 .8.41.8.9 0 .55-.35 1.36-.53 2.12-.15.63.32 1.15.94 1.15 1.13 0 2-1.19 2-2.91 0-1.52-1.09-2.58-2.65-2.58-1.81 0-2.87 1.35-2.87 2.75 0 .54.21 1.12.47 1.44.05.06.06.12.04.18l-.18.73c-.03.12-.1.15-.22.09-.83-.39-1.35-1.6-1.35-2.58 0-2.1 1.53-4.03 4.4-4.03 2.31 0 4.11 1.65 4.11 3.85 0 2.3-1.45 4.15-3.46 4.15-.68 0-1.31-.35-1.53-.77l-.42 1.58c-.15.58-.55 1.31-.83 1.76A10 10 0 1 0 12 2z" />
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <defs>
+          <linearGradient id="ap-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stopColor="#822CBE" />
+            <stop offset="1" stopColor="#D772FB" />
+          </linearGradient>
+        </defs>
+        <rect width="24" height="24" rx="5.4" fill="url(#ap-grad)" />
+        <path
+          fill="#fff"
+          d="M12 13.6a2.3 2.3 0 0 0 2.3-2.3V7.7a2.3 2.3 0 0 0-4.6 0v3.6a2.3 2.3 0 0 0 2.3 2.3zm4-2.3a4 4 0 0 1-3.25 3.93V17h1.4a.6.6 0 0 1 0 1.2H9.85a.6.6 0 0 1 0-1.2h1.4v-1.77A4 4 0 0 1 8 11.3h1.2a2.8 2.8 0 0 0 5.6 0H16z"
+        />
       </svg>
     );
   }
   if (l.includes("youtube")) {
     return (
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
-        <path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 2a7 7 0 1 1 0 14 7 7 0 0 1 0-14zm-1.5 3.2v5.6l4.8-2.8-4.8-2.8z" />
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+        <path
+          fill="#FF0000"
+          d="M12 0C5.376 0 0 5.376 0 12s5.376 12 12 12 12-5.376 12-12S18.624 0 12 0zm0 19.104c-3.924 0-7.104-3.18-7.104-7.104S8.076 4.896 12 4.896 19.104 8.076 19.104 12 15.924 19.104 12 19.104z"
+        />
+        <path fill="#FF0000" d="M9.6 7.8v8.4l7.2-4.2z" />
       </svg>
     );
   }
@@ -100,38 +114,36 @@ export default async function PodcastEpisodePage({ params }) {
         </div>
       </section>
 
-      {/* ── Show notes + listen ── */}
-      <article className="section section-muted">
-        <div className="container split-grid">
-          <div>
-            <span className="eyebrow text-accent">Episode Show Notes</span>
-            <h2>About This Episode</h2>
-            <p>{ep.summary}</p>
-          </div>
-
-          <div className="card podcast-listen-card">
-            <span className="eyebrow text-accent">Listen Anywhere</span>
-            <h3>Subscribe to the Show</h3>
-            <p className="muted-text" style={{ marginBottom: "1rem" }}>
-              New episodes every week. Follow on your favourite platform.
-            </p>
-            <div className="podcast-listen-stack">
-              {listeningPlatforms.map((p) => (
-                <a key={p.label} className="podcast-listen-row" href={p.href} target="_blank" rel="noreferrer">
-                  <span className="podcast-listen-ico"><PlatformIcon label={p.label} /></span>
-                  <span>{p.label}</span>
-                  <span className="podcast-listen-arrow">&rarr;</span>
-                </a>
-              ))}
+      {/* ── About + Transcript (main) with Listen sidebar ── */}
+      <section className="section section-muted">
+        <div className="container pod-detail-grid">
+          <div className="pod-detail-main">
+            <div className="pod-about">
+              <span className="eyebrow text-accent">Episode Show Notes</span>
+              <h2>About This Episode</h2>
+              <p>{ep.summary}</p>
             </div>
+            <PodcastTranscript episodeNumber={ep.number} />
           </div>
-        </div>
-      </article>
 
-      {/* ── Transcript (with search) ── */}
-      <section className="section">
-        <div className="container">
-          <PodcastTranscript episodeNumber={ep.number} />
+          <aside className="pod-detail-aside">
+            <div className="card podcast-listen-card">
+              <span className="eyebrow text-accent">Listen Anywhere</span>
+              <h3>Subscribe to the Show</h3>
+              <p className="muted-text" style={{ marginBottom: "1rem" }}>
+                New episodes every week. Follow on your favourite platform.
+              </p>
+              <div className="podcast-listen-stack">
+                {listeningPlatforms.map((p) => (
+                  <a key={p.label} className="podcast-listen-row" href={p.href} target="_blank" rel="noreferrer">
+                    <span className="podcast-listen-ico"><PlatformIcon label={p.label} /></span>
+                    <span>{p.label}</span>
+                    <span className="podcast-listen-arrow">&rarr;</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          </aside>
         </div>
       </section>
 

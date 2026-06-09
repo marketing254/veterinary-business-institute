@@ -8,7 +8,8 @@ export const CONSENT_EVENT = "vbi-consent-change";
 export function hasConsent() {
   if (typeof window === "undefined") return false;
   try {
-    return localStorage.getItem(CONSENT_KEY) === "true";
+    const v = localStorage.getItem(CONSENT_KEY);
+    return v === "accepted" || v === "true";
   } catch {
     return false;
   }

@@ -6,8 +6,36 @@ import { APPS_SCRIPT_URL } from "../../lib/sheets-config";
 
 function docExportUrl(url) {
   const m = String(url || "").match(/\/d\/([\w-]{20,})/) || String(url || "").match(/[?&]id=([\w-]{20,})/);
-  if (!m) return "";
-  return `https://docs.google.com/document/d/${m[1]}/export?format=txt`;
+  return m ? `https://docs.google.com/document/d/${m[1]}/export?format=txt` : "";
+}
+
+// Parse "[00:00:00.080 --> 00:01:55.080] Speaker:\ntext…" into segments.
+function parseSegments(text) {
+  const clean = String(text || "").replace(/\r/g, "");
+  const re = /\[(\d{1,2}:\d{2}:\d{2})(?:\.\d+)?\s*-->\s*[\d:.]+\]/g;
+  const matches = [...clean.matchAll(re)];
+  if (!matches.length) {
+    return clean
+      .split(/\n{2,}/)
+      .map((t) => ({ time: "", speaker: "", text: t.trim() }))
+      .filter((s) => s.text);
+  }
+  const segs = [];
+  for (let i = 0; i < matches.length; i++) {
+    const cur = matches[i];
+    const start = cur.index + cur[0].length;
+    const end = i + 1 < matches.length ? matches[i + 1].index : clean.length;
+    let chunk = clean.slice(start, end).trim();
+    let speaker = "";
+    const sp = chunk.match(/^([A-Za-z][\w .'&-]{0,40}):\s*/);
+    if (sp) {
+      speaker = sp[1].trim();
+      chunk = chunk.slice(sp[0].length);
+    }
+    chunk = chunk.replace(/\s*\n\s*/g, " ").trim();
+    if (chunk) segs.push({ time: cur[1], speaker, text: chunk });
+  }
+  return segs;
 }
 
 function highlight(text, q) {
@@ -18,14 +46,6 @@ function highlight(text, q) {
   );
 }
 
-/**
- * Podcast transcript viewer. Pulls the episode's transcript Google Doc (by ep
- * number) from the sheet, fetches its plain text through the Apps Script proxy
- * (?docUrl=…export?format=txt), and renders it with a live search box.
- *
- * Needs NEXT_PUBLIC_APPS_SCRIPT_URL set + the script deployed; until then it
- * shows a graceful "open transcript" fallback.
- */
 export default function PodcastTranscript({ episodeNumber }) {
   const [state, setState] = useState({ status: "loading", text: "", docUrl: "" });
   const [query, setQuery] = useState("");
@@ -41,16 +61,16 @@ export default function PodcastTranscript({ episodeNumber }) {
           if (alive) setState({ status: "none", text: "", docUrl: "" });
           return;
         }
-        const exportUrl = docExportUrl(docUrl);
-        const proxied = `${APPS_SCRIPT_URL}?docUrl=${encodeURIComponent(exportUrl)}`;
+        if (!APPS_SCRIPT_URL || /PASTE_VET_EXEC_ID/.test(APPS_SCRIPT_URL)) {
+          if (alive) setState({ status: "fallback", text: "", docUrl });
+          return;
+        }
+        const proxied = `${APPS_SCRIPT_URL}?docUrl=${encodeURIComponent(docExportUrl(docUrl))}`;
         const res = await fetch(proxied);
         const text = await res.text();
         if (!alive) return;
-        if (text && !/PASTE_VET_EXEC_ID/.test(APPS_SCRIPT_URL) && !text.startsWith("ERROR")) {
-          setState({ status: "ready", text, docUrl });
-        } else {
-          setState({ status: "fallback", text: "", docUrl });
-        }
+        if (text && !text.startsWith("ERROR")) setState({ status: "ready", text, docUrl });
+        else setState({ status: "fallback", text: "", docUrl });
       } catch (_) {
         if (alive) setState((s) => ({ ...s, status: "fallback" }));
       }
@@ -60,27 +80,19 @@ export default function PodcastTranscript({ episodeNumber }) {
     };
   }, [episodeNumber]);
 
-  const paragraphs = useMemo(
-    () =>
-      state.text
-        .replace(/\r/g, "")
-        .split(/\n{2,}/)
-        .map((p) => p.trim())
-        .filter(Boolean),
-    [state.text]
-  );
-
-  const visible = useMemo(
-    () => (query ? paragraphs.filter((p) => p.toLowerCase().includes(query.toLowerCase())) : paragraphs),
-    [paragraphs, query]
-  );
+  const segments = useMemo(() => parseSegments(state.text), [state.text]);
+  const visible = useMemo(() => {
+    if (!query) return segments;
+    const q = query.toLowerCase();
+    return segments.filter((s) => s.text.toLowerCase().includes(q) || s.speaker.toLowerCase().includes(q));
+  }, [segments, query]);
 
   if (state.status === "none") return null;
 
   return (
     <div className="ts-wrap">
       <div className="ts-head">
-        <h2>Transcript</h2>
+        <h2>Episode Transcript</h2>
         {state.status === "ready" && (
           <div className="ts-search">
             <input
@@ -113,7 +125,15 @@ export default function PodcastTranscript({ episodeNumber }) {
       {state.status === "ready" && (
         <div className="ts-body">
           {visible.length ? (
-            visible.map((p, i) => <p key={i}>{highlight(p, query)}</p>)
+            visible.map((s, i) => (
+              <div className="ts-seg" key={i}>
+                {s.time ? <span className="ts-time">{s.time}</span> : <span className="ts-time ts-time-empty" />}
+                <div className="ts-seg-body">
+                  {s.speaker ? <span className="ts-speaker">{highlight(s.speaker, query)}</span> : null}
+                  <p>{highlight(s.text, query)}</p>
+                </div>
+              </div>
+            ))
           ) : (
             <p className="muted-text">No matches for &ldquo;{query}&rdquo;.</p>
           )}

@@ -9637,11 +9637,25 @@ html[data-theme="dark"] .res-card-cta p {
    so it stays readable on every background — no per-section override needed. */
 
 /* (#11) Gated/lead-capture modals must never force a long page scroll. */
-.evt-modal,
+/* Resource-unlock modal — compact so it fits the screen without an inner scrollbar */
 .runlock-modal {
-  max-height: 90vh;
+  width: min(94vw, 560px);
+  max-height: calc(100dvh - 20px);
   overflow-y: auto;
+  padding: 1.4rem 1.5rem 1.2rem;
 }
+.runlock-icon { width: 40px !important; height: 40px !important; margin-bottom: 0.3rem; }
+.runlock-eyebrow { font-size: 0.68rem; }
+.runlock-modal h2 { font-size: 1.45rem; line-height: 1.12; margin: 0.25rem 0 0.35rem; }
+.runlock-sub { font-size: 0.85rem; line-height: 1.5; margin-bottom: 0.9rem; }
+.runlock-form { display: flex; flex-direction: column; gap: 0.6rem; }
+.runlock-form .contact-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.runlock-form .contact-field label { font-size: 0.74rem; margin-bottom: 0.15rem; }
+.runlock-form .contact-field input,
+.runlock-form .contact-field select { padding: 0.55rem 0.7rem; font-size: 0.9rem; }
+.runlock-submit { padding: 0.7rem 1rem; margin-top: 0.3rem; }
+.runlock-note { font-size: 0.72rem; margin-top: 0.4rem; }
+
 .evt-modal-form .evt-modal-row { gap: 0.75rem; }
 .evt-modal-field input { padding: 0.6rem 0.75rem; }
 .evt-modal h3 { margin: 0.25rem 0; }
@@ -9699,8 +9713,20 @@ html[data-theme="dark"] .res-card-cta p {
 }
 
 /* (#6) Registration hero image as a clean 16:9 frame. */
-.reg-hero-media { aspect-ratio: 16 / 9; height: auto; }
-.reg-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+/* Registration hero — latest replay image, softly faded into the page so it
+   blends with the background (no hard card frame). Default hero text untouched. */
+.reg-hero-art { width: 100%; }
+.reg-hero-art-img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  min-height: 0; /* override generic .image-frame img min-height */
+  border-radius: 22px;
+  opacity: 0.92;
+  -webkit-mask-image: radial-gradient(130% 130% at 50% 42%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(130% 130% at 50% 42%, #000 60%, transparent 100%);
+}
 
 /* (#18) Community "what you get" cards: don't stretch text cards to the image
    card's height — size each to its content so there's no dead space. */
@@ -9750,12 +9776,13 @@ html { font-size: 15px; }
 /* (#6) Back-to-top sits ABOVE the chat bubble (chat = 60px @ bottom 24px). */
 .back-to-top { bottom: 100px; right: 26px; }
 
-/* (#8) Gate / lead-capture modal: compact so it fits WITHOUT scrolling. */
+/* (#8) Gate / lead-capture modal: compact so it fits the screen with no scroll.
+   The overlay itself scrolls only as a last resort on very short viewports. */
+.evt-modal-overlay { overflow-y: auto; padding: 16px; }
 .evt-modal {
-  max-height: none;
-  overflow: visible;
   width: min(94vw, 480px);
-  padding: 1.5rem 1.5rem 1.25rem;
+  padding: 1.4rem 1.5rem 1.2rem;
+  margin: auto;
 }
 .evt-modal h3 { font-size: 1.25rem; margin: 0.15rem 0 0.25rem; }
 .evt-modal-sub { font-size: 0.85rem; margin-bottom: 0.75rem; }
@@ -9790,8 +9817,8 @@ html[data-theme="dark"] .brand-logo-dark { background: #fff; padding: 5px 9px; b
 /* (#10) Listen-anywhere rows with proper platform icons */
 .podcast-listen-ico {
   display: inline-flex; align-items: center; justify-content: center;
-  width: 34px; height: 34px; border-radius: 50%; flex-shrink: 0;
-  background: rgba(31, 122, 92, 0.12); color: var(--teal-500, #1f7a5c);
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+  background: var(--background-muted);
 }
 .podcast-listen-row {
   display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0.9rem;
@@ -9800,3 +9827,113 @@ html[data-theme="dark"] .brand-logo-dark { background: #fff; padding: 5px 9px; b
 }
 .podcast-listen-row:hover { border-color: var(--teal-500); transform: translateX(2px); }
 .podcast-listen-arrow { margin-left: auto; color: var(--teal-500, #1f7a5c); }
+
+/* ── Podcast detail: cohesive 2-col (About + Transcript | Listen) ── */
+.pod-detail-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 2.5rem; align-items: start;
+}
+.pod-about { margin-bottom: 2.5rem; }
+.pod-detail-aside .podcast-listen-card { position: sticky; top: 96px; }
+@media (max-width: 900px) {
+  .pod-detail-grid { grid-template-columns: 1fr; gap: 1.75rem; }
+  .pod-detail-aside .podcast-listen-card { position: static; }
+}
+
+/* ── Transcript: timestamped segments + highlighted times ── */
+.ts-body { max-height: 560px; }
+.ts-seg {
+  display: grid; grid-template-columns: 84px 1fr; gap: 0.9rem;
+  padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+}
+.ts-seg:last-child { border-bottom: none; }
+.ts-time {
+  align-self: start; font-variant-numeric: tabular-nums; font-size: 0.72rem; font-weight: 700;
+  color: var(--forest-950); background: rgba(198, 248, 0, 0.55);
+  padding: 0.2rem 0.5rem; border-radius: 6px; text-align: center; white-space: nowrap;
+}
+.ts-time-empty { background: transparent; }
+.ts-speaker {
+  display: inline-block; font-weight: 700; color: var(--teal-500, #1f7a5c);
+  font-size: 0.85rem; margin-bottom: 0.2rem;
+}
+.ts-seg-body p { margin: 0; color: var(--ink-600, #3f4a45); line-height: 1.7; }
+
+/* ── Cookie consent banner (redesigned, theme-aware, bottom-left) ── */
+.vbi-cookie {
+  position: fixed; left: 20px; bottom: 20px; z-index: 120;
+  width: min(420px, calc(100vw - 40px));
+  display: grid; grid-template-columns: auto 1fr; align-items: start; gap: 0.45rem 0.85rem;
+  background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+  padding: 1.05rem 1.15rem;
+  box-shadow: 0 20px 50px rgba(8, 22, 18, 0.28);
+  transform: translateY(150%); opacity: 0;
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.42s ease;
+}
+.vbi-cookie.is-visible { transform: translateY(0); opacity: 1; }
+.vbi-cookie-icon {
+  grid-row: 1; flex-shrink: 0; width: 40px; height: 40px; border-radius: 10px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(31, 122, 92, 0.12); color: var(--teal-500, #1f7a5c);
+}
+.vbi-cookie-text { grid-column: 2; }
+.vbi-cookie-text strong { display: block; font-size: 0.95rem; color: var(--forest-950, #0f2d28); margin-bottom: 0.15rem; }
+.vbi-cookie-text p { margin: 0; font-size: 0.8rem; line-height: 1.5; color: var(--ink-500); }
+.vbi-cookie-text a { color: var(--teal-500, #1f7a5c); text-decoration: underline; }
+.vbi-cookie-actions { grid-column: 1 / -1; display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 0.45rem; }
+.vbi-cookie-btn {
+  padding: 0.5rem 1.15rem; border-radius: 9px; font-size: 0.84rem; font-weight: 700;
+  cursor: pointer; border: 1px solid transparent; transition: all 0.2s ease;
+}
+.vbi-cookie-decline { background: transparent; border-color: var(--border); color: var(--ink-700); }
+.vbi-cookie-decline:hover { border-color: var(--ink-500); }
+.vbi-cookie-accept { background: var(--teal-500, #1f7a5c); color: #fff; }
+.vbi-cookie-accept:hover { background: var(--forest-950, #0f2d28); }
+html[data-theme="dark"] .vbi-cookie-text strong { color: #eaf3ee; }
+@media (max-width: 520px) {
+  .vbi-cookie { left: 12px; right: 12px; bottom: 12px; width: auto; }
+}
+
+/* ── Webinar replay: centered wrap + meta chips + Description/Transcript tabs ── */
+.rep-detail-wrap { max-width: 940px; margin: 0 auto; }
+.rep-meta-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
+.rep-chip {
+  font-size: 0.78rem; font-weight: 600; color: var(--ink-700);
+  background: var(--background-muted); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.3rem 0.8rem;
+}
+.rep-chip-free { color: var(--teal-500, #1f7a5c); background: rgba(31, 122, 92, 0.1); border-color: rgba(31, 122, 92, 0.25); }
+
+.rep-tabs {
+  margin-top: 1.5rem; background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; overflow: hidden; box-shadow: 0 12px 36px rgba(0, 0, 0, 0.06);
+}
+.rep-tabbar {
+  display: flex; align-items: center; gap: 0.25rem;
+  border-bottom: 1px solid var(--border); padding: 0 0.6rem; background: var(--background-muted);
+}
+.rep-tab {
+  appearance: none; background: none; border: none; cursor: pointer;
+  padding: 0.95rem 1.1rem; font-size: 0.92rem; font-weight: 700; color: var(--ink-500);
+  border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.2s ease;
+}
+.rep-tab:hover { color: var(--ink-700); }
+.rep-tab.is-active { color: var(--forest-950, #0f2d28); border-bottom-color: var(--teal-500, #1f7a5c); }
+.rep-tab-search { margin-left: auto; padding: 0.4rem 0; }
+.rep-tab-search input {
+  width: 220px; max-width: 48vw; padding: 0.45rem 0.85rem; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--card); color: var(--ink-700); font-size: 0.85rem;
+}
+.rep-tabpanel { padding: 1.6rem 1.75rem; }
+.rep-tab-transcript { max-height: 520px; overflow-y: auto; border: none; padding: 0; }
+
+.rep-prose p { color: var(--ink-600, #3f4a45); line-height: 1.75; margin: 0 0 1rem; }
+.rep-prose .rep-prose-h { font-size: 1.1rem; margin: 1.4rem 0 0.6rem; color: var(--forest-950, #0f2d28); }
+.rep-prose .rep-prose-list { margin: 0 0 1rem; padding-left: 1.2rem; }
+.rep-prose .rep-prose-list li { color: var(--ink-600, #3f4a45); line-height: 1.7; margin-bottom: 0.4rem; }
+
+@media (max-width: 600px) {
+  .rep-tabbar { flex-wrap: wrap; }
+  .rep-tab-search { margin-left: 0; width: 100%; padding-bottom: 0.6rem; }
+  .rep-tab-search input { width: 100%; max-width: none; }
+  .rep-tabpanel { padding: 1.25rem 1.1rem; }
+}

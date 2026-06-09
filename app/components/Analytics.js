@@ -21,7 +21,8 @@ export default function Analytics() {
   useEffect(() => {
     const read = () => {
       try {
-        setConsented(localStorage.getItem(CONSENT_KEY) === "true");
+        const v = localStorage.getItem(CONSENT_KEY);
+        setConsented(v === "accepted" || v === "true");
       } catch {
         setConsented(false);
       }
