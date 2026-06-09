@@ -27,7 +27,7 @@ export default function SiteFooter() {
       {/* Link columns */}
       <div className="container footer-grid">
         <div className="footer-brand">
-          <img src={withBasePath("/assets/logo-white.svg")} alt="Veterinary Business Institute" />
+          <img src={withBasePath("/assets/logo-vbi.png")} alt="Veterinary Business Institute" />
           <p>
             A resource hub for veterinarians focused on practice growth, leadership,
             operations, and digital visibility.

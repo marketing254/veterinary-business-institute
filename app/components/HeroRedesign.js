@@ -161,7 +161,7 @@ export default function HeroRedesign() {
 
           <div className={`${styles.mainCircle} ${styles.animateReveal}`} style={{ "--delay": "0.8s" }}>
             <div className={styles.heroImageMask}>
-              <img src={withBasePath("/assets/hero-vet.png")} alt="Veterinary Professional" className={styles.personImg} />
+              <img src={withBasePath("/assets/hero-home.png")} alt="Veterinary Professional" className={styles.personImg} />
               <span aria-hidden="true" className={styles.heroImageSheen} />
             </div>
           </div>

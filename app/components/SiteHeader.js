@@ -60,8 +60,8 @@ export default function SiteHeader() {
 
               {/* Logo */}
               <Link className="brand shrink-0" href="/" aria-label="Veterinary Business Institute home">
-                <img className="brand-logo brand-logo-light" src={withBasePath("/assets/logo.svg")} alt="Veterinary Business Institute" />
-                <img className="brand-logo brand-logo-dark" src={withBasePath("/assets/logo-white.svg")} alt="Veterinary Business Institute" />
+                <img className="brand-logo brand-logo-light" src={withBasePath("/assets/logo-vbi.png")} alt="Veterinary Business Institute" />
+                <img className="brand-logo brand-logo-dark" src={withBasePath("/assets/logo-vbi.png")} alt="Veterinary Business Institute" />
               </Link>
 
               {/* Desktop Nav */}

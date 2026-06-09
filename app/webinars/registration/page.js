@@ -1,7 +1,9 @@
 import Link from "next/link";
-import { contactDetails } from "../../lib/site-data";
+import { contactDetails, registrationEvents } from "../../lib/site-data";
 import { withBasePath } from "../../lib/base-path";
 import CommunityJoinForm from "../../community/CommunityJoinForm";
+
+const heroImage = registrationEvents[0]?.image || withBasePath("/assets/panels/panel-01.jpg");
 
 export const metadata = {
   title: "Webinar Registration | Veterinary Business Institute",
@@ -26,7 +28,7 @@ export default function WebinarRegistrationPage() {
           </div>
 
           <div className="image-frame reg-hero-media">
-            <img src={withBasePath("/assets/panels/panel-01.jpg")} alt="Veterinary business webinar panel" />
+            <img src={heroImage} alt="Veterinary business webinar panel" />
             <div className="marketing-seo-image-badge">
               &#9733; Free to attend &middot; Replay sent to all registrants
             </div>
