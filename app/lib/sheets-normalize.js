@@ -24,6 +24,7 @@ export function normalizePodcast(row) {
     audioUrl: pick(row, ["audio_source", "audioUrl", "audio_url"]),
     duration: pick(row, ["duration"]),
     category: pick(row, ["category"]),
+    transcriptUrl: pick(row, ["transcript_url", "transcript"]),
     summary: pick(row, ["description", "summary"]),
   };
 }

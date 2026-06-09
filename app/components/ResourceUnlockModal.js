@@ -111,9 +111,8 @@ export default function ResourceUnlockModal() {
           <span className="runlock-eyebrow">Free Resources — Veterinary Professionals Only</span>
           <h2>Unlock your free resource library</h2>
           <p className="runlock-sub">
-            Get instant, free access to all Veterinary Business Institute templates, guides,
-            tools, and checklists — built specifically for veterinary practice owners and teams.
-            Just tell us where to send them.
+            Instant, free access to every VBI template, guide, and checklist — just tell us where
+            to send them.
           </p>
 
           <div className="contact-form-row">
@@ -127,14 +126,15 @@ export default function ResourceUnlockModal() {
             </div>
           </div>
 
-          <div className="contact-field">
-            <label>Email Address *</label>
-            <input type="email" name="email" required placeholder="you@yourpractice.com" />
-          </div>
-
-          <div className="contact-field">
-            <label>Practice Name *</label>
-            <input type="text" name="practice" required placeholder="Greenfield Animal Hospital" />
+          <div className="contact-form-row">
+            <div className="contact-field">
+              <label>Email Address *</label>
+              <input type="email" name="email" required placeholder="you@yourpractice.com" />
+            </div>
+            <div className="contact-field">
+              <label>Practice Name *</label>
+              <input type="text" name="practice" required placeholder="Greenfield Animal Hospital" />
+            </div>
           </div>
 
           <div className="contact-field">

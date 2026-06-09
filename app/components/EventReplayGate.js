@@ -201,29 +201,31 @@ export default function EventReplayGate({ panels }) {
                   />
                 </div>
               </div>
-              <div className="evt-modal-field">
-                <label htmlFor="rg-email">Email *</label>
-                <input
-                  id="rg-email"
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  placeholder="you@yourpractice.com"
-                />
-              </div>
-              <div className="evt-modal-field">
-                <label htmlFor="rg-mobile">Phone *</label>
-                <input
-                  id="rg-mobile"
-                  name="mobile"
-                  type="tel"
-                  required
-                  value={form.mobile}
-                  onChange={handleChange}
-                  placeholder="+1 (555) 123-4567"
-                />
+              <div className="evt-modal-row">
+                <div className="evt-modal-field">
+                  <label htmlFor="rg-email">Email *</label>
+                  <input
+                    id="rg-email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="you@yourpractice.com"
+                  />
+                </div>
+                <div className="evt-modal-field">
+                  <label htmlFor="rg-mobile">Phone *</label>
+                  <input
+                    id="rg-mobile"
+                    name="mobile"
+                    type="tel"
+                    required
+                    value={form.mobile}
+                    onChange={handleChange}
+                    placeholder="+1 (555) 123-4567"
+                  />
+                </div>
               </div>
               <div className="evt-modal-field">
                 <label htmlFor="rg-practice">Practice Name *</label>

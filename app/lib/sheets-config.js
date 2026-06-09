@@ -14,7 +14,7 @@ export const SHEET_ID = "1xRjdnkT9pt82s1LAnxuZKvSgleWYSS-1YWBED-hNGX0";
 // Apps Script /exec — only needed once forms are switched on (currently blocked).
 export const APPS_SCRIPT_URL =
   process.env.NEXT_PUBLIC_APPS_SCRIPT_URL ||
-  "https://script.google.com/macros/s/PASTE_VET_EXEC_ID/exec";
+  "https://script.google.com/macros/s/AKfycbyr0xzhA4TX-rlNYVvUYF0MrDKw6Mfkvy9VLK3vchQbiMezY-vkfC5_s6V5_XRh-HW9NQ/exec";
 
 // The ONLY tabs that are dynamic (must match the sheet tab names exactly).
 export const TABS = {

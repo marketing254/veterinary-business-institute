@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 import { fetchEventPanels } from "../../lib/sheets-client";
 import { vimeoEmbed } from "../../lib/sheets-core";
+import WebinarTabs from "./WebinarTabs";
 
 /**
- * Single webinar-replay detail: Vimeo embed + description + transcript, in the
- * site's standard section/split-grid/card layout. Seeded with the build-time
- * panel, then live-refreshed from the event-panels tab by slug.
+ * Single webinar-replay detail: Vimeo embed + a tabbed Description / Transcript
+ * panel (both pulled from their Google Docs via the Apps Script proxy).
+ * Seeded with the build-time panel, then live-refreshed from the sheet by slug.
  */
 export default function WebinarReplayDetail({ initial, slug }) {
   const [panel, setPanel] = useState(initial || null);
@@ -28,17 +29,12 @@ export default function WebinarReplayDetail({ initial, slug }) {
   if (!panel) return null;
 
   const embed = vimeoEmbed(panel.href);
-  const paras = (txt) =>
-    String(txt || "")
-      .split(/\n{2,}|\r\n\r\n/)
-      .map((p) => p.trim())
-      .filter(Boolean);
 
   return (
     <>
       {/* ── Video ── */}
       <section className="section" style={{ paddingTop: 0 }}>
-        <div className="container">
+        <div className="container rep-detail-wrap">
           {embed ? (
             <div className="wrd-video-frame">
               <iframe
@@ -53,57 +49,23 @@ export default function WebinarReplayDetail({ initial, slug }) {
               <span>Replay video coming soon.</span>
             </div>
           )}
+
+          {/* meta chips */}
+          <div className="rep-meta-row">
+            {panel.date ? <span className="rep-chip">{panel.date}</span> : null}
+            {panel.category ? <span className="rep-chip">{panel.category}</span> : null}
+            {panel.duration ? <span className="rep-chip">{panel.duration}</span> : null}
+            <span className="rep-chip rep-chip-free">Free Replay</span>
+          </div>
         </div>
       </section>
 
-      {/* ── Show notes + sidebar ── */}
-      <article className="section section-muted">
-        <div className="container split-grid">
-          <div>
-            <span className="eyebrow text-accent">Session Notes</span>
-            <h2>About This Session</h2>
-            {paras(panel.description).length ? (
-              paras(panel.description).map((p, i) => <p key={i}>{p}</p>)
-            ) : (
-              <p className="muted-text">A full description of this session will be added soon.</p>
-            )}
-
-            <h2 style={{ marginTop: "2.5rem" }}>Transcript</h2>
-            {paras(panel.transcript).length ? (
-              paras(panel.transcript).map((p, i) => <p key={i}>{p}</p>)
-            ) : (
-              <div className="wrd-transcript-placeholder">
-                <span className="wrd-placeholder-badge">Coming soon</span>
-                <p>
-                  A full, searchable transcript of this webinar will be published here shortly.
-                  Watch the replay above in the meantime.
-                </p>
-              </div>
-            )}
-          </div>
-
-          <div className="card">
-            <span className="eyebrow text-accent">Session Details</span>
-            <ul className="wrd-meta-list" style={{ marginTop: "1rem" }}>
-              {panel.date ? <li><strong>Date</strong><span>{panel.date}</span></li> : null}
-              {panel.category ? <li><strong>Category</strong><span>{panel.category}</span></li> : null}
-              {panel.duration ? <li><strong>Duration</strong><span>{panel.duration}</span></li> : null}
-              <li><strong>Access</strong><span>Free</span></li>
-            </ul>
-            {panel.href ? (
-              <a
-                className="button button-secondary"
-                href={panel.href}
-                target="_blank"
-                rel="noreferrer"
-                style={{ marginTop: "1.25rem", display: "inline-block" }}
-              >
-                Open on Vimeo &rarr;
-              </a>
-            ) : null}
-          </div>
+      {/* ── Description / Transcript tabs ── */}
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container rep-detail-wrap">
+          <WebinarTabs descriptionSrc={panel.description} transcriptSrc={panel.transcript} />
         </div>
-      </article>
+      </section>
     </>
   );
 }

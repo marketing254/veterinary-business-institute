@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { submitLead } from "../lib/submit-lead";
 
 export default function EventRegistrationForm({ eventSlug, eventTitle }) {
   const [form, setForm] = useState({ firstName: "", lastName: "", email: "", mobile: "", questions: "" });
@@ -25,33 +26,13 @@ export default function EventRegistrationForm({ eventSlug, eventTitle }) {
 
     setStatus("sending");
 
-    const payload = {
+    const res = await submitLead("event_registration", {
       ...form,
       partner,
       eventSlug,
       eventTitle,
-      submittedAt: new Date().toISOString(),
-    };
-
-    const webhookUrl = process.env.NEXT_PUBLIC_REGISTRATION_WEBHOOK;
-
-    if (webhookUrl) {
-      try {
-        const res = await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        if (!res.ok) throw new Error("Webhook failed");
-        setStatus("success");
-      } catch {
-        setStatus("error");
-      }
-    } else {
-      // No webhook configured — show success for now (dev mode)
-      await new Promise((r) => setTimeout(r, 800));
-      setStatus("success");
-    }
+    });
+    setStatus(res.ok ? "success" : "error");
   }
 
   if (status === "success") {
