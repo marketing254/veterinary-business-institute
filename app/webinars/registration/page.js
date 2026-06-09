@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { contactDetails } from "../../lib/site-data";
+import { withBasePath } from "../../lib/base-path";
 import CommunityJoinForm from "../../community/CommunityJoinForm";
 
 export const metadata = {
@@ -18,10 +19,17 @@ export default function WebinarRegistrationPage() {
               Reserve your <em>seat.</em>
             </h1>
             <p className="hero-lead">
-              Sign up for our upcoming live webinars and panel sessions to learn 
-              from industry experts about operations, growth, team retention, 
+              Sign up for our upcoming live webinars and panel sessions to learn
+              from industry experts about operations, growth, team retention,
               and smarter veterinary leadership.
             </p>
+          </div>
+
+          <div className="image-frame reg-hero-media">
+            <img src={withBasePath("/assets/panels/panel-01.jpg")} alt="Veterinary business webinar panel" />
+            <div className="marketing-seo-image-badge">
+              &#9733; Free to attend &middot; Replay sent to all registrants
+            </div>
           </div>
         </div>
       </section>

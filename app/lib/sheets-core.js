@@ -121,6 +121,21 @@ export function driveImageUrl(url, sizePx = 1200) {
   return `https://lh3.googleusercontent.com/d/${id}=w${sizePx}`;
 }
 
+/**
+ * Turn a Google Drive file link into a direct-streamable URL (for <audio>/<video>).
+ * Non-Drive URLs (e.g. a libsyn .mp3) pass through unchanged.
+ */
+export function driveFileUrl(url) {
+  if (!url) return "";
+  const trimmed = String(url).trim();
+  if (!trimmed || !trimmed.includes("drive.google.com")) return trimmed;
+  const m =
+    trimmed.match(/\/file\/d\/([\w-]{20,})/) ||
+    trimmed.match(/[?&]id=([\w-]{20,})/) ||
+    trimmed.match(/\/d\/([\w-]{20,})/);
+  return m ? `https://drive.google.com/uc?export=download&id=${m[1]}` : trimmed;
+}
+
 /** Turn a Vimeo share/review URL into a player embed URL. */
 export function vimeoEmbed(url) {
   if (!url) return "";

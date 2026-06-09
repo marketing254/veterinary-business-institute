@@ -23,13 +23,16 @@ export function normalizePodcast(row) {
     appleId: pick(row, ["appleId", "apple_id"]),
     audioUrl: pick(row, ["audio_source", "audioUrl", "audio_url"]),
     duration: pick(row, ["duration"]),
+    category: pick(row, ["category"]),
     summary: pick(row, ["description", "summary"]),
   };
 }
 
-// event-panels → {slug,date,duration,category,title,subtitle,image,href,summary}
+// event-panels → {slug,date,duration,category,title,subtitle,image,href,summary,description,transcript}
 export function normalizeEventPanel(row) {
   const title = pick(row, ["title"]);
+  const summary = pick(row, ["summary"]);
+  const description = pick(row, ["description", "long_description", "body"]);
   return {
     slug: pick(row, ["slug"]) || slugify(title),
     date: formatSheetDate(pick(row, ["date", "date_iso"])),
@@ -37,9 +40,13 @@ export function normalizeEventPanel(row) {
     category: pick(row, ["category"]),
     title,
     subtitle: pick(row, ["subtitle"]),
-    image: driveImageUrl(pick(row, ["image_url", "image", "thumbnail_url"]), 800),
+    image: driveImageUrl(pick(row, ["image_url", "image", "thumbnail_url"]), 1200),
     href: pick(row, ["vimeo_url", "href", "url", "link"]),
-    summary: pick(row, ["summary", "description"]),
+    summary,
+    // Full write-up for the detail page; falls back to the short summary.
+    description: description || summary,
+    // Transcript is added later — empty for now so the page shows a placeholder.
+    transcript: pick(row, ["transcript", "transcript_text"]),
   };
 }
 

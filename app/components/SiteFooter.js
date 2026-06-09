@@ -6,58 +6,32 @@ import {
   footerExploreLinks,
   footerResourceLinks,
   socialLinks,
-  topBarItems,
 } from "../lib/site-data";
-import TrustBadges from "./TrustBadges";
 
 export default function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="footer">
-      <div className="container footer-cta-band">
-        <span className="footer-cta-eyebrow">Stay Connected</span>
-        <h2 className="footer-cta-heading">
-          Your next step starts here.
-        </h2>
-        <p className="footer-cta-sub">
-          Explore the latest podcast, catch up on event panels, or book your
-          free marketing strategy session.
-        </p>
-        <div className="footer-cta-buttons">
-          <a className="footer-cta-btn footer-cta-btn-primary" href={topBarItems[0].href} target="_blank" rel="noreferrer">
-            <span className="footer-cta-btn-icon">&#9654;</span>
-            Latest Podcast
-          </a>
-          <a className="footer-cta-btn" href={topBarItems[1].href} target="_blank" rel="noreferrer">
-            Latest Event Panel
-          </a>
-          <Link className="footer-cta-btn" href="/consultation">
-            Free Strategy Call
-          </Link>
+      {/* Slim CTA strip */}
+      <div className="container footer-cta-strip">
+        <div>
+          <span className="footer-cta-eyebrow">Stay Connected</span>
+          <h2 className="footer-cta-heading">Your next step starts here.</h2>
         </div>
+        <Link className="button button-primary" href="/consultation">
+          Book a Free Strategy Call &rarr;
+        </Link>
       </div>
 
+      {/* Link columns */}
       <div className="container footer-grid">
         <div className="footer-brand">
           <img src={withBasePath("/assets/logo-white.svg")} alt="Veterinary Business Institute" />
           <p>
-            Veterinary Business Institute is a resource hub for veterinarians focused on business
-            growth, leadership, operations, culture, client experience, and digital visibility.
+            A resource hub for veterinarians focused on practice growth, leadership,
+            operations, and digital visibility.
           </p>
-          <TrustBadges />
-        </div>
-
-        <div>
-          <h3>Contact</h3>
-          <ul className="footer-list">
-            {contactDetails.map((item) => (
-              <li key={item.label}>
-                <a href={item.href}>{item.label}</a>
-              </li>
-            ))}
-            <li>{contactAddress}</li>
-          </ul>
         </div>
 
         <div>
@@ -76,17 +50,28 @@ export default function SiteFooter() {
           <ul className="footer-list">
             {footerResourceLinks.map((item) => (
               <li key={item.label}>
-                <a href={item.href} target="_blank" rel="noreferrer">
-                  {item.label}
-                </a>
+                <Link href={item.href}>{item.label}</Link>
               </li>
             ))}
           </ul>
         </div>
+
+        <div>
+          <h3>Contact</h3>
+          <ul className="footer-list">
+            {contactDetails.map((item) => (
+              <li key={item.label}>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))}
+            <li className="footer-address">{contactAddress}</li>
+          </ul>
+        </div>
       </div>
 
+      {/* Bottom bar */}
       <div className="container footer-bottom">
-        <span>Copyright {year} Veterinary Business Institute. All rights reserved.</span>
+        <span>&copy; {year} Veterinary Business Institute. All rights reserved.</span>
         <div className="footer-bottom-links">
           {socialLinks.map((item) => (
             <a href={item.href} key={item.label} target="_blank" rel="noreferrer">

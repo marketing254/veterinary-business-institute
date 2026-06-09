@@ -55,19 +55,24 @@ export default function ToolsPage() {
       </section>
 
       <section className="section section-muted">
-        <div className="container page-cta">
-          <div>
+        <div className="container">
+          <div className="tools-cta-card">
             <span className="eyebrow text-accent">Next Step</span>
             <h2>Want help turning these numbers into a plan?</h2>
             <p>
               Our VBI marketing and strategy team can audit your current performance and build a
               tailored growth plan around the metrics that matter most to your practice.
             </p>
-          </div>
-          <div className="cta-actions">
-            <Link href="/consultation" className="button button-primary">
-              Book a Free Consultation
-            </Link>
+            <ul className="tools-cta-points">
+              <li>4–6 hour custom performance review</li>
+              <li>Tailored local-SEO &amp; growth plan</li>
+              <li>Free &middot; no obligation</li>
+            </ul>
+            <div className="button-row" style={{ justifyContent: "center" }}>
+              <Link href="/consultation" className="button button-primary">
+                Book a Free Consultation
+              </Link>
+            </div>
           </div>
         </div>
       </section>

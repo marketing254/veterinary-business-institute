@@ -3,8 +3,8 @@ import { fileURLToPath } from "node:url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const repoSlug = "VBI-Revamp";
-const repoName = "VBI Revamp";
+const repoSlug = "veterinary-business-institute";
+const repoName = "Veterinary Business Institute";
 const isGithubPages = process.env.GITHUB_PAGES === "true";
 const basePath = isGithubPages ? `/${repoSlug}` : "";
 

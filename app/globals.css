@@ -14,6 +14,10 @@
   --popover-foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
+  /* alias used by inline-styled popups (ExitIntentPopup, ChatWidget). Was
+     undefined → popups rendered with no background (see-through). Resolves to
+     the solid card surface in both light and dark themes. */
+  --paper: var(--card);
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --primary: oklch(0.205 0 0);
@@ -3602,9 +3606,11 @@ html[data-theme="dark"] .nav-menu-viewport {
   min-width: 200px;
   padding: 14px 32px;
   border-radius: 999px;
-  border: 1px solid rgba(47, 107, 69, 0.3);
-  background: rgba(47, 107, 69, 0.08);
-  color: var(--teal-500);
+  border: 1px solid var(--teal-500);
+  /* Solid resting state so the label is readable on ANY background (light
+     sections, dark heroes, stats panels). Animation is unaffected. */
+  background: var(--teal-500);
+  color: #ffffff;
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
@@ -3616,10 +3622,10 @@ html[data-theme="dark"] .nav-menu-viewport {
 
 .attract-btn:hover,
 .attract-btn.is-attracting {
-  background: var(--teal-500);
-  border-color: var(--teal-500);
-  color: var(--white);
-  box-shadow: 0 8px 28px rgba(47, 107, 69, 0.3);
+  background: var(--forest-950);
+  border-color: var(--forest-950);
+  color: #ffffff;
+  box-shadow: 0 8px 28px rgba(47, 107, 69, 0.35);
   transform: translateY(-1px);
 }
 
@@ -5914,7 +5920,9 @@ a.contact-info-main:hover {
 .wnb-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 45, 40, 0.35);
+  background: rgba(8, 22, 18, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   z-index: 9998;
   animation: wnb-fade-in 0.3s ease;
 }
@@ -9537,3 +9545,183 @@ html[data-theme="dark"] .res-card-cta p {
   .about-founder-stats { justify-content: center; }
   .about-team-grid { grid-template-columns: 1fr; }
 }
+
+/* ── Webinar Replay detail page (/webinars/[slug]) ───────────────────────── */
+.wrd-hero { padding-bottom: 1.5rem; }
+.wrd-back { display: inline-block; font-size: 0.9rem; text-decoration: underline; }
+.wrd-title { margin-top: 0.5rem; }
+.wrd-subtitle { margin-top: 0.5rem; max-width: 60ch; }
+.wrd-hero-meta {
+  display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;
+  margin-top: 1rem; color: var(--ink-500); font-size: 0.9rem;
+}
+.wrd-free-pill {
+  display: inline-block; padding: 0.2rem 0.7rem; border-radius: 100px;
+  background: rgba(31, 122, 92, 0.12); color: var(--teal-500, #1f7a5c);
+  font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+}
+.wrd-video-section { padding-top: 0; }
+.wrd-video-frame {
+  position: relative; width: 100%; aspect-ratio: 16 / 9;
+  border-radius: 16px; overflow: hidden; background: #0a0f0d;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28); border: 1px solid var(--border);
+}
+.wrd-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.wrd-video-soon {
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255, 255, 255, 0.7); font-size: 0.95rem;
+}
+.wrd-content {
+  display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 2.5rem; align-items: start;
+}
+.wrd-h2 { font-size: 1.5rem; margin-bottom: 1rem; }
+.wrd-description p, .wrd-transcript p { color: var(--ink-600, #3f4a45); line-height: 1.75; margin-bottom: 1rem; }
+.wrd-placeholder { color: var(--ink-400); font-style: italic; }
+.wrd-transcript-placeholder {
+  border: 1px dashed var(--border); border-radius: 12px; padding: 1.5rem;
+  background: var(--background-muted); color: var(--ink-500);
+}
+.wrd-placeholder-badge {
+  display: inline-block; margin-bottom: 0.6rem; padding: 0.2rem 0.7rem; border-radius: 100px;
+  background: rgba(31, 122, 92, 0.12); color: var(--teal-500, #1f7a5c);
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.wrd-aside-card {
+  position: sticky; top: 96px; background: var(--card); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+.wrd-meta-list { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.wrd-meta-list li { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.9rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+.wrd-meta-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.wrd-meta-list strong { color: var(--ink-700); }
+.wrd-meta-list span { color: var(--ink-500); text-align: right; }
+
+/* Replay cards as links (events page) */
+.evt-replay-card-link { display: flex; flex-direction: column; text-decoration: none; color: inherit; cursor: pointer; }
+.evt-replay-thumb-static { display: block; position: relative; width: 100%; border: none; padding: 0; cursor: pointer; }
+
+@media (max-width: 860px) {
+  .wrd-content { grid-template-columns: 1fr; gap: 1.5rem; }
+  .wrd-aside-card { position: static; }
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   VBI fixes — light-mode visibility, CTA text, forms, filters, pagination
+   ════════════════════════════════════════════════════════════════════════ */
+
+/* (#4/#8/#19) Branded heroes (.section-about-vbi) are ALWAYS dark green, so
+   their heading/lead/outline text must be light in BOTH themes. In light mode
+   the global foreground was dark → invisible on the dark hero. */
+.section-about-vbi h1,
+.section-about-vbi h2,
+.section-about-vbi .hero-copy h1,
+.section-about-vbi .community-hero-copy h1,
+.section-about-vbi .about-vbi-heading,
+.section-about-vbi .hero-lead,
+.section-about-vbi .about-vbi-lead,
+.section-about-vbi .evt-hero-note,
+.section-about-vbi .hero-kicker {
+  color: #ffffff;
+}
+.section-about-vbi .hero-lead,
+.section-about-vbi .about-vbi-lead,
+.section-about-vbi .evt-hero-note {
+  color: rgba(255, 255, 255, 0.82);
+}
+.section-about-vbi .outline-txt {
+  color: transparent;
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.92);
+}
+
+/* (#7/#2) AttractButton uses a solid resting state globally (see .attract-btn),
+   so it stays readable on every background — no per-section override needed. */
+
+/* (#11) Gated/lead-capture modals must never force a long page scroll. */
+.evt-modal,
+.runlock-modal {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.evt-modal-form .evt-modal-row { gap: 0.75rem; }
+.evt-modal-field input { padding: 0.6rem 0.75rem; }
+.evt-modal h3 { margin: 0.25rem 0; }
+.evt-modal-sub { margin-bottom: 0.75rem; }
+
+/* (#17) Podcast category filter chips */
+.pod-filter-bar {
+  display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;
+  margin: 0 auto 2rem; max-width: 900px;
+}
+.pod-filter-chip {
+  padding: 0.45rem 1rem; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--card); color: var(--ink-700);
+  font-size: 0.85rem; font-weight: 600; transition: all 0.2s ease;
+}
+.pod-filter-chip:hover { border-color: var(--teal-500); color: var(--teal-500); }
+.pod-filter-chip.is-active { background: var(--teal-500); border-color: var(--teal-500); color: #fff; }
+
+/* (#10) Pagination controls */
+.vbi-pagination {
+  display: flex; justify-content: center; align-items: center; gap: 0.4rem;
+  margin-top: 2.5rem; flex-wrap: wrap;
+}
+.vbi-page-btn {
+  min-width: 40px; height: 40px; padding: 0 0.75rem; border-radius: 10px;
+  border: 1px solid var(--border); background: var(--card); color: var(--ink-700);
+  font-weight: 700; cursor: pointer; transition: all 0.2s ease;
+}
+.vbi-page-btn:hover:not(:disabled) { border-color: var(--teal-500); color: var(--teal-500); }
+.vbi-page-btn.is-active { background: var(--teal-500); border-color: var(--teal-500); color: #fff; }
+.vbi-page-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* (#20) YouCanBookMe scheduler embed */
+.ycbm-embed {
+  width: 100%; border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--border); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+  background: var(--card);
+}
+.ycbm-embed iframe { width: 100%; height: 520px; min-height: 520px; border: 0; background: transparent; display: block; }
+
+/* Tools "Next Step" CTA — clean centered card (replaces the stretched grid). */
+.tools-cta-card {
+  max-width: 760px; margin: 0 auto; text-align: center;
+  background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+  padding: 2.5rem 2rem; box-shadow: 0 14px 40px rgba(0, 0, 0, 0.06);
+}
+.tools-cta-card p { max-width: 60ch; margin: 0.75rem auto 0; }
+.tools-cta-points {
+  list-style: none; margin: 1.5rem 0 0; padding: 0;
+  display: flex; flex-wrap: wrap; gap: 0.6rem 1.5rem; justify-content: center;
+}
+.tools-cta-points li { position: relative; padding-left: 1.4rem; color: var(--ink-600); font-size: 0.9rem; }
+.tools-cta-points li::before {
+  content: "✓"; position: absolute; left: 0; color: var(--teal-500); font-weight: 800;
+}
+
+/* (#6) Registration hero image as a clean 16:9 frame. */
+.reg-hero-media { aspect-ratio: 16 / 9; height: auto; }
+.reg-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+/* (#18) Community "what you get" cards: don't stretch text cards to the image
+   card's height — size each to its content so there's no dead space. */
+.community-benefits-grid { align-items: start; }
+.community-benefit-image { align-self: stretch; min-height: 100%; }
+
+/* (#3) Tighter footer CTA band so the footer reads as standard height. */
+.footer-cta-band { padding-top: 40px; padding-bottom: 40px; }
+
+/* (#7) Professional, compact footer CTA strip (replaces the heavy 3-button band) */
+.footer-cta-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap;
+  padding: 32px 0; margin-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+.footer-cta-strip .footer-cta-eyebrow {
+  display: block; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--teal-300, #8fd3b6); margin-bottom: 6px;
+}
+.footer-cta-strip .footer-cta-heading {
+  margin: 0; font-size: clamp(1.3rem, 2.4vw, 1.8rem); color: #fff; line-height: 1.1;
+}
+.footer-address { opacity: 0.8; font-size: 0.85rem; line-height: 1.5; }
