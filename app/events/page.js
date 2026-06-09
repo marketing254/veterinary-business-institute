@@ -2,8 +2,7 @@ import Link from "next/link";
 import { eventPanels, registrationEvents } from "../lib/site-data";
 import SolarIcon from "../components/SolarIcon";
 import CountdownTimer from "../components/CountdownTimer";
-import EventReplayGate from "../components/EventReplayGate";
-import LiveEventPanels from "../components/live/LiveEventPanels";
+import LiveWebinarReplays from "../components/live/LiveWebinarReplays";
 
 export const metadata = {
   title: "Webinars & Events | Veterinary Business Institute",
@@ -190,7 +189,7 @@ export default function EventsPage() {
               ideas without waiting for the next live event.
             </p>
           </div>
-          <LiveEventPanels initial={eventPanels} />
+          <LiveWebinarReplays initial={eventPanels} />
         </div>
       </section>
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { episodes, listeningPlatforms } from "../../lib/site-data";
 import SolarIcon from "../../components/SolarIcon";
+import { driveFileUrl } from "../../lib/sheets-core";
 
 const APPLE_SHOW_ID = "1712053291";
 
@@ -54,7 +55,16 @@ export default async function PodcastEpisodePage({ params }) {
       {/* ── Embedded player ── */}
       <section className="section" style={{ paddingTop: 0 }}>
         <div className="container">
-          {ep.appleId ? (
+          {ep.audioUrl ? (
+            <audio
+              controls
+              preload="none"
+              src={driveFileUrl(ep.audioUrl)}
+              style={{ width: "100%", borderRadius: "12px" }}
+            >
+              Your browser does not support the audio element.
+            </audio>
+          ) : ep.appleId ? (
             <iframe
               className="podcast-page-player"
               title={`Listen to episode ${ep.number}`}
@@ -65,7 +75,7 @@ export default async function PodcastEpisodePage({ params }) {
           ) : (
             <div className="button-row" style={{ justifyContent: "center" }}>
               <a className="button button-primary" href={ep.href} target="_blank" rel="noreferrer">
-                Listen on Apple / Spotify
+                Listen on Apple Podcasts
               </a>
             </div>
           )}

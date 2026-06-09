@@ -16,6 +16,7 @@ import HeroRedesign from "./components/HeroRedesign";
 import ParallaxCard from "./components/ParallaxCard";
 import AnimatedCounter from "./components/AnimatedCounter";
 import AttractButton from "./components/AttractButton";
+import LiveHomePodcastGrid from "./components/live/LiveHomePodcastGrid";
 import { pillarIcons } from "./lib/pillar-icons";
 
 const signalRows = [
@@ -224,24 +225,7 @@ export default function HomePage() {
               Latest veterinary business episodes.
             </h2>
           </div>
-          <div className="ep-photo-grid">
-            {episodes.slice(0, 9).map((ep) => (
-              <a
-                key={ep.number}
-                href={ep.href}
-                target="_blank"
-                rel="noreferrer"
-                className="ep-photo-card"
-              >
-                <div className="ep-photo-thumb">
-                  <img src={ep.image} alt={`Episode ${ep.number}`} />
-                </div>
-                <span className="ep-photo-badge">EPISODE {ep.number}</span>
-                <h3>{ep.title}</h3>
-                <p className="ep-photo-date">{ep.date}</p>
-              </a>
-            ))}
-          </div>
+          <LiveHomePodcastGrid initial={episodes} limit={9} />
 
           {/* Host spotlight inline row */}
           <div className="pod-host-row">

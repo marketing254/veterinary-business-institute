@@ -64,23 +64,16 @@ export const headerNavigation = [
   },
   { type: "link", label: "Guest / Speaker", href: "/guest-speaker" },
   { type: "link", label: "Community", href: "/community" },
-  { type: "link", label: "Marketing", href: "/marketing" },
+  { type: "link", label: "Marketing", href: "/consultation" },
 ];
 
 export const footerExploreLinks = [
-  { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Events", href: "/events" },
-  { label: "Reviews", href: "/reviews" },
   { label: "Podcast", href: "/podcast" },
-  { label: "Blog", href: "/blog" },
+  { label: "Events", href: "/events" },
   { label: "Resources", href: "/resources" },
-  { label: "Guest / Speaker", href: "/guest-speaker" },
   { label: "Community", href: "/community" },
-  { label: "Newsletter", href: "/newsletter" },
-  { label: "Webinars", href: "/webinars" },
-  { label: "Marketing", href: "/marketing" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "Consultation", href: "/consultation" },
 ];
 
 export const contactDetails = [
@@ -114,20 +107,13 @@ export const socialLinks = [
 ];
 
 export const footerResourceLinks = [
-  { label: "Podcast Show", href: podcastHubLink },
-  { label: "Event Panels Folder", href: panelFolderLink },
-  { label: "Webinar Archive", href: webinarArchiveLink },
-  { label: "Book a Free Consultation", href: "/consultation" },
-  { label: "Ekwa Marketing", href: "https://www.ekwa.com/" },
+  { label: "Webinar Replays", href: "/events" },
+  { label: "Free Consultation", href: "/consultation" },
   { label: "Knowledge Base (FAQ)", href: "/resources/faq" },
   { label: "Free Downloads Hub", href: "/resources" },
 ];
 
 export const listeningPlatforms = [
-  {
-    label: "Spotify",
-    href: "https://open.spotify.com/show/5F1cmzekwcb8UbFO4OL5pu",
-  },
   {
     label: "Apple Podcasts",
     href: "https://podcasts.apple.com/us/podcast/veterinary-business-podcast/id1712053291",

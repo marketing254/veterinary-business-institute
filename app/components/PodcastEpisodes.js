@@ -1,100 +1,121 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Link from "next/link";
 import SolarIcon from "./SolarIcon";
 
-const APPLE_SHOW_ID = "1712053291";
+const PAGE_SIZE = 9;
+
+// An episode is "playable" (worth showing) only if it links somewhere.
+function hasLink(ep) {
+  return Boolean(ep.appleId || ep.href || ep.audioUrl);
+}
 
 export default function PodcastEpisodes({ episodes }) {
-  const [playerId, setPlayerId] = useState(null);
-  const [playerTitle, setPlayerTitle] = useState("");
-  const [playerHref, setPlayerHref] = useState("");
+  const [activeCat, setActiveCat] = useState("All");
+  const [page, setPage] = useState(1);
 
-  function openPlayer(ep) {
-    if (!ep.appleId) {
-      if (ep.href) window.open(ep.href, "_blank", "noopener,noreferrer");
-      return;
-    }
-    setPlayerId(ep.appleId);
-    setPlayerTitle(ep.title);
-    setPlayerHref(ep.href || "");
-    document.body.style.overflow = "hidden";
-  }
+  // (#14) Only show episodes that actually have a link.
+  const linked = useMemo(() => (episodes || []).filter(hasLink), [episodes]);
 
-  function closePlayer() {
-    setPlayerId(null);
-    document.body.style.overflow = "";
+  // (#17) Category filter options derived from the data.
+  const categories = useMemo(() => {
+    const set = new Set();
+    linked.forEach((e) => e.category && set.add(e.category));
+    return ["All", ...Array.from(set)];
+  }, [linked]);
+
+  const filtered = useMemo(
+    () => (activeCat === "All" ? linked : linked.filter((e) => e.category === activeCat)),
+    [linked, activeCat]
+  );
+
+  // (#10) Pagination.
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const safePage = Math.min(page, totalPages);
+  const pageItems = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+
+  function choose(cat) {
+    setActiveCat(cat);
+    setPage(1);
   }
 
   return (
     <>
-      <div className="podcast-episode-list">
-        {episodes.map((ep) => (
-          <article className="podcast-episode-card" key={ep.number + ep.title}>
+      {categories.length > 1 && (
+        <div className="pod-filter-bar">
+          {categories.map((c) => (
             <button
+              key={c}
               type="button"
+              className={`pod-filter-chip${activeCat === c ? " is-active" : ""}`}
+              onClick={() => choose(c)}
+            >
+              {c}
+            </button>
+          ))}
+        </div>
+      )}
+
+      <div className="podcast-episode-list">
+        {pageItems.map((ep) => (
+          <article className="podcast-episode-card" key={ep.number + ep.title}>
+            <Link
+              href={`/podcast/episode-${ep.number}`}
               className="podcast-episode-thumb"
-              onClick={() => openPlayer(ep)}
-              aria-label={`Play episode ${ep.number}: ${ep.title}`}
+              aria-label={`Open episode ${ep.number}: ${ep.title}`}
             >
               <img src={ep.image} alt={`Episode ${ep.number}`} loading="lazy" />
               <span className="podcast-episode-play" aria-hidden="true">
                 <SolarIcon name="playCircle" size={34} />
               </span>
-            </button>
+            </Link>
             <div className="podcast-episode-body">
               <div className="podcast-episode-meta">
                 <span className="podcast-episode-num">Episode #{ep.number}</span>
                 <span className="podcast-episode-date">{ep.date}</span>
-                {ep.duration && (
-                  <span className="podcast-episode-dur">{ep.duration}</span>
-                )}
+                {ep.duration && <span className="podcast-episode-dur">{ep.duration}</span>}
               </div>
               <h3>{ep.title}</h3>
               <p>{ep.summary}</p>
-              <button
-                type="button"
-                className="podcast-episode-link"
-                onClick={() => openPlayer(ep)}
-              >
+              <Link href={`/podcast/episode-${ep.number}`} className="podcast-episode-link">
                 &#9654; Listen Now
-              </button>
+              </Link>
             </div>
           </article>
         ))}
       </div>
 
-      {playerId && (
-        <div className="podcast-player-overlay" onClick={closePlayer}>
-          <div className="podcast-player-box" onClick={(e) => e.stopPropagation()}>
+      {totalPages > 1 && (
+        <div className="vbi-pagination">
+          <button
+            type="button"
+            className="vbi-page-btn"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={safePage === 1}
+            aria-label="Previous page"
+          >
+            &larr;
+          </button>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
             <button
+              key={n}
               type="button"
-              className="podcast-player-close"
-              onClick={closePlayer}
-              aria-label="Close player"
+              className={`vbi-page-btn${n === safePage ? " is-active" : ""}`}
+              onClick={() => setPage(n)}
             >
-              &times;
+              {n}
             </button>
-            <span className="podcast-player-eyebrow">Now Playing</span>
-            <h3 className="podcast-player-title">{playerTitle}</h3>
-            <iframe
-              className="podcast-player-frame"
-              title={playerTitle}
-              allow="autoplay *; encrypted-media *; clipboard-write"
-              sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-              src={`https://embed.podcasts.apple.com/us/podcast/id${APPLE_SHOW_ID}?i=${playerId}&theme=auto`}
-            />
-            {playerHref && (
-              <a
-                className="podcast-player-applelink"
-                href={playerHref}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Open in Apple Podcasts &rarr;
-              </a>
-            )}
-          </div>
+          ))}
+          <button
+            type="button"
+            className="vbi-page-btn"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={safePage === totalPages}
+            aria-label="Next page"
+          >
+            &rarr;
+          </button>
         </div>
       )}
     </>

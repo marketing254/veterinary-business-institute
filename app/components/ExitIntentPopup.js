@@ -42,7 +42,7 @@ export default function ExitIntentPopup() {
       style={{
         position: "fixed",
         top: 0, left: 0, right: 0, bottom: 0,
-        backgroundColor: "rgba(16, 35, 32, 0.4)",
+        backgroundColor: "rgba(8, 22, 18, 0.66)",
         backdropFilter: "blur(6px)",
         zIndex: 200,
         display: "flex",
@@ -63,7 +63,8 @@ export default function ExitIntentPopup() {
           width: "100%",
           textAlign: "center",
           position: "relative",
-          boxShadow: "0 24px 60px rgba(16,35,32,0.12)"
+          boxShadow: "0 24px 70px rgba(0,0,0,0.45)",
+          border: "1px solid var(--vbi-border, rgba(16,35,32,0.1))"
         }}>
         <button 
           onClick={() => setShow(false)}

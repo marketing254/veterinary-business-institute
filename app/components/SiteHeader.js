@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X, ChevronRight } from "lucide-react";
 import AttractButton from "./AttractButton";
 import ThemeToggle from "./ThemeToggle";
+import TopBar from "./TopBar";
 import { withBasePath } from "../lib/base-path";
 import { headerNavigation, topBarItems } from "../lib/site-data";
 import { cn } from "../../lib/utils";
@@ -48,17 +49,8 @@ export default function SiteHeader() {
 
   return (
     <>
-      {/* ── Top Bar ── */}
-      <header className="topbar">
-        <div className="container topbar-grid">
-          {topBarItems.map((item) => (
-            <a className="topbar-item" href={item.href} key={item.label} target="_blank" rel="noreferrer">
-              <span className="eyebrow">{item.label}</span>
-              <span className="topbar-copy">{item.copy}</span>
-            </a>
-          ))}
-        </div>
-      </header>
+      {/* ── Top Bar (latest podcast + event panel → internal pages) ── */}
+      <TopBar items={topBarItems} />
 
       {/* ── Sticky Nav ── */}
       <nav className="nav" aria-label="Site navigation">
