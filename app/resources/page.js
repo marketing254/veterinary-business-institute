@@ -6,7 +6,8 @@ import ResourceUnlockModal from "../components/ResourceUnlockModal";
 export const metadata = {
   title: "Free Veterinary Marketing Resources & Guides | Veterinary Business Institute",
   description:
-    "Download free veterinary marketing resources: the Practice Growth Blueprint, SEO and Google Business Profile guides, social media playbooks, email templates, and practice-management toolkits. All free — no credit card needed.",
+    "Free veterinary marketing resources: the Practice Growth Blueprint, SEO and Google Business Profile guides, plus social media and email templates. No credit card.",
+  alternates: { canonical: "/resources" },
 };
 
 const blueprintPoints = [

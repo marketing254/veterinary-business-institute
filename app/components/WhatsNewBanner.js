@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { episodes, webinars, eventPanels } from "../lib/site-data";
+import { podcastSlug } from "../lib/sheets-core";
 
 const DISMISS_KEY = "vbi-whats-new-dismissed";
 
@@ -69,7 +70,7 @@ export default function WhatsNewBanner() {
               </div>
             </div>
             <Link
-              href={`/podcast/episode-${latestEpisode.number}`}
+              href={`/podcast/${podcastSlug(latestEpisode)}`}
               onClick={handleDismiss}
               className="wnb-btn wnb-btn-primary"
             >

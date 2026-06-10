@@ -4,6 +4,7 @@ import { contactDetails } from "../lib/site-data";
 export const metadata = {
   title: "Coaching Services (CSM) | Veterinary Business Institute",
   description: "One-on-one leadership and management coaching for veterinary practice owners and high-level associates.",
+  alternates: { canonical: "/csm" },
 };
 
 const csmPillars = [

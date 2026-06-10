@@ -85,6 +85,7 @@ export const metadata = {
   title: "Veterinary Business Institute | Podcast, Panels, and Practice Growth",
   description:
     "The VBI homepage built around podcasts, event panels, webinar replays, and veterinary growth strategy.",
+  alternates: { canonical: "/" },
 };
 
 export default function HomePage() {

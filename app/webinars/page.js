@@ -43,6 +43,7 @@ export const metadata = {
   title: "Webinars | Veterinary Business Institute",
   description:
     "Browse replay-ready veterinary webinars focused on leadership, resilience, technology, marketing, and practice growth.",
+  alternates: { canonical: "/webinars" },
 };
 
 export default function WebinarsPage() {

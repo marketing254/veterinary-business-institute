@@ -8,6 +8,7 @@ export const metadata = {
   title: "Veterinary Community & Peer Network | Veterinary Business Institute",
   description:
     "Join a free community of veterinary practice owners and teams sharing real growth strategies, exclusive resources, and peer support to build stronger practices.",
+  alternates: { canonical: "/community" },
 };
 
 const heroStats = [

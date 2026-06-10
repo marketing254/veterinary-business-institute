@@ -17,6 +17,7 @@ import LiveCaseStudies from "../components/live/LiveCaseStudies";
 export const metadata = {
   title: "Case Studies | Veterinary Business Institute",
   description: "Detailed breakdowns of how VBI coaching and Ekwa marketing audits impact veterinary practices.",
+  alternates: { canonical: "/case-studies" },
 };
 
 const caseStudies = [

@@ -188,6 +188,15 @@ export const hosts = [
 export const episodes = [
   {
     number: "113",
+    date: "June 4, 2026",
+    title: "The Future of Veterinary Marketing: How Independent Practices Can Build a Predictable New-Client Engine and Compete Against Corporate Groups",
+    image: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/28/06/77/28067714-70d0-2d4f-54a3-688f6c93b715/mza_5109063160220216959.jpg/600x600bb.jpg",
+    href: "https://podcasts.apple.com/us/podcast/veterinary-business-podcast/id1712053291",
+    duration: "",
+    summary: "Cebron Walker joins the Veterinary Business Podcast to break down how independent veterinary practices can build a predictable new-client engine and compete against corporate groups — covering local visibility, referral systems, and a marketing engine that compounds over time.",
+  },
+  {
+    number: "112",
     date: "May 28, 2026",
     title: "The Investment You Haven't Considered: How Veterinarians Are Shaping the Future of Animal Health",
     image: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/28/06/77/28067714-70d0-2d4f-54a3-688f6c93b715/mza_5109063160220216959.jpg/600x600bb.jpg",
@@ -379,7 +388,7 @@ export const webinars = [
 
 export const eventPanels = [
   {
-    slug: "data-driven-growth-ai-search-client",
+    slug: "data-driven-growth-ai-search-client-education",
     date: "May 27, 2026",
     duration: "01:00:00",
     category: "Technology and Innovation",
@@ -390,7 +399,7 @@ export const eventPanels = [
     summary: "Turn Dr. Google behavior into trust-building education funnels",
   },
   {
-    slug: "spectrum-care-playbook-keeping-middle-class",
+    slug: "spectrum-of-care-playbook-middle-class-pet-owners",
     date: "May 20, 2026",
     duration: "01:00:00",
     category: "Client Experience",
@@ -401,7 +410,7 @@ export const eventPanels = [
     summary: "Reframing the exam room conversation: Moving from \"gold standard or nothing\" to tiered, transparent treatment options without guilt or pressure",
   },
   {
-    slug: "charge-what-re-worth-stop-discounting",
+    slug: "charge-what-youre-worth-stop-discounting",
     date: "May 13, 2026",
     duration: "01:00:00",
     category: "Ownership and Leadership",
@@ -412,7 +421,7 @@ export const eventPanels = [
     summary: "Replace discount habits with value-based messaging frameworks",
   },
   {
-    slug: "profitability-playbook-2026-increase-revenue-per",
+    slug: "profitability-playbook-increase-revenue-per-visit",
     date: "May 6, 2026",
     duration: "01:00:00",
     category: "Financial Health",
@@ -434,7 +443,7 @@ export const eventPanels = [
     summary: "Run a workflow-friction audit across front desk, exam, and follow-up",
   },
   {
-    slug: "tech-enabled-manager-automating-coordination-tasks",
+    slug: "tech-enabled-manager-automating-coordination",
     date: "April 22, 2026",
     duration: "01:00:00",
     category: "Technology and Innovation",
@@ -445,7 +454,7 @@ export const eventPanels = [
     summary: "Protect middle leaders by automating repeatable coordination tasks",
   },
   {
-    slug: "modern-vet-leaders-use-ai-automation",
+    slug: "modern-vet-leaders-ai-automation-grow-profit",
     date: "April 8, 2026",
     duration: "01:00:00",
     category: "Ownership and Leadership",

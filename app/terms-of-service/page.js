@@ -4,6 +4,7 @@ import { contactDetails } from "../lib/site-data";
 export const metadata = {
   title: "Terms of Service | Veterinary Business Institute",
   description: "Terms and conditions for accessing the Veterinary Business Institute and its resources.",
+  alternates: { canonical: "/terms-of-service" },
 };
 
 export default function TermsOfServicePage() {

@@ -4,6 +4,7 @@ import { contactDetails } from "../lib/site-data";
 export const metadata = {
   title: "Privacy Policy | Veterinary Business Institute",
   description: "Privacy Policy and data protection guidelines for the Veterinary Business Institute platform.",
+  alternates: { canonical: "/privacy-policy" },
 };
 
 export default function PrivacyPolicyPage() {

@@ -1,5 +1,6 @@
 import { blogPosts } from "./lib/blog-posts";
-import { episodes } from "./lib/site-data";
+import { episodes, eventPanels } from "./lib/site-data";
+import { podcastSlug } from "./lib/sheets-core";
 
 export const dynamic = "force-static";
 
@@ -7,24 +8,30 @@ export default function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.veterinarybusinessinstitute.com";
   const siteLastModified = "2026-05-31T00:00:00.000Z";
 
+  // Note: /thank-you, /dashboard, /resources/hub are intentionally excluded
+  // (noindex / internal app pages — see robots.js).
   const coreRoutes = [
     "",
     "/about",
+    "/team",
     "/events",
     "/podcast",
     "/reviews",
+    "/case-studies",
     "/resources",
     "/blog",
     "/guest-speaker",
     "/community",
+    "/community/forum",
     "/marketing",
+    "/consultation",
+    "/csm",
+    "/newsletter",
     "/contact",
     "/privacy-policy",
     "/terms-of-service",
     "/webinars",
     "/webinars/registration",
-    "/consultation",
-    "/thank-you",
     "/resources/tools",
     "/resources/apps",
     "/resources/faq",
@@ -43,11 +50,18 @@ export default function sitemap() {
   }));
 
   const episodeRoutes = episodes.map((e) => ({
-    url: `${baseUrl}/podcast/episode-${e.number}`,
+    url: `${baseUrl}/podcast/${podcastSlug(e)}`,
     lastModified: siteLastModified,
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  return [...coreRoutes, ...blogRoutes, ...episodeRoutes];
+  const webinarRoutes = eventPanels.map((p) => ({
+    url: `${baseUrl}/webinars/${p.slug}`,
+    lastModified: siteLastModified,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...coreRoutes, ...blogRoutes, ...episodeRoutes, ...webinarRoutes];
 }

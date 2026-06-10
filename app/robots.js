@@ -7,8 +7,10 @@ export default function robots() {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/api/", "/thank-you", "/*?*"], 
-      // Prevent indexing of confirmation pages or query param variations to avoid duplicate content
+      // Confirmation/utility and internal app pages have no search value; query-param
+      // variants are blocked to avoid duplicate-content crawling. AI crawlers (GPTBot,
+      // PerplexityBot, ClaudeBot, Google-Extended) are intentionally allowed via "*".
+      disallow: ["/api/", "/thank-you", "/dashboard", "/resources/hub", "/*?*"],
     },
     sitemap: `${baseUrl}/sitemap.xml`,
   };

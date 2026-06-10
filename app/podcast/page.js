@@ -8,7 +8,16 @@ import LivePodcastEpisodes from "../components/live/LivePodcastEpisodes";
 export const metadata = {
   title: "The Veterinary Business Podcast | Veterinary Business Institute",
   description:
-    "Real conversations with veterinarians, practice owners, and industry leaders sharing their journeys, strategies, and hard-won lessons on building a thriving veterinary practice. Listen free.",
+    "Real conversations with veterinarians, practice owners, and industry leaders on building a thriving veterinary practice. Listen free to every episode.",
+  alternates: { canonical: "/podcast" },
+  openGraph: {
+    title: "The Veterinary Business Podcast",
+    description:
+      "Real conversations with veterinarians, practice owners, and industry leaders on building a thriving veterinary practice. Listen free.",
+    type: "website",
+    url: "/podcast",
+    images: ["/assets/og-cover.jpg"],
+  },
 };
 
 const marqueeItems = [

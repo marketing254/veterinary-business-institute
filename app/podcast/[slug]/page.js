@@ -1,7 +1,14 @@
 import Link from "next/link";
 import { episodes, listeningPlatforms } from "../../lib/site-data";
-import { driveFileUrl } from "../../lib/sheets-core";
+import { driveFileUrl, podcastSlug } from "../../lib/sheets-core";
 import PodcastTranscript from "../../components/live/PodcastTranscript";
+import { podcastEpisodeSchema, breadcrumbSchema, jsonLd } from "../../lib/seo";
+
+function isoDate(value) {
+  if (!value) return undefined;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? undefined : d.toISOString().slice(0, 10);
+}
 
 const APPLE_SHOW_ID = "1712053291";
 
@@ -43,36 +50,59 @@ function PlatformIcon({ label }) {
 }
 
 export async function generateStaticParams() {
-  return episodes.map((ep) => ({ slug: `episode-${ep.number}` }));
+  return episodes.map((ep) => ({ slug: podcastSlug(ep) }));
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const number = slug.replace("episode-", "");
-  const ep = episodes.find((e) => e.number === number);
+  const ep = episodes.find((e) => podcastSlug(e) === slug);
   if (!ep) return { title: "Episode | Veterinary Business Podcast" };
+  const canonical = `/podcast/${podcastSlug(ep)}`;
   return {
     title: `Ep ${ep.number}: ${ep.title} | Veterinary Business Podcast`,
     description: ep.summary,
+    alternates: { canonical },
     openGraph: {
       title: `Ep ${ep.number}: ${ep.title}`,
       description: ep.summary,
       images: ep.image ? [ep.image] : undefined,
       type: "article",
+      url: canonical,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `Ep ${ep.number}: ${ep.title}`,
+      description: ep.summary,
+      images: ep.image ? [ep.image] : undefined,
     },
   };
 }
 
 export default async function PodcastEpisodePage({ params }) {
   const { slug } = await params;
-  const number = slug.replace("episode-", "");
-  const idx = episodes.findIndex((e) => e.number === number);
+  const idx = episodes.findIndex((e) => podcastSlug(e) === slug);
   const ep = idx >= 0 ? episodes[idx] : episodes[0];
   const newer = idx > 0 ? episodes[idx - 1] : null;
   const older = idx >= 0 && idx < episodes.length - 1 ? episodes[idx + 1] : null;
 
+  const episodeLd = podcastEpisodeSchema({
+    title: `Ep ${ep.number}: ${ep.title}`,
+    description: ep.summary,
+    path: `/podcast/${podcastSlug(ep)}`,
+    image: ep.image,
+    datePublished: isoDate(ep.date),
+    audioUrl: ep.audioUrl,
+  });
+  const breadcrumbLd = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Podcast", path: "/podcast" },
+    { name: `Episode ${ep.number}`, path: `/podcast/${podcastSlug(ep)}` },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={jsonLd(episodeLd)} />
+      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={jsonLd(breadcrumbLd)} />
       <section className="page-hero" style={{ paddingBottom: "1.25rem" }}>
         <div className="container">
           <Link href="/podcast" className="wrd-back text-accent">
@@ -152,7 +182,7 @@ export default async function PodcastEpisodePage({ params }) {
         <section className="section section-muted">
           <div className="container podcast-epnav">
             {older ? (
-              <Link className="podcast-epnav-card" href={`/podcast/episode-${older.number}`}>
+              <Link className="podcast-epnav-card" href={`/podcast/${podcastSlug(older)}`}>
                 <span className="podcast-epnav-dir">&larr; Previous Episode</span>
                 <span className="podcast-epnav-title">{older.title}</span>
               </Link>
@@ -160,7 +190,7 @@ export default async function PodcastEpisodePage({ params }) {
               <span />
             )}
             {newer ? (
-              <Link className="podcast-epnav-card podcast-epnav-next" href={`/podcast/episode-${newer.number}`}>
+              <Link className="podcast-epnav-card podcast-epnav-next" href={`/podcast/${podcastSlug(newer)}`}>
                 <span className="podcast-epnav-dir">Next Episode &rarr;</span>
                 <span className="podcast-epnav-title">{newer.title}</span>
               </Link>

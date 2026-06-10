@@ -60,6 +60,7 @@ export const metadata = {
   title: "About | Veterinary Business Institute",
   description:
     "Learn how Veterinary Business Institute connects podcast conversations, webinar education, and marketing guidance for veterinary leaders.",
+  alternates: { canonical: "/about" },
 };
 
 export default function AboutPage() {

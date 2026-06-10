@@ -8,6 +8,15 @@ export const metadata = {
   title: "Webinars & Events | Veterinary Business Institute",
   description:
     "Free virtual panel events, masterclasses, and workshops for veterinary practice owners. Register for the next live panel or watch past webinar replays on demand.",
+  alternates: { canonical: "/events" },
+  openGraph: {
+    title: "Webinars & Events | Veterinary Business Institute",
+    description:
+      "Free virtual panel events, masterclasses, and workshops for veterinary practice owners. Register for the next live panel or watch past replays.",
+    type: "website",
+    url: "/events",
+    images: ["/assets/og-cover.jpg"],
+  },
 };
 
 const nextEvent = registrationEvents[0];

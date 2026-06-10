@@ -53,6 +53,7 @@ const reverseMarqueeItems = [
 export const metadata = {
   title: "Our Team | Veterinary Business Institute",
   description: "Meet the leadership and coaching team behind the Veterinary Business Institute and Ekwa Marketing.",
+  alternates: { canonical: "/team" },
 };
 
 export default function TeamPage() {

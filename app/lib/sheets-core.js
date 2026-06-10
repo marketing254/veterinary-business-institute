@@ -85,16 +85,29 @@ export function formatSheetDate(str) {
   });
 }
 
-/** kebab-case slug, capped, safe for URLs. */
+/** kebab-case slug, capped at a word boundary, safe for URLs. */
 export function slugify(value) {
-  return (
-    String(value || "item")
-      .toLowerCase()
-      .replace(/&/g, " and ")
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "")
-      .slice(0, 72) || "item"
-  );
+  const base = String(value || "item")
+    .toLowerCase()
+    .replace(/['’]/g, "") // drop apostrophes so "don't" → "dont", not "don-t"
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+  if (base.length <= 72) return base || "item";
+  // Cap at the last full word within 72 chars (no dangling partial word/dash).
+  const cut = base.slice(0, 72);
+  const lastDash = cut.lastIndexOf("-");
+  return (lastDash > 40 ? cut.slice(0, lastDash) : cut).replace(/-+$/g, "") || "item";
+}
+
+/**
+ * Canonical, keyword-rich URL slug for a podcast episode — used by the route,
+ * every internal link, and the sitemap. Derived from the title so build-time
+ * (site-data) and live (sheet) data produce identical URLs.
+ */
+export function podcastSlug(ep) {
+  const base = slugify(ep && ep.title ? ep.title : "");
+  return base && base !== "item" ? base : `episode-${(ep && ep.number) || ""}`;
 }
 
 /**

@@ -7,6 +7,7 @@ export const metadata = {
   title: "Contact | Veterinary Business Institute",
   description:
     "Contact Veterinary Business Institute for podcast opportunities, webinar questions, partnerships, and veterinary marketing conversations.",
+  alternates: { canonical: "/contact" },
 };
 
 const email = contactDetails[2];

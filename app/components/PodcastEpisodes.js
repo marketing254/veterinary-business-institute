@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import SolarIcon from "./SolarIcon";
+import { podcastSlug } from "../lib/sheets-core";
 
 const PAGE_SIZE = 9;
 
@@ -61,7 +62,7 @@ export default function PodcastEpisodes({ episodes }) {
         {pageItems.map((ep) => (
           <article className="podcast-episode-card" key={ep.number + ep.title}>
             <Link
-              href={`/podcast/episode-${ep.number}`}
+              href={`/podcast/${podcastSlug(ep)}`}
               className="podcast-episode-thumb"
               aria-label={`Open episode ${ep.number}: ${ep.title}`}
             >
@@ -78,7 +79,7 @@ export default function PodcastEpisodes({ episodes }) {
               </div>
               <h3>{ep.title}</h3>
               <p>{ep.summary}</p>
-              <Link href={`/podcast/episode-${ep.number}`} className="podcast-episode-link">
+              <Link href={`/podcast/${podcastSlug(ep)}`} className="podcast-episode-link">
                 &#9654; Listen Now
               </Link>
             </div>

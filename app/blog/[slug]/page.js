@@ -1,21 +1,39 @@
 import Link from "next/link";
 import { blogPosts } from "../../lib/blog-posts";
+import { articleSchema, jsonLd, breadcrumbSchema, OG_IMAGE } from "../../lib/seo";
 
 export async function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
+}
+
+// Normalize a human date string ("May 28, 2026") to ISO YYYY-MM-DD for schema.
+function isoDate(value) {
+  if (!value) return undefined;
+  const d = new Date(value);
+  return Number.isNaN(d.getTime()) ? undefined : d.toISOString().slice(0, 10);
 }
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return { title: "Article | Veterinary Business Institute" };
+  const canonical = `/blog/${post.slug}`;
   return {
     title: `${post.title} | VBI Blog`,
     description: post.metaDescription || post.excerpt,
+    alternates: { canonical },
     openGraph: {
       title: post.title,
       description: post.metaDescription || post.excerpt,
       type: "article",
+      url: canonical,
+      images: [post.image || OG_IMAGE],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.metaDescription || post.excerpt,
+      images: [post.image || OG_IMAGE],
     },
   };
 }
@@ -27,8 +45,24 @@ export default async function BlogPostPage({ params }) {
   const prev = idx > 0 ? blogPosts[idx - 1] : null;
   const next = idx >= 0 && idx < blogPosts.length - 1 ? blogPosts[idx + 1] : null;
 
+  const articleLd = articleSchema({
+    title: post.title,
+    description: post.metaDescription || post.excerpt,
+    path: `/blog/${post.slug}`,
+    image: post.image,
+    datePublished: isoDate(post.date),
+    author: "Veterinary Business Institute",
+  });
+  const breadcrumbLd = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Blog", path: "/blog" },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ]);
+
   return (
     <>
+      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={jsonLd(articleLd)} />
+      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={jsonLd(breadcrumbLd)} />
       <section className="page-hero blogpost-hero">
         <div className="container blogpost-head">
           <Link href="/blog" className="blogpost-back">
@@ -37,7 +71,7 @@ export default async function BlogPostPage({ params }) {
           <span className="eyebrow text-accent">{post.category}</span>
           <h1>{post.title}</h1>
           <p className="blogpost-meta">
-            {post.date} · {post.readMinutes} min read
+            By <strong>Veterinary Business Institute</strong> · Updated {post.date} · {post.readMinutes} min read
           </p>
         </div>
       </section>
@@ -90,6 +124,46 @@ export default async function BlogPostPage({ params }) {
               </div>
             </section>
           )}
+
+          <div
+            className="blogpost-author"
+            style={{
+              display: "flex",
+              gap: "1rem",
+              alignItems: "center",
+              marginTop: "2.5rem",
+              padding: "1.25rem 1.5rem",
+              borderRadius: "16px",
+              border: "1px solid var(--card-border, rgba(0,0,0,0.08))",
+              background: "var(--card)",
+            }}
+          >
+            <div
+              aria-hidden="true"
+              style={{
+                flex: "0 0 auto",
+                width: 52,
+                height: 52,
+                borderRadius: "50%",
+                display: "grid",
+                placeItems: "center",
+                fontWeight: 700,
+                letterSpacing: "0.02em",
+                color: "#fff",
+                background: "var(--teal-500, #1FB6A0)",
+              }}
+            >
+              VBI
+            </div>
+            <div>
+              <p style={{ fontWeight: 700, margin: 0 }}>Written by the Veterinary Business Institute team</p>
+              <p style={{ margin: "0.35rem 0 0", fontSize: "0.92rem", color: "var(--ink-500)" }}>
+                Practical veterinary practice-growth education from the team behind the
+                Veterinary Business Podcast and Ekwa Marketing — covering marketing, leadership,
+                operations, and client experience.
+              </p>
+            </div>
+          </div>
 
           {post.cta && (
             <div className="blogpost-cta">

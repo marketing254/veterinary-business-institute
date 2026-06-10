@@ -3,6 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Community Forum | Veterinary Business Institute",
   description: "Join the discussion on practice growth, DVM retention, and marketing strategies.",
+  alternates: { canonical: "/community/forum" },
 };
 
 const forumCategories = [
