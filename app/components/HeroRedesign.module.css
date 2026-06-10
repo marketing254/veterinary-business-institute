@@ -445,9 +445,19 @@
 }
 
 @media (max-width: 720px) {
-  .headline {
-    font-size: clamp(3.25rem, 14vw, 4.2rem);
+  /* Tame the giant side padding so content isn't crushed on phones */
+  .heroContainer {
+    padding: 3.5rem 1.25rem 2rem;
+    gap: 1rem;
   }
+
+  .headline {
+    font-size: clamp(1.95rem, 8.5vw, 4.2rem);
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+  /* Stop grid items from forcing the headline wider than the screen */
+  .headline > span { min-width: 0; max-width: 100%; }
 
   .typewriterFrame {
     width: 100%;
@@ -459,10 +469,27 @@
     white-space: normal;
     justify-content: center;
     text-align: center;
+    overflow-wrap: anywhere;
   }
 
-  .personImg {
-    width: 109%;
-  }
+  .description { margin-bottom: 2rem; }
+  .buttonGroup { flex-wrap: wrap; gap: 1rem; margin-bottom: 2.5rem; }
+  .trustedSection { flex-wrap: wrap; gap: 0.75rem 1.25rem; }
+
+  /* Let the visual column size to the (now smaller) circle instead of 600px */
+  .heroVisuals { height: auto; margin-top: 1.5rem; }
+
+  /* Shrink the image circle + decorative rings so they fit the screen width */
+  .mainCircle { width: min(80vw, 340px); height: min(80vw, 340px); }
+  .circleWire1 { width: min(90vw, 400px); height: min(90vw, 400px); }
+  .circleWire2 { width: min(100vw, 460px); height: min(100vw, 460px); }
+  .personImg { width: 112%; }
+}
+
+@media (max-width: 420px) {
+  .heroContainer { padding: 3rem 1rem 1.5rem; }
+  .mainCircle { width: 80vw; height: 80vw; }
+  .circleWire1 { width: 90vw; height: 90vw; }
+  .circleWire2 { width: 100vw; height: 100vw; }
 }
 
