@@ -1,5 +1,4 @@
 import { Cormorant_Garamond, IBM_Plex_Mono, Manrope } from "next/font/google";
-import { basePath } from "./lib/base-path";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import CookieBanner from "./components/CookieBanner";
@@ -36,15 +35,22 @@ const plexMono = IBM_Plex_Mono({
   weight: ["500", "600"],
 });
 
-const siteOrigin = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.veterinarybusinessinstitute.com";
-const siteUrl = `${siteOrigin}${basePath}`;
+// Canonical/public host is the custom domain ROOT — intentionally NOT suffixed
+// with basePath (basePath only prefixes in-page asset src on the github.io
+// subpath staging deploy). Keeping this at the root keeps canonical + OG + schema
+// URLs aligned with sitemap.xml / robots.txt, which already use the root domain.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.veterinarybusinessinstitute.com";
 
 const organizationSchema = {
   "@context": "https://schema.org",
-  "@type": "Organization",
+  "@type": ["Organization", "EducationalOrganization"],
   name: "Veterinary Business Institute",
+  alternateName: "VBI",
   url: siteUrl,
-  logo: `${siteUrl}/assets/logo.svg`,
+  logo: `${siteUrl}/assets/logo-vbi.png`,
+  image: `${siteUrl}/assets/og-cover.jpg`,
+  description:
+    "Veterinary Business Institute helps veterinary leaders grow their practices through podcasts, webinar replays, marketing guidance, and practical business education.",
   email: "team@veterinarybusinessinstitute.com",
   telephone: contactDetails[0]?.label,
   address: {
@@ -69,19 +75,55 @@ export const metadata = {
   title: "Veterinary Business Institute | Practice Growth, Leadership, and Education",
   description:
     "Veterinary Business Institute helps veterinary leaders grow through podcasts, webinar replays, marketing guidance, and practical business education.",
+  applicationName: "Veterinary Business Institute",
+  authors: [{ name: "Veterinary Business Institute" }],
+  creator: "Veterinary Business Institute",
+  publisher: "Veterinary Business Institute",
+  alternates: { canonical: "/" },
+  // Search-engine ownership verification. Set these as repo/build variables;
+  // each renders a <meta> tag only when its value is present.
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: {
+      ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+        ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+        : {}),
+    },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     title: "Veterinary Business Institute",
     description:
       "Veterinary leadership education, podcast episodes, event panel replays, webinar archives, and growth strategy support.",
     type: "website",
-    url: siteUrl,
+    url: "/",
     siteName: "Veterinary Business Institute",
+    locale: "en_US",
+    images: [
+      {
+        url: "/assets/og-cover.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Veterinary Business Institute — podcasts, webinars, and practice growth",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Veterinary Business Institute",
     description:
       "Veterinary leadership education, podcast episodes, event panel replays, webinar archives, and growth strategy support.",
+    images: ["/assets/og-cover.jpg"],
   },
 };
 

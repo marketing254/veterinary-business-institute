@@ -53,6 +53,7 @@ export const metadata = {
   title: "Marketing | Veterinary Business Institute",
   description:
     "A clearer VBI marketing page built around the audit process, local search visibility, and practical growth support for veterinary practices.",
+  alternates: { canonical: "/marketing" },
 };
 
 export default function MarketingPage() {

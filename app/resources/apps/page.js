@@ -3,6 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Recommended Apps | Veterinary Business Institute",
   description: "A curated list of integrations, PMS platforms, and applications for modern veterinary practices.",
+  alternates: { canonical: "/resources/apps" },
 };
 
 const appsList = [

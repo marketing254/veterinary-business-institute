@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useLive } from "../../lib/use-live";
 import { fetchPodcasts } from "../../lib/sheets-client";
+import { podcastSlug } from "../../lib/sheets-core";
 
 /**
  * Homepage "latest episodes" grid — newest first from the sheet (by ep number),
@@ -17,7 +18,7 @@ export default function LiveHomePodcastGrid({ initial = [], limit = 9 }) {
   return (
     <div className="ep-photo-grid">
       {episodes.map((ep) => (
-        <Link key={ep.number} href={`/podcast/episode-${ep.number}`} className="ep-photo-card">
+        <Link key={ep.number} href={`/podcast/${podcastSlug(ep)}`} className="ep-photo-card">
           <div className="ep-photo-thumb">
             <img src={ep.image} alt={`Episode ${ep.number}`} />
           </div>

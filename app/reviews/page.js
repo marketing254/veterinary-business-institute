@@ -5,6 +5,7 @@ export const metadata = {
   title: "Guest Reviews | Veterinary Business Institute",
   description:
     "Hear from the veterinary professionals who have appeared on the Veterinary Business Podcast — in their own words.",
+  alternates: { canonical: "/reviews" },
 };
 
 const heroStats = [

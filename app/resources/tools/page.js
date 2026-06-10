@@ -5,7 +5,8 @@ import VetCalculators from "../../components/VetCalculators";
 export const metadata = {
   title: "Free Veterinary Calculators & Tools | Veterinary Business Institute",
   description:
-    "8 free, instant veterinary practice calculators — practice valuation, turnover cost, client lifetime value, marketing ROI, wellness pricing, no-show loss, and new-hire payback. No spreadsheets required.",
+    "8 free, instant veterinary practice calculators: valuation, staff turnover, client lifetime value, marketing ROI, no-show loss, and more. No spreadsheets required.",
+  alternates: { canonical: "/resources/tools" },
 };
 
 const heroStats = [

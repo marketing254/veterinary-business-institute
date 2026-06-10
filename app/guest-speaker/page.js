@@ -6,7 +6,8 @@ import { withBasePath } from "../lib/base-path";
 export const metadata = {
   title: "Apply as a Guest or Speaker | Veterinary Business Institute",
   description:
-    "Apply to be a guest or speaker on the Veterinary Business Podcast — reach veterinary practice owners and teams across North America. Share your expertise on practice growth, marketing, and leadership.",
+    "Apply to be a guest or speaker on the Veterinary Business Podcast and share your expertise on practice growth, marketing, and leadership with veterinary leaders.",
+  alternates: { canonical: "/guest-speaker" },
 };
 
 const heroStats = [

@@ -11,6 +11,7 @@ const heroFallback = eventPanels[0]?.image || withBasePath("/assets/panels/panel
 export const metadata = {
   title: "Webinar Registration | Veterinary Business Institute",
   description: "Register for an upcoming live veterinary business webinar or panel discussion.",
+  alternates: { canonical: "/webinars/registration" },
 };
 
 export default function WebinarRegistrationPage() {

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { fetchPodcasts, fetchEventPanels } from "../lib/sheets-client";
+import { podcastSlug } from "../lib/sheets-core";
 
 /**
  * Top announcement bar — latest podcast + latest event panel, linking to their
@@ -23,7 +24,7 @@ export default function TopBar({ items = [] }) {
           next.push({
             label: "Latest Podcast",
             copy: `Episode #${ep.number}: ${ep.title}`,
-            href: `/podcast/episode-${ep.number}`,
+            href: `/podcast/${podcastSlug(ep)}`,
             internal: true,
           });
         }

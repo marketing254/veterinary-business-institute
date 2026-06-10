@@ -3,6 +3,8 @@ import Link from "next/link";
 export const metadata = {
   title: "Thank You | Veterinary Business Institute",
   description: "Thank you for connecting with the Veterinary Business Institute.",
+  alternates: { canonical: "/thank-you" },
+  robots: { index: false, follow: true },
 };
 
 const nextSteps = [

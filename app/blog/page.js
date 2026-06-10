@@ -4,7 +4,16 @@ import { blogPosts } from "../lib/blog-posts";
 export const metadata = {
   title: "Blog & Insights | Veterinary Business Institute",
   description:
-    "In-depth veterinary marketing and practice-growth guides: SEO, Google Business Profile, social media, email, AI tools, and client experience for veterinary practice owners.",
+    "In-depth veterinary marketing and practice-growth guides: SEO, Google Business Profile, social media, email, AI tools, and client experience.",
+  alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog & Insights | Veterinary Business Institute",
+    description:
+      "In-depth veterinary marketing and practice-growth guides: SEO, Google Business Profile, social media, email, AI tools, and client experience.",
+    type: "website",
+    url: "/blog",
+    images: ["/assets/og-cover.jpg"],
+  },
 };
 
 const featured = blogPosts[0];

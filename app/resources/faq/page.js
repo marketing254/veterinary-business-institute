@@ -1,10 +1,12 @@
 import Link from "next/link";
 import { contactDetails } from "../../lib/site-data";
 import LiveFaqList from "../../components/live/LiveFaqList";
+import { faqSchema, breadcrumbSchema, jsonLd } from "../../lib/seo";
 
 export const metadata = {
   title: "Knowledge Base & FAQ | Veterinary Business Institute",
   description: "Frequently asked questions regarding VBI educational content, podcast access, and the marketing audit.",
+  alternates: { canonical: "/resources/faq" },
 };
 
 const faqs = [
@@ -27,8 +29,16 @@ const faqs = [
 ];
 
 export default function FAQPage() {
+  const faqLd = faqSchema(faqs);
+  const breadcrumbLd = breadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Resources", path: "/resources" },
+    { name: "FAQ", path: "/resources/faq" },
+  ]);
   return (
     <>
+      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={jsonLd(faqLd)} />
+      <script type="application/ld+json" suppressHydrationWarning dangerouslySetInnerHTML={jsonLd(breadcrumbLd)} />
       <section className="page-hero">
         <div className="container hero-grid">
           <div className="hero-copy">

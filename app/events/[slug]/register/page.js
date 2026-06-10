@@ -29,9 +29,18 @@ export async function generateMetadata({ params }) {
   const { slug } = await params;
   const event = registrationEvents.find((e) => e.slug === slug);
   if (!event) return { title: "Register" };
+  const canonical = `/events/${event.slug}/register`;
   return {
     title: `${event.title} | Free Live Panel | VBI`,
     description: event.description,
+    alternates: { canonical },
+    openGraph: {
+      title: event.title,
+      description: event.description,
+      type: "website",
+      url: canonical,
+      images: [event.image || "/assets/og-cover.jpg"],
+    },
   };
 }
 

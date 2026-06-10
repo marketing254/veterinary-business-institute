@@ -18,6 +18,7 @@ import {
 export const metadata = {
   title: "Newsletter Integration | Veterinary Business Institute",
   description: "Subscribe to the VBI Newsletter for recurring practice growth insights.",
+  alternates: { canonical: "/newsletter" },
 };
 
 const signalRows = [
