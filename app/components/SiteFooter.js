@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 import { withBasePath } from "../lib/base-path";
 import {
   contactAddress,
@@ -19,7 +19,7 @@ export default function SiteFooter() {
           <span className="footer-cta-eyebrow">Stay Connected</span>
           <h2 className="footer-cta-heading">Your next step starts here.</h2>
         </div>
-        <Link className="button button-primary" href="/consultation">
+        <Link className="button button-primary" href="/msm">
           Book a Free Strategy Call &rarr;
         </Link>
       </div>

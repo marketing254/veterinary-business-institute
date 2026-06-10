@@ -92,7 +92,7 @@ export default function NewsletterPage() {
               <Link className="button button-primary" href="/about">
                 Our Story
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -168,10 +168,10 @@ export default function NewsletterPage() {
               <li>Backed by 16,000+ positive testimonials from the Ekwa network</li>
             </ul>
             <div className="button-row">
-              <Link className="button button-primary" href="/marketing">
+              <Link className="button button-primary" href="/msm">
                 Explore Marketing
               </Link>
-              <Link className="button button-secondary" href="/consultation">
+              <Link className="button button-secondary" href="/msm">
                 Book a Free Consultation
               </Link>
             </div>
@@ -282,7 +282,7 @@ export default function NewsletterPage() {
             </p>
           </div>
           <div className="final-cta-buttons">
-            <AttractButton href="/consultation">
+            <AttractButton href="/msm">
               Book Free Strategy Call
             </AttractButton>
             <Link className="button button-secondary button-dark" href="/podcast">

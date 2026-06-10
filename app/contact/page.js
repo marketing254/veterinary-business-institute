@@ -53,7 +53,7 @@ export default function ContactPage() {
               </span>
               <div className="contact-info-text">
                 <span className="contact-info-eyebrow">Free Strategy Meeting</span>
-                <Link href="/consultation" className="contact-info-main contact-info-link">
+                <Link href="/msm" className="contact-info-main contact-info-link">
                   Book a 30-min session &rarr;
                 </Link>
                 <span className="contact-info-desc">

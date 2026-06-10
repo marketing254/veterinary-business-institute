@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
@@ -83,7 +83,7 @@ export default function ExitIntentPopup() {
         </p>
         
         <div style={{ display: "flex", flexDirection: "column", gap: "1rem", marginTop: "2rem" }}>
-          <Link className="button button-primary" href="/consultation" onClick={() => setShow(false)}>
+          <Link className="button button-primary" href="/msm" onClick={() => setShow(false)}>
             Book a Free Consultation
           </Link>
           <button 

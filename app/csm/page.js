@@ -39,7 +39,7 @@ export default function CSMPage() {
               growth without burning out your clinical team.
             </p>
             <div className="button-row">
-              <Link className="button button-primary" href="/consultation">
+              <Link className="button button-primary" href="/msm">
                 Book an Intro Call
               </Link>
             </div>

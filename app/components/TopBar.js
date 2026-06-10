@@ -11,7 +11,7 @@ import { podcastSlug } from "../lib/sheets-core";
  * for SSR, then live-refreshed from the sheet.
  */
 export default function TopBar({ items = [] }) {
-  const [links, setLinks] = useState(() => items.map((i) => ({ ...i, internal: false })));
+  const [links, setLinks] = useState(() => items.map((i) => ({ ...i, internal: i.internal ?? false })));
 
   useEffect(() => {
     let alive = true;
@@ -45,23 +45,37 @@ export default function TopBar({ items = [] }) {
     };
   }, []);
 
+  // Repeat the base items so the row overflows the viewport, then duplicate the
+  // whole row once — animating the track to -50% scrolls exactly one copy for a
+  // seamless infinite marquee.
+  const loop = [...links, ...links, ...links, ...links];
+  const track = [...loop, ...loop];
+
   return (
-    <header className="topbar">
-      <div className="container topbar-grid">
-        {links.map((item) =>
-          item.internal ? (
-            <Link className="topbar-item" href={item.href} key={item.label}>
-              <span className="eyebrow">{item.label}</span>
-              <span className="topbar-copy">{item.copy}</span>
-            </Link>
-          ) : (
-            <a className="topbar-item" href={item.href} key={item.label} target="_blank" rel="noreferrer">
-              <span className="eyebrow">{item.label}</span>
-              <span className="topbar-copy">{item.copy}</span>
-            </a>
-          )
-        )}
+    <div className="topbar" role="region" aria-label="Latest from Veterinary Business Institute">
+      <div className="topbar-marquee">
+        <div className="topbar-track">
+          {track.map((item, i) => {
+            const isDup = i >= loop.length;
+            const common = {
+              className: "topbar-item",
+              "aria-hidden": isDup ? "true" : undefined,
+              tabIndex: isDup ? -1 : undefined,
+            };
+            return item.internal ? (
+              <Link key={i} href={item.href} {...common}>
+                <span className="eyebrow">{item.label}</span>
+                <span className="topbar-copy">{item.copy}</span>
+              </Link>
+            ) : (
+              <a key={i} href={item.href} target="_blank" rel="noreferrer" {...common}>
+                <span className="eyebrow">{item.label}</span>
+                <span className="topbar-copy">{item.copy}</span>
+              </a>
+            );
+          })}
+        </div>
       </div>
-    </header>
+    </div>
   );
 }

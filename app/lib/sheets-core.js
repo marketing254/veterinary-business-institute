@@ -131,7 +131,9 @@ export function driveImageUrl(url, sizePx = 1200) {
     }
   }
   if (!id) return trimmed;
-  return `https://lh3.googleusercontent.com/d/${id}=w${sizePx}`;
+  // The thumbnail endpoint hotlinks reliably for public Drive files; the older
+  // lh3.googleusercontent.com/d/<id> form is frequently blocked.
+  return `https://drive.google.com/thumbnail?id=${id}&sz=w${sizePx}`;
 }
 
 /**

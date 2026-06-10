@@ -4,19 +4,92 @@ export const auditLink = "https://www.veterinarybusinessinstitute.com/msm/ryan/"
 export const contactPageLink = "https://www.veterinarybusinessinstitute.com/contact-us/";
 export const podcastHubLink = "https://www.veterinarybusinessinstitute.com/podcast-show/";
 export const webinarArchiveLink = "https://www.veterinarybusinessinstitute.com/webinar-archive/";
-export const marketingPageLink = "https://www.veterinarybusinessinstitute.com/marketing/";
+export const marketingPageLink = "https://www.veterinarybusinessinstitute.com/msm/";
 export const panelFolderLink = "/events";
+
+// Build-time seed for the live "Reserve My Spot" card. Mirrors the latest row of
+// the "events" sheet tab; the card live-refreshes from the sheet on the client.
+export const eventsSeed = [
+  {
+    dateIso: "2026-06-30",
+    day: "30",
+    monthYear: "June 2026",
+    time: "7:30 PM to 9:00 PM EDT",
+    title:
+      "Driving Veterinary Practice Growth: Increasing Revenue, Strengthening Client Loyalty, and Streamlining Operations",
+    description:
+      "Leverage modern veterinary technology to improve workflows, automate processes, and enhance client communication\nIdentify gaps in technology adoption and implement tools that support both clinical care and business performance\nBuild marketing strategies that consistently attract ideal clients and reinforce your clinic's value\nOptimize operational workflows to reduce inefficiencies, improve staff productivity, and increase profitability\nEnhance the client experience across every touchpoint to strengthen trust, satisfaction, and long-term loyalty",
+    registerUrl: "https://us02web.zoom.us/webinar/register/3117810154536/WN_AbEAHCvlTaqCKjDKyHbWfQ",
+    speakers: [
+      { name: "Dr. Christie Cornelius", image: "" },
+      { name: "Lester De Alwis", image: "" },
+      { name: "Dr. Amanda Ensor", image: "" },
+      { name: "Jack Peploe", image: "" },
+    ],
+  },
+];
+
+// Build-time seed for the live webinar registration list (the "webinars" sheet
+// tab). Mirrors current rows; the page live-refreshes (incl. speaker photos).
+export const webinarsSeed = [
+  {
+    dateIso: "6/10/2026",
+    day: "10",
+    monthYear: "June 2026",
+    time: "8:00 PM to 9:00 PM EDT",
+    title: "Scaling Without Selling: How Independent VET Practices Are Growing in a Post-Consolidation Market",
+    description:
+      "Understand why the 2026 post-consolidation market reset favors independent practices\nExplore growth paths that don't require selling: a second location, buying a competitor, partnering with associates for equity\nCompete with corporate groups on talent by offering autonomy, an equity path, and real culture\nBuild a practice that could sell — even if you never do — by strengthening your fundamentals",
+    registerUrl: "https://www.reg.veterinarybusinessinstitute.com/June-10/",
+    speakers: [
+      { name: "Peter Noël", image: "" },
+      { name: "Dr. Mark de Wolde", image: "" },
+    ],
+  },
+  {
+    dateIso: "6/17/2026",
+    day: "17",
+    monthYear: "June 2026",
+    time: "8:00 PM to 9:00 PM EDT",
+    title: "Why Your Best People Leave — and How Top Veterinary Practices Make Them Stay",
+    description:
+      "Uncover the real reasons people leave — what exit interviews miss and what top practices actually hear\nGo beyond pay to the other 30% of retention: schedule, growth path, recognition, and leadership quality\nUse stay interviews, not exit interviews, to catch disengagement before the resignation letter\nBuild career ladders for techs and support staff — turning scope-of-practice expansion into a retention lever",
+    registerUrl: "https://www.reg.veterinarybusinessinstitute.com/June-17/",
+    speakers: [
+      { name: "Desmond Xavier Coates, DVM", image: "" },
+      { name: "Dr. Jason Epstein", image: "" },
+      { name: "Jen Bruce", image: "" },
+    ],
+  },
+  {
+    dateIso: "6/24/2026",
+    day: "24",
+    monthYear: "June 2026",
+    time: "8:00 PM to 9:00 PM EDT",
+    title: "Cost-Based Anger in Veterinary Clients",
+    description:
+      "Understand the psychology behind cost-based anger and financial friction\nDefine de-escalation language and boundaries for team safety\nSet clear boundaries that protect team mental health without losing compassion\nDevelop front-desk protocols for expectation-setting and trust messaging",
+    registerUrl: "https://www.reg.veterinarybusinessinstitute.com/June-24",
+    speakers: [
+      { name: "Erika Lee", image: "" },
+      { name: "Amelia Knight Pinkston, VMD", image: "" },
+      { name: "Bob Murtaugh, DVM, MS", image: "" },
+    ],
+  },
+];
 
 export const topBarItems = [
   {
     label: "Latest Podcast",
-    copy: "Episode 113: The Investment You Haven't Considered — How Veterinarians Are Shaping the Future of Animal Health",
-    href: "https://podcasts.apple.com/us/podcast/the-investment-you-havent-considered-how/id1712053291?i=1000769967502",
+    copy: "Episode 113: The Future of Veterinary Marketing — Building a Predictable New-Client Engine",
+    href: "/podcast/the-future-of-veterinary-marketing-how-independent-practices-can-build",
+    internal: true,
   },
   {
     label: "Latest Event Panel",
-    copy: "May 27, 2026: Data-Driven Growth — How AI Search and Client Education Are Changing Veterinary Visibility",
-    href: "https://vimeo.com/1196507090",
+    copy: "Data-Driven Growth: How AI Search and Client Education Are Changing Veterinary Visibility",
+    href: "/webinars/data-driven-growth-ai-search-client-education",
+    internal: true,
   },
 ];
 
@@ -64,7 +137,7 @@ export const headerNavigation = [
   },
   { type: "link", label: "Guest / Speaker", href: "/guest-speaker" },
   { type: "link", label: "Community", href: "/community" },
-  { type: "link", label: "Marketing", href: "/consultation" },
+  { type: "link", label: "Marketing", href: "/msm" },
 ];
 
 export const footerExploreLinks = [
@@ -73,7 +146,7 @@ export const footerExploreLinks = [
   { label: "Events", href: "/events" },
   { label: "Resources", href: "/resources" },
   { label: "Community", href: "/community" },
-  { label: "Consultation", href: "/consultation" },
+  { label: "Consultation", href: "/msm" },
 ];
 
 export const contactDetails = [
@@ -108,7 +181,7 @@ export const socialLinks = [
 
 export const footerResourceLinks = [
   { label: "Webinar Replays", href: "/events" },
-  { label: "Free Consultation", href: "/consultation" },
+  { label: "Free Consultation", href: "/msm" },
   { label: "Knowledge Base (FAQ)", href: "/resources/faq" },
   { label: "Free Downloads Hub", href: "/resources" },
 ];
@@ -192,6 +265,7 @@ export const episodes = [
     title: "The Future of Veterinary Marketing: How Independent Practices Can Build a Predictable New-Client Engine and Compete Against Corporate Groups",
     image: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/28/06/77/28067714-70d0-2d4f-54a3-688f6c93b715/mza_5109063160220216959.jpg/600x600bb.jpg",
     href: "https://podcasts.apple.com/us/podcast/veterinary-business-podcast/id1712053291",
+    audioUrl: "https://drive.google.com/file/d/1XEQSDIBC4Y-xjn3ahNMMslQYaiPLivIV/view?usp=sharing",
     duration: "",
     summary: "Cebron Walker joins the Veterinary Business Podcast to break down how independent veterinary practices can build a predictable new-client engine and compete against corporate groups — covering local visibility, referral systems, and a marketing engine that compounds over time.",
   },
@@ -744,7 +818,7 @@ export const servicePillars = [
     icon: "trending-up",
     title: "Marketing & Visibility",
     body: "Local SEO, website positioning, and client-facing messaging that brings the right pet owners to your door.",
-    href: "/marketing",
+    href: "/msm",
   },
   {
     icon: "monitor",
@@ -774,7 +848,7 @@ export const servicePillars = [
     icon: "target",
     title: "Growth Strategy",
     body: "Expansion timing, succession planning, and the strategic thinking that separates growing practices from stuck ones.",
-    href: "/marketing",
+    href: "/msm",
   },
 ];
 
