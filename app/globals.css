@@ -9937,3 +9937,255 @@ html[data-theme="dark"] .vbi-cookie-text strong { color: #eaf3ee; }
   .rep-tab-search input { width: 100%; max-width: none; }
   .rep-tabpanel { padding: 1.25rem 1.1rem; }
 }
+
+/* ════════════════════════════════════════════════════════════════
+   DARK-MODE TEXT-VISIBILITY FIXES (UI audit follow-up)
+   Root cause: --forest-950 and --white invert to LIGHT values in
+   dark mode, so `background: var(--forest-950); color:#fff` renders
+   white-on-white. These restore contrast. Scoped to dark mode only.
+   ════════════════════════════════════════════════════════════════ */
+
+/* (1) "Ready to Grow?" + (5) "Keep Learning" — final-CTA heading was var(--white)=dark */
+html[data-theme="dark"] .section-final-cta .final-cta-heading,
+html[data-theme="dark"] .section-final-cta h2,
+html[data-theme="dark"] .final-cta-copy h2 { color: #eaf3ee !important; }
+html[data-theme="dark"] .final-cta-sub,
+html[data-theme="dark"] .final-cta-copy p { color: rgba(234, 243, 238, 0.82) !important; }
+
+/* (3) Attract / "Free Strategy Call" button — hover bg was var(--forest-950)=white */
+html[data-theme="dark"] .attract-btn {
+  background: var(--teal-500) !important;
+  border-color: var(--teal-500) !important;
+  color: #06140f !important;
+}
+html[data-theme="dark"] .attract-btn:hover,
+html[data-theme="dark"] .attract-btn.is-attracting {
+  background: #9be7b8 !important;
+  border-color: #9be7b8 !important;
+  color: #06140f !important;
+}
+html[data-theme="dark"] .attract-btn .attract-btn-icon { color: #06140f !important; }
+
+/* (4) Events "More Upcoming Events" date badge — bg var(--forest-950)=white + white text */
+html[data-theme="dark"] .evt-upcoming-date {
+  background: #1f7a5c !important;
+  color: #ffffff !important;
+}
+
+/* (5) Webinar replay Description / Transcript tab text */
+html[data-theme="dark"] .rep-prose p,
+html[data-theme="dark"] .rep-prose .rep-prose-list li,
+html[data-theme="dark"] .ts-body p,
+html[data-theme="dark"] .ts-seg-body p { color: #c8d6d0 !important; }
+html[data-theme="dark"] .rep-prose .rep-prose-h { color: #eaf3ee !important; }
+html[data-theme="dark"] .ts-time { color: #0f2d28 !important; } /* dark text on lime chip */
+
+/* (6/7) Native <select> dropdown options were white-on-white */
+html[data-theme="dark"] select option {
+  background-color: #0f1f1b !important;
+  color: #eaf3ee !important;
+}
+
+/* (8) Individual blog-post CTA — bg var(--forest-950)=white + white text */
+html[data-theme="dark"] .blogpost-cta { background: #103a32 !important; }
+html[data-theme="dark"] .blogpost-cta h3 { color: #ffffff !important; }
+html[data-theme="dark"] .blogpost-cta p { color: rgba(255, 255, 255, 0.85) !important; }
+
+/* (9) Blog cards — keep a dark surface with readable text in dark mode */
+html[data-theme="dark"] .blog-feature-card,
+html[data-theme="dark"] .blog-card {
+  background: var(--card) !important;
+  border: 1px solid rgba(199, 226, 207, 0.12) !important;
+}
+html[data-theme="dark"] .blog-feature-card h2,
+html[data-theme="dark"] .blog-card h3 { color: #eaf3ee !important; }
+html[data-theme="dark"] .blog-feature-card p,
+html[data-theme="dark"] .blog-card p { color: rgba(234, 243, 238, 0.72) !important; }
+html[data-theme="dark"] .blog-card-cat { color: #7ed9a3 !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   Top announcement bar → continuous MARQUEE (podcast + events),
+   shown on every page in light & dark.
+   ════════════════════════════════════════════════════════════════ */
+.topbar { overflow: hidden; }
+.topbar-marquee { overflow: hidden; width: 100%; }
+.topbar-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: topbar-scroll 55s linear infinite;
+  will-change: transform;
+}
+.topbar-marquee:hover .topbar-track,
+.topbar-marquee:focus-within .topbar-track { animation-play-state: paused; }
+.topbar .topbar-item {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  white-space: nowrap;
+  border-left: none !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+.topbar .topbar-item::after {
+  content: "•";
+  margin: 0 1.75rem;
+  color: var(--teal-500);
+  opacity: 0.55;
+}
+.topbar .topbar-item .topbar-copy {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: nowrap;
+}
+@keyframes topbar-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topbar-track { animation: none; transform: none; }
+}
+/* Marquee is compact enough to show on mobile too (overrides the old hide) */
+@media (max-width: 1079px) {
+  .topbar { display: block; }
+  .topbar .topbar-item .topbar-copy { font-size: 0.8rem; }
+  .topbar .topbar-item::after { margin: 0 1.2rem; }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   Live "Reserve My Spot" event card (events page, from events sheet)
+   ════════════════════════════════════════════════════════════════ */
+.evt-live-card {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 1.75rem;
+  margin-top: 2rem;
+  padding: 2rem;
+  border-radius: 24px;
+  background: var(--card);
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  box-shadow: var(--shadow-md, 0 20px 50px rgba(0, 0, 0, 0.08));
+  animation: evt-live-in 0.6s ease both;
+}
+@keyframes evt-live-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@media (max-width: 860px) {
+  .evt-live-card { grid-template-columns: 1fr; padding: 1.5rem; }
+}
+
+.evt-live-meta { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
+.evt-live-datepill {
+  display: grid; place-items: center; flex: 0 0 auto;
+  width: 72px; height: 72px; border-radius: 18px;
+  background: linear-gradient(150deg, var(--teal-500), #1f7a5c); color: #fff;
+}
+.evt-live-day { font-size: 1.7rem; font-weight: 800; line-height: 1; }
+.evt-live-month { font-size: 0.64rem; text-transform: uppercase; letter-spacing: 0.06em; margin-top: 3px; }
+.evt-live-when { display: flex; flex-direction: column; gap: 4px; }
+.evt-live-time { font-weight: 700; color: var(--forest-950); }
+.evt-live-free { font-size: 0.82rem; color: var(--teal-500); font-weight: 600; }
+
+.evt-live-points-title { font-size: 1.05rem; margin: 0 0 0.75rem; }
+.evt-live-points { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.6rem; }
+.evt-live-points li {
+  display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; color: var(--ink-700);
+  animation: evt-live-in 0.5s ease both; animation-delay: calc(0.08s * var(--i, 0) + 0.15s);
+}
+.evt-live-check {
+  flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 0.8rem; font-weight: 700;
+  background: rgba(31, 122, 92, 0.14); color: var(--teal-500);
+}
+.evt-live-cta { position: relative; overflow: hidden; }
+.evt-live-cta::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.35) 50%, transparent 70%);
+}
+.evt-live-cta:hover::after { animation: evt-live-shimmer 0.9s ease; }
+@keyframes evt-live-shimmer { to { transform: translateX(120%); } }
+.evt-live-fine { font-size: 0.8rem; color: var(--ink-500); margin-top: 0.7rem; }
+
+.evt-live-aside {
+  display: flex; flex-direction: column; gap: 1.25rem;
+  padding: 1.5rem; border-radius: 18px; background: var(--background);
+  border: 1px solid var(--border, rgba(0, 0, 0, 0.06));
+}
+.evt-live-countdown-label, .evt-live-speakers-title {
+  display: block; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em;
+  font-weight: 700; color: var(--teal-500); margin-bottom: 0.6rem;
+}
+.evt-live-speakers-row { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+.evt-live-speaker {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 104px; text-align: center;
+  animation: evt-live-in 0.5s ease both; animation-delay: calc(0.1s * var(--i, 0) + 0.2s);
+}
+.evt-live-avatar {
+  width: 88px; height: 88px; border-radius: 50%; overflow: hidden;
+  display: grid; place-items: center; font-weight: 700; font-size: 1.55rem; color: #fff;
+  background: linear-gradient(150deg, var(--teal-500), #1f7a5c);
+  box-shadow: 0 6px 18px rgba(31, 122, 92, 0.28);
+  transition: transform 0.2s ease;
+}
+.evt-live-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.evt-live-speaker:hover .evt-live-avatar { transform: scale(1.06); }
+.evt-live-speaker-name { font-size: 0.8rem; line-height: 1.3; color: var(--ink-700); }
+@media (max-width: 520px) {
+  .evt-live-speaker { width: 84px; }
+  .evt-live-avatar { width: 70px; height: 70px; font-size: 1.25rem; }
+}
+
+html[data-theme="dark"] .evt-live-card { background: var(--card); border-color: rgba(199, 226, 207, 0.12); }
+html[data-theme="dark"] .evt-live-aside { background: rgba(255, 255, 255, 0.03); border-color: rgba(199, 226, 207, 0.12); }
+html[data-theme="dark"] .evt-live-points li { color: #c8d6d0; }
+html[data-theme="dark"] .evt-live-speaker-name { color: rgba(234, 243, 238, 0.8); }
+@media (prefers-reduced-motion: reduce) {
+  .evt-live-card, .evt-live-points li, .evt-live-speaker { animation: none; }
+}
+
+/* Countdown inside the reserve card — solid contrast cells so the digits read in
+   BOTH light and dark (the base countdown follows page text colour, which goes
+   invisible on the light aside). */
+.evt-live-countdown .countdown-row { display: flex; gap: 0.5rem; }
+.evt-live-countdown .countdown-cell {
+  flex: 1; min-width: 0; padding: 0.6rem 0.3rem; border-radius: 12px;
+  background: linear-gradient(150deg, var(--teal-500), #1f7a5c);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.evt-live-countdown .countdown-value { color: #fff !important; font-size: 1.35rem; font-weight: 800; }
+.evt-live-countdown .countdown-label {
+  color: rgba(255, 255, 255, 0.85) !important; font-size: 0.6rem;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+
+/* "More Upcoming Webinars" grid (webinar registration page) */
+.evt-reg-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1.25rem; margin-top: 2rem;
+}
+.evt-reg-card {
+  display: flex; gap: 1rem; padding: 1.25rem; border-radius: 18px;
+  background: var(--card); border: 1px solid var(--border, rgba(0, 0, 0, 0.08));
+  box-shadow: var(--shadow-sm, 0 8px 24px rgba(0, 0, 0, 0.06));
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.evt-reg-card:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0, 0, 0, 0.12); }
+.evt-reg-date {
+  flex: 0 0 auto; width: 58px; height: 58px; border-radius: 14px;
+  display: grid; place-items: center; color: #fff;
+  background: linear-gradient(150deg, var(--teal-500), #1f7a5c);
+}
+.evt-reg-day { font-size: 1.4rem; font-weight: 800; line-height: 1; }
+.evt-reg-month { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; text-align: center; }
+.evt-reg-body { min-width: 0; display: flex; flex-direction: column; }
+.evt-reg-body h3 { font-size: 1rem; line-height: 1.35; margin: 0 0 0.4rem; }
+.evt-reg-time { font-size: 0.82rem; color: var(--teal-500); font-weight: 600; margin: 0 0 0.3rem; }
+.evt-reg-panelists { font-size: 0.82rem; color: var(--ink-700); margin: 0 0 0.9rem; }
+.evt-reg-cta { align-self: flex-start; margin-top: auto; }
+
+html[data-theme="dark"] .evt-reg-card { background: var(--card); border-color: rgba(199, 226, 207, 0.12); }
+html[data-theme="dark"] .evt-reg-body h3 { color: #eaf3ee; }
+html[data-theme="dark"] .evt-reg-panelists { color: rgba(234, 243, 238, 0.72); }

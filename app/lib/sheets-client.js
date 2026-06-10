@@ -11,6 +11,7 @@ import { parseGviz } from "./sheets-core";
 import {
   normalizePodcast,
   normalizeEventPanel,
+  normalizeEvent,
   normalizeReview,
   normalizeTeamMember,
   normalizeCaseStudy,
@@ -36,6 +37,17 @@ export async function fetchPodcasts() {
 }
 export async function fetchEventPanels() {
   return map(await fetchTab(TABS.eventPanels), normalizeEventPanel, (r) => r.title);
+}
+const byDateAsc = (a, b) =>
+  (new Date(a.dateIso).getTime() || 0) - (new Date(b.dateIso).getTime() || 0);
+
+export async function fetchEvents() {
+  // Soonest-first so the page can show the next upcoming event as [0].
+  return map(await fetchTab(TABS.events), normalizeEvent, (r) => r.title).sort(byDateAsc);
+}
+export async function fetchWebinars() {
+  // Webinars share the events schema (date_iso, register_url, "Name : link" images).
+  return map(await fetchTab(TABS.webinars), normalizeEvent, (r) => r.title).sort(byDateAsc);
 }
 export async function fetchReviews() {
   return map(await fetchTab(TABS.reviews), normalizeReview, (r) => r.reviewer_name || r.review_text);

@@ -1,4 +1,4 @@
-import Link from "next/link";
+﻿import Link from "next/link";
 
 export const metadata = {
   title: "Thank You | Veterinary Business Institute",
@@ -21,7 +21,7 @@ const nextSteps = [
   {
     title: "3. Review your market positioning",
     body: "If you're ready for aggressive growth, book a free strategy consultation with our team.",
-    actionLink: "/consultation",
+    actionLink: "/msm",
     actionText: "Book a Free Consultation"
   }
 ];

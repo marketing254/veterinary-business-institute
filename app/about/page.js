@@ -7,7 +7,6 @@ import {
   hosts,
   servicePillars,
 } from "../lib/site-data";
-import SignalMarquee from "../components/SignalMarquee";
 import ParallaxCard from "../components/ParallaxCard";
 import AnimatedCounter from "../components/AnimatedCounter";
 import AttractButton from "../components/AttractButton";
@@ -105,12 +104,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Signal Marquee ── */}
-      <SignalMarquee
-        heading="The institute, its people, and its story — presented as one visual system."
-        rows={signalRows}
-      />
-
       {/* ── Ghost Text Stats Section ── */}
       <section className="section section-stats-ghost">
         <div className="ghost-text" aria-hidden="true">INSTITUTE</div>
@@ -150,7 +143,7 @@ export default function AboutPage() {
               <Link className="button button-primary" href="/podcast">
                 Explore the Podcast
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -208,10 +201,10 @@ export default function AboutPage() {
               <li>Backed by the Ekwa marketing ecosystem and veterinary expertise</li>
             </ul>
             <div className="button-row">
-              <Link className="button button-primary" href="/marketing">
+              <Link className="button button-primary" href="/msm">
                 See the Marketing Offer
               </Link>
-              <Link className="button button-secondary" href="/consultation">
+              <Link className="button button-secondary" href="/msm">
                 Book a Free Consultation
               </Link>
             </div>
@@ -347,7 +340,7 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="final-cta-buttons">
-            <AttractButton href="/consultation">
+            <AttractButton href="/msm">
               Book Free Strategy Call
             </AttractButton>
             <Link className="button button-secondary button-dark" href="/contact">

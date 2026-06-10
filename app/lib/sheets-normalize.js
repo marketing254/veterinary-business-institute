@@ -51,6 +51,40 @@ export function normalizeEventPanel(row) {
   };
 }
 
+// events → upcoming live events {dateIso,day,monthYear,time,title,description,registerUrl,speakers:[{name,image}]}
+export function normalizeEvent(row) {
+  // image_urls cell holds one "Name : drivelink" per line (link may be blank for now).
+  const imageLines = String(pick(row, ["image_urls", "panelist_images", "images"]) || "")
+    .split(/\r?\n/)
+    .map((line) => {
+      const i = line.indexOf(":");
+      if (i === -1) return null;
+      const name = line.slice(0, i).trim();
+      const link = line.slice(i + 1).trim();
+      if (!name) return null;
+      return { name, image: link ? driveImageUrl(link, 400) : "" };
+    })
+    .filter(Boolean);
+
+  // Fallback to the Panelists name list if no image_urls rows were provided.
+  const nameOnly = String(pick(row, ["Panelists", "panelists", "speakers"]) || "")
+    .split(/[\n;]+/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .map((name) => ({ name, image: "" }));
+
+  return {
+    dateIso: pick(row, ["date_iso", "date"]),
+    day: pick(row, ["day"]),
+    monthYear: pick(row, ["month_year", "month"]),
+    time: pick(row, ["time"]),
+    title: pick(row, ["title"]),
+    description: pick(row, ["description", "details"]),
+    registerUrl: pick(row, ["register_url", "registration_url", "register", "url"]),
+    speakers: imageLines.length ? imageLines : nameOnly,
+  };
+}
+
 // reviews → guestReviews shape {source,quote,name,title}
 export function normalizeReview(row) {
   return {

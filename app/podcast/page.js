@@ -145,7 +145,7 @@ export default function PodcastPage() {
             Our team can help you plan, launch, and grow a veterinary podcast that positions you as
             the go-to expert in your market. Book a free consultation to learn how.
           </p>
-          <Link className="button button-primary" href="/consultation">
+          <Link className="button button-primary" href="/msm">
             Book Free Consultation &rarr;
           </Link>
         </div>

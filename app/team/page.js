@@ -77,7 +77,7 @@ export default function TeamPage() {
               <Link className="button button-primary" href="/guest-speaker">
                 Invite a Speaker
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -118,7 +118,7 @@ export default function TeamPage() {
               <Link className="button button-primary" href="/about">
                 Our Story
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -182,7 +182,7 @@ export default function TeamPage() {
               <Link className="button button-primary" href="/podcast">
                 Listen to the Podcast
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -249,7 +249,7 @@ export default function TeamPage() {
             </p>
           </div>
           <div className="final-cta-buttons">
-            <AttractButton href="/consultation">
+            <AttractButton href="/msm">
               Book Free Strategy Call
             </AttractButton>
             <Link className="button button-secondary button-dark" href="/guest-speaker">

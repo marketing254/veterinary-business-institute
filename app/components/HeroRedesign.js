@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
@@ -131,7 +131,7 @@ export default function HeroRedesign() {
                 </span>
               </Link>
             </ConicGradientBorder>
-            <AttractButton href="/consultation">
+            <AttractButton href="/msm">
               Free Strategy Call
             </AttractButton>
           </div>

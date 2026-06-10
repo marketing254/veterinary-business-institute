@@ -65,7 +65,7 @@ const marketingGuides = [
     title: "Get a Custom Digital Marketing Plan",
     body: "Our team will build a personalized digital marketing roadmap for your services, city, and growth goals — in one free 30-minute session.",
     cta: "Book Free Session →",
-    href: "/consultation",
+    href: "/msm",
     highlight: true,
   },
 ];
@@ -93,7 +93,7 @@ const opsGuides = [
     title: "Veterinary KPI Dashboard Template",
     body: "Track the metrics that predict practice growth — new clients, average transaction, rebooking rate, retention, client satisfaction, and more.",
     cta: "Request Template →",
-    href: "/consultation",
+    href: "/msm",
     highlight: true,
   },
 ];
@@ -121,7 +121,7 @@ const techGuides = [
     title: "Veterinary Team Retention Checklist",
     body: "A 25-point checklist covering onboarding, mentorship, scheduling, compensation, and culture to help you keep your best people.",
     cta: "Request Checklist →",
-    href: "/consultation",
+    href: "/msm",
     highlight: true,
   },
 ];
@@ -267,7 +267,7 @@ export default function ResourcesPage() {
             get you there faster — with a custom plan built around your specific market, services,
             and goals.
           </p>
-          <Link className="button button-primary" href="/consultation">
+          <Link className="button button-primary" href="/msm">
             Book Free Strategy Session &rarr;
           </Link>
         </div>

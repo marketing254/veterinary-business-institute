@@ -169,7 +169,7 @@ export default async function BlogPostPage({ params }) {
             <div className="blogpost-cta">
               <h3>{post.cta.heading}</h3>
               <p>{post.cta.body}</p>
-              <Link className="button button-primary" href="/consultation">
+              <Link className="button button-primary" href="/msm">
                 Book a Free Strategy Consultation &rarr;
               </Link>
             </div>

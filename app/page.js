@@ -150,7 +150,7 @@ export default function HomePage() {
               <Link className="button button-primary" href="/about">
                 Our Story &rarr;
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -200,10 +200,10 @@ export default function HomePage() {
               </li>
             </ul>
             <div className="button-row">
-              <Link className="button button-primary" href="/marketing">
+              <Link className="button button-primary" href="/msm">
                 Explore Marketing &rarr;
               </Link>
-              <Link className="button button-secondary" href="/consultation">
+              <Link className="button button-secondary" href="/msm">
                 Book a Free Consultation
               </Link>
             </div>
@@ -297,7 +297,7 @@ export default function HomePage() {
               <Link className="button button-primary" href="/about">
                 Our Story
               </Link>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -490,7 +490,7 @@ export default function HomePage() {
             </p>
           </div>
           <div className="final-cta-buttons">
-            <AttractButton href="/consultation">
+            <AttractButton href="/msm">
               Book Free Strategy Call &rarr;
             </AttractButton>
             <Link className="button button-secondary button-dark" href="/podcast">

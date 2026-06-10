@@ -8,7 +8,7 @@ export const metadata = {
   title: "Book a Free Marketing Strategy Meeting | Veterinary Business Institute",
   description:
     "Schedule a free 60-minute marketing strategy meeting. Our team will invest 4–5 hours preparing a customised plan for your veterinary practice.",
-  alternates: { canonical: "/consultation" },
+  alternates: { canonical: "/msm" },
 };
 
 const processSteps = [

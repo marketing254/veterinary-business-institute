@@ -112,7 +112,7 @@ export default function WebinarsPage() {
               <a className="button button-primary" href={webinarArchiveLink} target="_blank" rel="noreferrer">
                 Open Live Archive
               </a>
-              <AttractButton href="/consultation">
+              <AttractButton href="/msm">
                 Free Strategy Call
               </AttractButton>
             </div>
@@ -164,7 +164,7 @@ export default function WebinarsPage() {
                   <a className="button button-primary" href={featuredReplay.href} target="_blank" rel="noreferrer">
                     Watch Replay
                   </a>
-                  <Link className="button button-secondary button-dark" href="/marketing">
+                  <Link className="button button-secondary button-dark" href="/msm">
                     Review the Marketing Offer
                   </Link>
                 </div>
@@ -197,7 +197,7 @@ export default function WebinarsPage() {
               <li>A clean handoff into strategy conversations when the team is ready</li>
             </ul>
             <div className="button-row">
-              <Link className="button button-primary" href="/marketing">
+              <Link className="button button-primary" href="/msm">
                 Explore Marketing
               </Link>
               <Link className="button button-secondary" href="/events">
@@ -363,7 +363,7 @@ export default function WebinarsPage() {
             </p>
           </div>
           <div className="final-cta-buttons">
-            <AttractButton href="/consultation">
+            <AttractButton href="/msm">
               Book Free Strategy Call
             </AttractButton>
             <Link className="button button-secondary button-dark" href="/webinars/registration">

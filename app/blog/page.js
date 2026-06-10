@@ -88,7 +88,7 @@ export default function BlogPage() {
             Book a free strategy consultation and we&rsquo;ll map the highest-impact moves for your
             specific market, team, and goals.
           </p>
-          <Link className="button button-primary" href="/consultation">
+          <Link className="button button-primary" href="/msm">
             Book a Free Consultation &rarr;
           </Link>
         </div>

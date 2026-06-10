@@ -70,7 +70,7 @@ export default function ToolsPage() {
               <li>Free &middot; no obligation</li>
             </ul>
             <div className="button-row" style={{ justifyContent: "center" }}>
-              <Link href="/consultation" className="button button-primary">
+              <Link href="/msm" className="button button-primary">
                 Book a Free Consultation
               </Link>
             </div>
