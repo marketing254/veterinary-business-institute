@@ -9694,7 +9694,7 @@ html[data-theme="dark"] .res-card-cta p {
   border: 1px solid var(--border); box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
   background: var(--card);
 }
-.ycbm-embed iframe { width: 100%; height: 520px; min-height: 520px; border: 0; background: transparent; display: block; }
+.ycbm-embed iframe { width: 100%; height: 480px; min-height: 480px; border: 0; background: transparent; display: block; }
 
 /* Tools "Next Step" CTA — clean centered card (replaces the stretched grid). */
 .tools-cta-card {
@@ -10189,3 +10189,21 @@ html[data-theme="dark"] .evt-live-speaker-name { color: rgba(234, 243, 238, 0.8)
 html[data-theme="dark"] .evt-reg-card { background: var(--card); border-color: rgba(199, 226, 207, 0.12); }
 html[data-theme="dark"] .evt-reg-body h3 { color: #eaf3ee; }
 html[data-theme="dark"] .evt-reg-panelists { color: rgba(234, 243, 238, 0.72); }
+
+/* ════════════════════════════════════════════════════════════════
+   MOBILE HARDENING — prevents the most common mobile breakage
+   (horizontal scroll / content wider than the screen). Scoped to
+   small screens only, so desktop/tablet UI is untouched.
+   ════════════════════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+  /* Kill any sideways scroll caused by a stray over-wide element */
+  html, body { overflow-x: hidden; }
+  /* No media or embed may exceed the viewport width */
+  img, svg, video, iframe, canvas { max-width: 100%; }
+  /* Long unbroken strings (URLs, emails, IDs) wrap instead of overflowing */
+  p, li, h1, h2, h3, h4, h5, blockquote, figcaption, .hero-lead, .topbar-copy {
+    overflow-wrap: anywhere;
+  }
+  /* Wide tables scroll within their box rather than stretching the page */
+  table { display: block; width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
