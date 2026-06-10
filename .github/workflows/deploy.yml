@@ -37,9 +37,15 @@ jobs:
           # Custom domain (www.veterinarybusinessinstitute.com via public/CNAME) serves
           # this repo at the ROOT, so GITHUB_PAGES/basePath is intentionally NOT set —
           # assets resolve at "/", matching the canonical SEO URLs.
+          # All of the below are non-sensitive build-time config. Set each in:
+          # repo → Settings → Secrets and variables → Actions → Variables (NOT Secrets).
           # Apps Script /exec URL (for form writes + transcript proxy).
-          # Set repo variable: Settings → Secrets and variables → Actions → Variables.
           NEXT_PUBLIC_APPS_SCRIPT_URL: ${{ vars.NEXT_PUBLIC_APPS_SCRIPT_URL }}
+          # Google Analytics 4 Measurement ID, e.g. G-XXXXXXXXXX
+          NEXT_PUBLIC_GA_ID: ${{ vars.NEXT_PUBLIC_GA_ID }}
+          # Search Console (HTML-tag method) + Bing site verification codes
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }}
+          NEXT_PUBLIC_BING_SITE_VERIFICATION: ${{ vars.NEXT_PUBLIC_BING_SITE_VERIFICATION }}
 
       - name: Disable Jekyll (so _next/ assets are served)
         run: touch out/.nojekyll
