@@ -50,6 +50,12 @@ jobs:
       - name: Disable Jekyll (so _next/ assets are served)
         run: touch out/.nojekyll
 
+      # Ping IndexNow (Bing/Yandex) with the freshly-built URL list so new
+      # episodes/pages get recrawled fast. Reads out/sitemap.xml. Non-blocking.
+      - name: Notify IndexNow
+        run: node scripts/indexnow-submit.mjs
+        continue-on-error: true
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

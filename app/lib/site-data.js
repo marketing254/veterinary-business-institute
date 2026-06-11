@@ -260,6 +260,16 @@ export const hosts = [
 
 export const episodes = [
   {
+    number: "114",
+    date: "June 11, 2026",
+    title: "From Scribe to Self-Reading Practice: How AI Helps Independent Veterinary Practices Move Faster",
+    image: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts126/v4/28/06/77/28067714-70d0-2d4f-54a3-688f6c93b715/mza_5109063160220216959.jpg/600x600bb.jpg",
+    href: "https://podcasts.apple.com/us/podcast/veterinary-business-podcast/id1712053291",
+    audioUrl: "https://drive.google.com/file/d/1RLyvtxSU-iPMW7_tFeQh6yKThOA7tga7/view?usp=sharing",
+    duration: "",
+    summary: "Robert Sanchez joins the Veterinary Business Podcast to explore how AI in veterinary medicine is moving beyond scribes — helping practices use data, client conversations, and context to make better decisions, personalize care, and strengthen relationships with pet owners.",
+  },
+  {
     number: "113",
     date: "June 4, 2026",
     title: "The Future of Veterinary Marketing: How Independent Practices Can Build a Predictable New-Client Engine and Compete Against Corporate Groups",
