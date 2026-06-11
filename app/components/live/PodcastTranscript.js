@@ -9,10 +9,12 @@ function docExportUrl(url) {
   return m ? `https://docs.google.com/document/d/${m[1]}/export?format=txt` : "";
 }
 
-// Parse "[00:00:00.080 --> 00:01:55.080] Speaker:\ntext…" into segments.
+// Parse timestamped transcripts into segments. Accepts BOTH common formats:
+//   • range:  "[00:00:00.080 --> 00:01:55.080] Speaker: text…"
+//   • single: "[00:00:00] Speaker: text…"  (also [MM:SS])
 function parseSegments(text) {
   const clean = String(text || "").replace(/\r/g, "");
-  const re = /\[(\d{1,2}:\d{2}:\d{2})(?:\.\d+)?\s*-->\s*[\d:.]+\]/g;
+  const re = /\[(\d{1,2}:\d{2}(?::\d{2})?)(?:\.\d+)?(?:\s*-->\s*[\d:.]+)?\]/g;
   const matches = [...clean.matchAll(re)];
   if (!matches.length) {
     return clean
