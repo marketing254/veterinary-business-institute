@@ -161,7 +161,7 @@ export function docExportUrl(url) {
 /** Parse "[00:00:00.080 --> …] Speaker:\ntext" transcript text into segments. */
 export function parseTranscriptSegments(text) {
   const clean = String(text || "").replace(/\r/g, "");
-  const re = /\[(\d{1,2}:\d{2}:\d{2})(?:\.\d+)?\s*-->\s*[\d:.]+\]/g;
+  const re = /\[(\d{1,2}:\d{2}(?::\d{2})?)(?:\.\d+)?(?:\s*-->\s*[\d:.]+)?\]/g;
   const matches = [...clean.matchAll(re)];
   if (!matches.length) {
     return clean
