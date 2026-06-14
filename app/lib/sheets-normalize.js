@@ -85,6 +85,20 @@ export function normalizeEvent(row) {
   };
 }
 
+// featured_speakers → {name,title,company,bio,panel,image,linkedin,website}
+export function normalizeSpeaker(row) {
+  return {
+    name: pick(row, ["name"]),
+    title: pick(row, ["title", "role"]),
+    company: pick(row, ["company", "firm", "organization"]),
+    bio: pick(row, ["bio", "description"]),
+    panel: pick(row, ["panel", "topic", "session"]),
+    image: driveImageUrl(pick(row, ["image_url", "image", "photo_url", "headshot"]), 400),
+    linkedin: pick(row, ["linkedin", "linkedin_url"]),
+    website: pick(row, ["website", "website_url", "url"]),
+  };
+}
+
 // reviews → guestReviews shape {source,quote,name,title}
 export function normalizeReview(row) {
   return {

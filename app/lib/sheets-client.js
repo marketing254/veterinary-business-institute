@@ -12,6 +12,7 @@ import {
   normalizePodcast,
   normalizeEventPanel,
   normalizeEvent,
+  normalizeSpeaker,
   normalizeReview,
   normalizeTeamMember,
   normalizeCaseStudy,
@@ -48,6 +49,9 @@ export async function fetchEvents() {
 export async function fetchWebinars() {
   // Webinars share the events schema (date_iso, register_url, "Name : link" images).
   return map(await fetchTab(TABS.webinars), normalizeEvent, (r) => r.title).sort(byDateAsc);
+}
+export async function fetchSpeakers() {
+  return map(await fetchTab(TABS.featuredSpeakers), normalizeSpeaker, (r) => r.name);
 }
 export async function fetchReviews() {
   return map(await fetchTab(TABS.reviews), normalizeReview, (r) => r.reviewer_name || r.review_text);

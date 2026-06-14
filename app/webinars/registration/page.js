@@ -22,10 +22,10 @@ export default function WebinarRegistrationPage() {
         <div className="container" style={{ textAlign: "center" }}>
           <div className="hero-copy" style={{ maxWidth: "720px", margin: "0 auto" }}>
             <span className="eyebrow text-accent">Live Webinar Registration</span>
-            <h1>
+            <h1 style={{ maxWidth: "none", marginLeft: "auto", marginRight: "auto" }}>
               Reserve your <em>seat.</em>
             </h1>
-            <p className="hero-lead">
+            <p className="hero-lead" style={{ margin: "1.5rem auto 0" }}>
               Sign up for our upcoming live webinars and panel sessions to learn from
               industry experts about operations, growth, team retention, and smarter
               veterinary leadership. Can&rsquo;t make it live? Every registrant gets the replay.

@@ -55,6 +55,13 @@ const reverseMarqueeItems = [
   "Practice Resilience",
 ];
 
+const vbiTeam = [
+  { name: "Ashen Anushka", role: "VBI Events & Podcasts", image: withBasePath("/assets/team-ashen.jpg") },
+  { name: "Chaluka Abeysinghe", role: "Marketing Executive · VET", image: withBasePath("/assets/team-chaluka.jpg") },
+  { name: "Lester De Alwis", role: "Assistant Marketing Manager", image: withBasePath("/assets/team-lester.jpg") },
+  { name: "Adeesha Pemananda", role: "Host & Event Presenter · Senior Marketing Executive", image: withBasePath("/assets/team-adeesha.jpg") },
+];
+
 export const metadata = {
   title: "About | Veterinary Business Institute",
   description:
@@ -252,11 +259,34 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── Meet the Team ── */}
+      {/* ── Our Team (VBI staff) ── */}
+      <section className="section section-muted">
+        <div className="container">
+          <div className="section-heading section-heading-centered">
+            <span className="eyebrow text-accent">Our Team</span>
+            <h2>
+              The <em style={{ fontStyle: 'italic', color: '#2e7d5c' }}>people</em> behind every episode and event.
+            </h2>
+          </div>
+          <div className="about-team-grid">
+            {vbiTeam.map((m) => (
+              <article className="about-team-card" key={m.name}>
+                <div className="about-team-photo">
+                  <img src={m.image} alt={m.name} loading="lazy" />
+                </div>
+                <h3>{m.name}</h3>
+                <span className="about-team-role">{m.role}</span>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── Podcast Co-Hosts ── */}
       <section className="section">
         <div className="container">
           <div className="section-heading section-heading-centered">
-            <span className="eyebrow text-accent">Meet the Team</span>
+            <span className="eyebrow text-accent">Our Podcast Hosts</span>
             <h2>
               The <em style={{ fontStyle: 'italic', color: '#2e7d5c' }}>co-hosts</em> shaping each conversation.
             </h2>

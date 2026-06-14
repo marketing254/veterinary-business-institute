@@ -16,6 +16,7 @@ export default function sitemap() {
     "/team",
     "/events",
     "/podcast",
+    "/speakers",
     "/reviews",
     "/case-studies",
     "/resources",

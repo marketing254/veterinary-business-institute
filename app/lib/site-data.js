@@ -110,6 +110,7 @@ export const headerNavigation = [
     ],
   },
   { type: "link", label: "Podcast", href: "/podcast" },
+  { type: "link", label: "Speakers", href: "/speakers" },
   { type: "link", label: "Reviews", href: "/reviews" },
   {
     type: "group",
