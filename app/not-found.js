@@ -1,15 +1,21 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { podcastSlug } from "./lib/sheets-core";
+import { fetchPodcasts } from "./lib/sheets-client";
+import EpisodeArticle from "./components/EpisodeArticle";
 
-export default function NotFound() {
-  const quickLinks = [
-    { href: "/podcast", label: "The Podcast" },
-    { href: "/webinars", label: "Webinar Replays" },
-    { href: "/events", label: "Live Events" },
-    { href: "/blog", label: "Blog & Insights" },
-    { href: "/resources", label: "Free Resources" },
-    { href: "/contact", label: "Contact Us" },
-  ];
+const quickLinks = [
+  { href: "/podcast", label: "The Podcast" },
+  { href: "/webinars", label: "Webinar Replays" },
+  { href: "/events", label: "Live Events" },
+  { href: "/blog", label: "Blog & Insights" },
+  { href: "/resources", label: "Free Resources" },
+  { href: "/contact", label: "Contact Us" },
+];
 
+function DefaultNotFound() {
   return (
     <section className="page-hero">
       <div className="container" style={{ textAlign: "center", paddingBlock: "3.5rem" }}>
@@ -35,11 +41,7 @@ export default function NotFound() {
           }}
         >
           {quickLinks.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="button button-secondary button-compact"
-            >
+            <Link key={l.href} href={l.href} className="button button-secondary button-compact">
               {l.label}
             </Link>
           ))}
@@ -47,4 +49,69 @@ export default function NotFound() {
       </div>
     </section>
   );
+}
+
+/**
+ * Static export only pre-renders episodes known at build time, so a brand-new
+ * episode that's already in the sheet would 404 until the next deploy. GitHub
+ * Pages serves this page for any unmatched path, so we "rescue" /podcast/<slug>
+ * URLs: look the slug up in the LIVE sheet and render the full episode instantly.
+ * Everything else falls back to the normal 404.
+ */
+export default function NotFound() {
+  const [view, setView] = useState({ status: "checking" });
+
+  useEffect(() => {
+    const path = decodeURIComponent(window.location.pathname).replace(/\/+$/, "");
+    const m = path.match(/\/podcast\/([^/]+)$/);
+    if (!m) {
+      setView({ status: "missing" });
+      return;
+    }
+    const slug = m[1];
+    let alive = true;
+    fetchPodcasts()
+      .then((eps) => {
+        if (!alive) return;
+        const idx = eps.findIndex((e) => podcastSlug(e) === slug);
+        if (idx === -1) {
+          setView({ status: "missing" });
+          return;
+        }
+        const ep = eps[idx];
+        if (typeof document !== "undefined") {
+          document.title = `Ep ${ep.number}: ${ep.title} | Veterinary Business Podcast`;
+        }
+        setView({
+          status: "episode",
+          ep,
+          newer: idx > 0 ? eps[idx - 1] : null,
+          older: idx < eps.length - 1 ? eps[idx + 1] : null,
+        });
+      })
+      .catch(() => {
+        if (alive) setView({ status: "missing" });
+      });
+    return () => {
+      alive = false;
+    };
+  }, []);
+
+  if (view.status === "episode") {
+    return <EpisodeArticle ep={view.ep} newer={view.newer} older={view.older} />;
+  }
+
+  if (view.status === "checking") {
+    // Brief neutral state so a podcast URL doesn't flash the 404 before the
+    // sheet responds. Non-podcast paths skip straight to the 404 above.
+    return (
+      <section className="page-hero">
+        <div className="container" style={{ textAlign: "center", paddingBlock: "3.5rem" }}>
+          <p className="muted-text">Loading…</p>
+        </div>
+      </section>
+    );
+  }
+
+  return <DefaultNotFound />;
 }

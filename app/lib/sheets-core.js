@@ -187,6 +187,43 @@ export function parseTranscriptSegments(text) {
   return segs;
 }
 
+/**
+ * Parse the exported plain text of a "key notes" Google Doc into:
+ *   • paragraphs — the episode description (everything before "Key Takeaways")
+ *   • takeaways  — one bullet per line after a "Key Takeaways" heading
+ * If no heading is found, the whole doc is treated as description paragraphs.
+ * Isomorphic so the build (server) and the live component (client) agree exactly.
+ */
+export function parseKeyNotes(text) {
+  const clean = String(text || "").replace(/\r/g, "").trim();
+  if (!clean) return { paragraphs: [], takeaways: [] };
+
+  const lines = clean.split("\n");
+  const idx = lines.findIndex((l) => /^\s*key\s*takeaways?\s*:?\s*$/i.test(l));
+
+  let descPart;
+  let takePart;
+  if (idx === -1) {
+    descPart = clean;
+    takePart = "";
+  } else {
+    descPart = lines.slice(0, idx).join("\n");
+    takePart = lines.slice(idx + 1).join("\n");
+  }
+
+  const paragraphs = descPart
+    .split(/\n{2,}/)
+    .map((s) => s.replace(/\s*\n\s*/g, " ").trim())
+    .filter(Boolean);
+
+  const takeaways = takePart
+    .split(/\n+/)
+    .map((s) => s.replace(/^\s*(?:[•\-*•●▪‣◦]+|\d+[.)])\s*/, "").trim())
+    .filter(Boolean);
+
+  return { paragraphs, takeaways };
+}
+
 /** Turn a Vimeo share/review URL into a player embed URL. */
 export function vimeoEmbed(url) {
   if (!url) return "";

@@ -25,6 +25,11 @@ export function normalizePodcast(row) {
     duration: pick(row, ["duration"]),
     category: pick(row, ["category"]),
     transcriptUrl: pick(row, ["transcript_url", "transcript"]),
+    // Google-Doc link holding the fuller description + "Key Takeaways" list.
+    keyNotesUrl: pick(row, [
+      "key_notes", "keynotes", "key_note", "key_takeaways", "keytakeaways",
+      "show_notes", "shownotes", "notes_doc", "notes_url", "notes",
+    ]),
     summary: pick(row, ["description", "summary"]),
   };
 }

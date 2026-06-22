@@ -8321,27 +8321,36 @@ html[data-theme="dark"] .res-card-cta p {
   }
 }
 
-/* Subscribe platforms */
+/* Subscribe platforms — compact horizontal cards, centred (looks right with 2). */
 .podcast-platforms {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  max-width: 880px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 18px;
+  max-width: 760px;
   margin: 0 auto;
 }
 
 .podcast-platform-card {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 26px 24px;
+  align-items: center;
+  gap: 15px;
+  width: min(100%, 350px);
+  padding: 16px 20px;
   background: var(--card);
   border: 1px solid var(--vbi-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   text-decoration: none;
   transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.podcast-platform-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  flex: 1;
+  min-width: 0;
 }
 
 .podcast-platform-card:hover {
@@ -8354,30 +8363,33 @@ html[data-theme="dark"] .res-card-cta p {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
-  border-radius: 13px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  flex-shrink: 0;
   color: var(--teal-500);
-  background: rgba(47, 107, 69, 0.1);
-  border: 1px solid rgba(47, 107, 69, 0.18);
+  /* Brand tiles (Apple Podcasts / YouTube Music) carry their own colour, so the
+     wrapper stays transparent; the fallback mic inherits the teal `color`. */
+  background: transparent;
+  border: none;
 }
 
 .podcast-platform-card strong {
-  font-size: 1.08rem;
+  font-size: 1rem;
   color: var(--forest-950);
 }
 
 .podcast-platform-blurb {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.83rem;
+  line-height: 1.4;
   color: var(--ink-700);
-  flex: 1;
 }
 
 .podcast-platform-link {
   font-weight: 800;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--teal-500);
+  flex-shrink: 0;
 }
 
 @media (max-width: 760px) {
@@ -9820,7 +9832,8 @@ html[data-theme="dark"] .brand-logo-dark { background: #fff; padding: 5px 9px; b
 .podcast-listen-ico {
   display: inline-flex; align-items: center; justify-content: center;
   width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
-  background: var(--background-muted);
+  /* Transparent: brand tiles bring their own colour; fallback mic uses currentColor. */
+  background: transparent;
 }
 .podcast-listen-row {
   display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem 0.9rem;
@@ -10245,3 +10258,48 @@ html[data-theme="dark"] .spk-pagination button { background: var(--card); border
 html[data-theme="dark"] .spk-name { color: #eaf3ee; }
 html[data-theme="dark"] .spk-bio { color: rgba(234, 243, 238, 0.75); }
 html[data-theme="dark"] .spk-search input { color: #eaf3ee; }
+
+/* ── Podcast episode: "Key Takeaways" (parsed from the key_notes Google Doc) ── */
+.pod-takeaways {
+  margin-top: 1.75rem;
+  padding: 1.5rem 1.6rem;
+  border: 1px solid rgba(16, 35, 32, 0.1);
+  border-radius: 16px;
+  background: rgba(46, 125, 92, 0.05);
+}
+.pod-takeaways h3 {
+  margin: 0 0 0.95rem;
+  font-size: 1.18rem;
+}
+.pod-takeaways ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+.pod-takeaways li {
+  position: relative;
+  padding-left: 2rem;
+  line-height: 1.55;
+}
+.pod-takeaways li::before {
+  content: "\2713";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: #2e7d5c;
+  border-radius: 999px;
+}
+html[data-theme="dark"] .pod-takeaways {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(46, 125, 92, 0.14);
+}
