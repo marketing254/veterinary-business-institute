@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { episodes, listeningPlatforms } from "../lib/site-data";
-import SolarIcon from "../components/SolarIcon";
+import PlatformIcon from "../components/PlatformIcon";
 import PodcastGuestForm from "../components/PodcastGuestForm";
 import PodcastEpisodes from "../components/PodcastEpisodes";
 import LivePodcastEpisodes from "../components/live/LivePodcastEpisodes";
@@ -108,11 +108,13 @@ export default function PodcastPage() {
                 rel="noreferrer"
                 key={p.label}
               >
-                <span className="podcast-platform-icon" aria-hidden="true">
-                  <SolarIcon name="microphone" size={24} />
+                <span className="podcast-platform-icon">
+                  <PlatformIcon label={p.label} size={40} />
                 </span>
-                <strong>{p.label}</strong>
-                <span className="podcast-platform-blurb">{platformBlurb[p.label]}</span>
+                <span className="podcast-platform-text">
+                  <strong>{p.label}</strong>
+                  <span className="podcast-platform-blurb">{platformBlurb[p.label]}</span>
+                </span>
                 <span className="podcast-platform-link">Open &rarr;</span>
               </a>
             ))}
