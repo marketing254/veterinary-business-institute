@@ -4,11 +4,15 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { episodes, webinars, eventPanels } from "../lib/site-data";
 import { podcastSlug } from "../lib/sheets-core";
+import { fetchPodcasts } from "../lib/sheets-client";
 
 const DISMISS_KEY = "vbi-whats-new-dismissed";
 
 export default function WhatsNewBanner() {
   const [visible, setVisible] = useState(false);
+  // Seed with the build-time newest, then swap in the LIVE newest from the sheet
+  // so the popup matches the marquee (both reflect episodes added after build).
+  const [latestEpisode, setLatestEpisode] = useState(episodes[0]);
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem(DISMISS_KEY);
@@ -18,6 +22,18 @@ export default function WhatsNewBanner() {
     }
   }, []);
 
+  useEffect(() => {
+    let alive = true;
+    fetchPodcasts()
+      .then((rows) => {
+        if (alive && rows && rows.length) setLatestEpisode(rows[0]);
+      })
+      .catch(() => {});
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   function handleDismiss() {
     setVisible(false);
     sessionStorage.setItem(DISMISS_KEY, "1");
@@ -25,7 +41,6 @@ export default function WhatsNewBanner() {
 
   if (!visible) return null;
 
-  const latestEpisode = episodes[0];
   const latestWebinar = webinars[0];
   const latestPanel = eventPanels[0];
 
