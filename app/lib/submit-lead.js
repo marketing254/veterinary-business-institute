@@ -10,6 +10,7 @@
 // just can't read the response, so a resolved fetch is treated as delivered.
 
 import { APPS_SCRIPT_URL } from "./sheets-config";
+import { postToKit } from "./kit";
 
 function target() {
   if (process.env.NEXT_PUBLIC_LEAD_WEBHOOK) return process.env.NEXT_PUBLIC_LEAD_WEBHOOK;
@@ -25,6 +26,10 @@ export async function submitLead(formName, payload) {
     pageUrl: typeof window !== "undefined" ? window.location.href : "",
     ...payload,
   };
+
+  // Additive: also subscribe the lead in Kit (browser-side, fire-and-forget).
+  // No-op for forms without a Kit mapping or when the email is missing.
+  postToKit(formName, body);
 
   const url = target();
   if (!url) {
