@@ -86,10 +86,18 @@ export function articleSchema({ title, description, path, image, datePublished, 
     image: image ? [absoluteUrl(image)] : undefined,
     datePublished: datePublished || undefined,
     dateModified: datePublished || undefined,
-    author: {
-      "@type": "Organization",
-      name: author || SITE_NAME,
-    },
+    author:
+      author && typeof author === "object"
+        ? {
+            "@type": "Person",
+            name: author.name,
+            url: author.url || undefined,
+            sameAs: Array.isArray(author.sameAs) && author.sameAs.length ? author.sameAs : undefined,
+          }
+        : {
+            "@type": "Organization",
+            name: author || SITE_NAME,
+          },
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
