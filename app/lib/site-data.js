@@ -33,49 +33,197 @@ export const eventsSeed = [
 // tab). Mirrors current rows; the page live-refreshes (incl. speaker photos).
 export const webinarsSeed = [
   {
-    dateIso: "6/10/2026",
-    day: "10",
-    monthYear: "June 2026",
-    time: "8:00 PM to 9:00 PM EDT",
-    title: "Scaling Without Selling: How Independent VET Practices Are Growing in a Post-Consolidation Market",
-    description:
-      "Understand why the 2026 post-consolidation market reset favors independent practices\nExplore growth paths that don't require selling: a second location, buying a competitor, partnering with associates for equity\nCompete with corporate groups on talent by offering autonomy, an equity path, and real culture\nBuild a practice that could sell — even if you never do — by strengthening your fundamentals",
-    registerUrl: "https://www.reg.veterinarybusinessinstitute.com/June-10/",
-    speakers: [
-      { name: "Peter Noël", image: "" },
-      { name: "Dr. Mark de Wolde", image: "" },
+    "dateIso": "7/15/2026",
+    "day": "15",
+    "monthYear": "July 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The 4-Year Visit Decline — Reversing the Pet-Owner Pullback Without a Price War",
+    "description": "✅ Why visits are down ~3% for the fourth straight year while prices climbed 6.57% — and what that compounding gap is signaling about client trust\n✅ The 48% expansion in interval-between-visits — what's actually being skipped (wellness, dental, diagnostics) and what it costs your forecast\n✅ Reframing pricing conversations: transparency, value framing, and care plans that pull elective spend back through the door\n✅ Bounce-back protocols: lapsed-client outreach scripts, payment plans, and wellness packages that re-anchor the relationship\n✅ Building a recession-resilient revenue mix: shifting from per-visit dependency to subscription, retention, and lifetime-value math",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/July-15/",
+    "speakers": [
+      {
+        "name": "Katerina Svigos",
+        "image": "https://drive.google.com/thumbnail?id=1kPlVGBQ9KZdJmbqUoKY1qCn05NUCfJIx&sz=w400"
+      },
+      {
+        "name": "Rebecca May, CVPM, CCFP, Elite FFCP (Veterinary)",
+        "image": "https://drive.google.com/thumbnail?id=1bRccyEWcVHm6H2hwfNGRcd-O61vDMw06&sz=w400"
+      },
+      {
+        "name": "Rachel Venable",
+        "image": "https://drive.google.com/thumbnail?id=18OXYlk9H4I_lX3s26wp2ZXaJgfnMeOA1&sz=w400"
+      }
     ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1tyFlN3HUUwboJ_UHOzODeM53ajzZCZuJ&sz=w1600"
   },
   {
-    dateIso: "6/17/2026",
-    day: "17",
-    monthYear: "June 2026",
-    time: "8:00 PM to 9:00 PM EDT",
-    title: "Why Your Best People Leave — and How Top Veterinary Practices Make Them Stay",
-    description:
-      "Uncover the real reasons people leave — what exit interviews miss and what top practices actually hear\nGo beyond pay to the other 30% of retention: schedule, growth path, recognition, and leadership quality\nUse stay interviews, not exit interviews, to catch disengagement before the resignation letter\nBuild career ladders for techs and support staff — turning scope-of-practice expansion into a retention lever",
-    registerUrl: "https://www.reg.veterinarybusinessinstitute.com/June-17/",
-    speakers: [
-      { name: "Desmond Xavier Coates, DVM", image: "" },
-      { name: "Dr. Jason Epstein", image: "" },
-      { name: "Jen Bruce", image: "" },
+    "dateIso": "7/29/2026",
+    "day": "29",
+    "monthYear": "July 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Numbers You're Not Reading: How Independent Vet Owners Get Real Visibility Into Profit, Cash Flow & Hidden Margin Leaks",
+    "description": "✅ The 5-7 financial numbers a vet practice owner should actually be watching weekly — and the ones that look important but don't predict anything\n✅ Why most independent practices are running on a 60-90 day financial blind spot — and the visibility infrastructure (PIMS reports, monthly close cadence, dashboard tools) that closes it\n✅ Reading your P&L like an owner, not a clinician — what COGS leaks, payroll-to-revenue ratios, and service-line margin actually tell you about where the practice is bleeding\n✅ Cash flow vs. profit in 2026 — why visit-count declines are showing up in P&L 90+ days before they hit the bank, and how to spot it before it's a crisis\n✅ The financial advisory layer that's emerging — when independent owners need a CPA vs. a fractional CFO vs. a valuation specialist vs. a practice analytics platform, and what each actually delivers",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/July-29/",
+    "speakers": [
+      {
+        "name": "Martin Traub-Werner",
+        "image": "https://drive.google.com/thumbnail?id=1U3d2xfIMR5FQdCDPuWmyY-uwDFY9W6qf&sz=w400"
+      },
+      {
+        "name": "Ashley Ingle, CPA",
+        "image": "https://drive.google.com/thumbnail?id=1FnTxMjrjm73BnKE3gwB-haAjaoSCKbgE&sz=w400"
+      },
+      {
+        "name": "Devin Corban",
+        "image": "https://drive.google.com/thumbnail?id=1QSGGdFETQAuzXdRbBaGnpaOKjDgutPxr&sz=w400"
+      },
+      {
+        "name": "Nicole Creed",
+        "image": "https://drive.google.com/thumbnail?id=1qVRB_9OX_jAYaCXcvDC-2J4gLlTRXfUo&sz=w400"
+      }
     ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1ipWP9UGlqovhtzCsDl6fKQkNfphjczkV&sz=w1600"
   },
   {
-    dateIso: "6/24/2026",
-    day: "24",
-    monthYear: "June 2026",
-    time: "8:00 PM to 9:00 PM EDT",
-    title: "Cost-Based Anger in Veterinary Clients",
-    description:
-      "Understand the psychology behind cost-based anger and financial friction\nDefine de-escalation language and boundaries for team safety\nSet clear boundaries that protect team mental health without losing compassion\nDevelop front-desk protocols for expectation-setting and trust messaging",
-    registerUrl: "https://www.reg.veterinarybusinessinstitute.com/June-24",
-    speakers: [
-      { name: "Erika Lee", image: "" },
-      { name: "Amelia Knight Pinkston, VMD", image: "" },
-      { name: "Bob Murtaugh, DVM, MS", image: "" },
+    "dateIso": "8/5/2026",
+    "day": "5",
+    "monthYear": "August 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Tech Retention Crisis — Why 70% of Your Techs Are Burned Out, and the 30% Who Quit Cost You More Than Any DVM",
+    "description": "✅ 70% of credentialed vet techs report severe burnout and 30% of practices reported losing techs in the last year — the staffing leak nobody is pricing into their forecast\n✅ The real cost of losing a CrVT: rebuilding clinical capacity, recovery time per surgery, and the 6-month ramp on a replacement most owners never calculate\n✅ Why 70% of techs say better compensation matters most — but flexibility, scope, and growth path are what actually keep your A-players from leaving for Banfield\n✅ The retention infrastructure that works: scheduling autonomy, VTS specialty stipends, internal certification pathways, and the 'promotion-instead-of-raise' track\n✅ Compensation reality check 2026: regional CrVT wage benchmarks, the title-protection movement, and what owners need to budget before next year's review cycle",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/August-5/",
+    "speakers": [
+      {
+        "name": "Ava Khodadadeh",
+        "image": "https://drive.google.com/thumbnail?id=1Tz6LBUePSvOvv8bA4SRUYK3N8urYMp8K&sz=w400"
+      },
+      {
+        "name": "Mark Massaro, DVM",
+        "image": "https://drive.google.com/thumbnail?id=1R0edgVD-0feLu-8MqKfKivZ6KRWKqn-u&sz=w400"
+      },
+      {
+        "name": "Caroline Kercheval",
+        "image": "https://drive.google.com/thumbnail?id=1WYaUXz3Uxl20VLuMby8gBI74cXqQNAzv&sz=w400"
+      }
     ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1s2g5FtZwxouZJIh0ak8l9Wu2fL8Z-PiW&sz=w1600"
   },
+  {
+    "dateIso": "8/18/2026",
+    "day": "18",
+    "monthYear": "August 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Fear-Free Practice — Designing the Visit Around the Patient, Not Just the Owner",
+    "description": "✅ Why patient fear is a business problem, not just a welfare one — how anxious, fractious animals lengthen appointments, raise injury risk, and quietly drive owners to skip visits\n✅ The Fear-Free toolkit that actually changes the room: pre-visit pharmaceuticals, low-stress handling, and environment design that any practice can implement without a remodel\n✅ Training the whole team, not just the DVM — why the experience can't depend on which tech restrains the cat, and how top practices standardize calm handling across every shift\n✅ The economics of the fear-free visit: how reducing patient stress improves compliance, rebooking, and word-of-mouth in a market where every visit counts\n✅ Measuring what matters: tracking handling incidents, sedation-free procedures, and owner-reported anxiety to prove the model is working — and where the field is heading next",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/August-18",
+    "speakers": [
+      {
+        "name": "Natasha Caplan",
+        "image": "https://drive.google.com/thumbnail?id=1hL2k6UzXMeYiyUPyYtWtqXOSZxAuvpU7&sz=w400"
+      },
+      {
+        "name": "Liz Stelow",
+        "image": "https://drive.google.com/thumbnail?id=1u7En2pFyTA_qeVPhZV5-yAtRo6zR8z0g&sz=w400"
+      },
+      {
+        "name": "Dot Baisly, MS, CDBC, CCBC, CSBS",
+        "image": "https://drive.google.com/thumbnail?id=1GgPfFk6rerUhpKUjTn1enVcfteBeqBYw&sz=w400"
+      }
+    ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=11zPUDis5dtGYTbJTI820RkAtcRrWmj8t&sz=w1600"
+  },
+  {
+    "dateIso": "8/19/2026",
+    "day": "19",
+    "monthYear": "August 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Discounting Trap — Why \"Helping Pets\" Is Quietly Killing Your Margin and What Top Owners Are Doing Instead",
+    "description": "✅ 81% of vets report clients more cost-sensitive in 2026 than 2025 — the instinct to discount is everywhere, and it's the single biggest margin destroyer in the recession\n✅ The hidden math: a 10% discount on a $400 visit requires roughly 30% more case volume to net the same — volume your team doesn't have the bandwidth to deliver\n✅ Intentional vs reflexive discounting: the framework AAHA practices use to differentiate access-to-care moments from front-desk caving\n✅ Replacing the discount habit: payment plans, wellness plans, CareCredit framing, and the value scripts that protect price without losing the relationship\n✅ Team training that sticks: how top owners get associates and CSRs to stop offering discounts as the default solution to client friction",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/August-19",
+    "speakers": [
+      {
+        "name": "Kate Boatright",
+        "image": "https://drive.google.com/thumbnail?id=1FN4UXY9nJNPWCUeBm09uwM6DA_ZInhgv&sz=w400"
+      },
+      {
+        "name": "Vanessa Waite, VetMB BA MA CertAVP CertGP DI MRCVS",
+        "image": "https://drive.google.com/thumbnail?id=1BtCYzqGe-4T_4GuwCTivgDF2AGJ9uQP6&sz=w400"
+      },
+      {
+        "name": "Genevieve Frederick",
+        "image": "https://drive.google.com/thumbnail?id=1kit4JgN8I12WVkdqXS6jj1zvRX8GRuiM&sz=w400"
+      }
+    ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1HJicgW4epBJ8EtIdlTQuBzTItPeQZu9x&sz=w1600"
+  },
+  {
+    "dateIso": "8/26/2026",
+    "day": "26",
+    "monthYear": "August 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Wellbeing Gap: Why \"Normal Mental Health, Poor Wellbeing\" Is the Retention Crisis Nobody Names",
+    "description": "✅ The Merck Wellbeing Study IV finding that flipped the narrative: vets aren't more mentally ill than the public — they're more exhausted, less fulfilled, and quietly leaving\n✅ 61% exhaustion vs 32% in the general population — what's actually broken about the workday, not the worker\n✅ The 69% tech-burnout number — why losing your CrVT bench costs you 2-3x more than losing an associate, and nobody is tracking it\n✅ Practical wellbeing infrastructure: scheduling autonomy, scope-of-practice clarity, debrief protocols, EAPs that actually get used, and the 4-day-week experiments showing real data\n✅ From 'self-care' to system change: the owner-led shifts that move retention numbers within two quarters, not two years",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/August-26/",
+    "speakers": [
+      {
+        "name": "Steven L. May, CVJ, VRCE",
+        "image": "https://drive.google.com/thumbnail?id=1OfT4fDiTfJ7G_qaFkoIUNT7eB4EBsK1k&sz=w400"
+      },
+      {
+        "name": "Mary LeMay NBC-HWC, FFCP, CVBL",
+        "image": "https://drive.google.com/thumbnail?id=18iSekg9JP53Za2WIKnnSLVa9o1Nk4SVE&sz=w400"
+      },
+      {
+        "name": "Dr. Patricia White",
+        "image": "https://drive.google.com/thumbnail?id=1rs6Bf_D4ocROvBmEMUr5522oFL_rSKAW&sz=w400"
+      }
+    ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1DIzHEqKlEh3tXPCMGEK1yvZ3poOHLWhS&sz=w1600"
+  },
+  {
+    "dateIso": "9/9/2026",
+    "day": "9",
+    "monthYear": "September 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Tech Utilization Reset — Unlocking Your Credentialed Team Before You Hire Another DVM",
+    "description": "✅ The math nobody runs: a fully utilized CrVT delegation model adds 25-40% DVM capacity without a single new hire\n✅ AABP and AAEVT's new utilization guidelines — the legal scope ceiling vs the cultural ceiling, and which one is actually holding you back\n✅ The under-utilization audit: what your techs are doing today that they shouldn't be, and what they aren't doing that they should\n✅ Wage compression, title protection, and the NAVTA push to make 'veterinary nurse' a protected term — what owners should be doing now\n✅ Building the career ladder: VTS specialty pathways, internal certification stipends, and retention through promotion instead of pay raise",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/Sept-9",
+    "speakers": [
+      {
+        "name": "Brendan Baker",
+        "image": "https://drive.google.com/thumbnail?id=1s-9HyhKmVASr5uP3Qp6PR0_DmdveI4g3&sz=w400"
+      },
+      {
+        "name": "Nicole Wisner",
+        "image": "https://drive.google.com/thumbnail?id=1GcK0tZ1TV3pvkGOdRQnvMYO2uQajhyer&sz=w400"
+      },
+      {
+        "name": "Mary L. Berg",
+        "image": "https://drive.google.com/thumbnail?id=1FlpHTPgrTle8TrwGLPvTarxj_9Eavl2h&sz=w400"
+      }
+    ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1yz-tLSz7Pk6AV157dtbQsCB4C3sjr8fz&sz=w1600"
+  },
+  {
+    "dateIso": "9/16/2026",
+    "day": "16",
+    "monthYear": "September 2026",
+    "time": "8:00 PM to 9:00 PM EDT",
+    "title": "The Independent Owner's 2026-2028 Playbook — How to Build a Practice That's Either Un-Buyable or Premium-Buyable",
+    "description": "✅ Why the corporate buying spree has hit a deal-velocity wall — multiples have compressed, PE firms can't exit, and the next 18 months favor independents for the first time in a decade\n✅ The two viable owner endgames in 2026-28: build a practice corporates can't replicate (un-buyable) OR build the operating layer that commands premium multiples (premium-buyable)\n✅ What '$2M+ with scalable systems' actually trades at today vs the 2021-22 frenzy — and which operational layers move the multiple most\n✅ The post-consolidation moment: where over-extracted corporates are quietly losing clients, hires, and referral lanes you can take back\n✅ Owner exit math 2026-28: timing windows, ESOP and partnership tracks, and the legacy-protecting alternatives to a corporate sale",
+    "registerUrl": "https://www.reg.veterinarybusinessinstitute.com/Sept-16",
+    "speakers": [
+      {
+        "name": "Tom Vega, DVM",
+        "image": "https://drive.google.com/thumbnail?id=1nJBBoRYXvvMofHEnEyS1SHT8gF5scS-Y&sz=w400"
+      },
+      {
+        "name": "Francesca Verney",
+        "image": "https://drive.google.com/thumbnail?id=1lFTSf8RSLXy49AjVI1lxaUnjnES3eJ0I&sz=w400"
+      }
+    ],
+    "bannerImage": "https://drive.google.com/thumbnail?id=1gnoyzb-NLUkR-AtbBdDN9HWzmgipB-hr&sz=w1600"
+  }
 ];
 
 export const topBarItems = [
@@ -86,9 +234,9 @@ export const topBarItems = [
     internal: true,
   },
   {
-    label: "Latest Event Panel",
-    copy: "Data-Driven Growth: How AI Search and Client Education Are Changing Veterinary Visibility",
-    href: "/webinars/data-driven-growth-ai-search-client-education",
+    label: "Next Live Webinar",
+    copy: `${webinarsSeed[0].day} ${webinarsSeed[0].monthYear}: ${webinarsSeed[0].title}`,
+    href: "/webinars/registration",
     internal: true,
   },
 ];
