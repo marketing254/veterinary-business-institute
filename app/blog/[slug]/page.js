@@ -51,7 +51,13 @@ export default async function BlogPostPage({ params }) {
     path: `/blog/${post.slug}`,
     image: post.image,
     datePublished: isoDate(post.date),
-    author: "Veterinary Business Institute",
+    author: post.author
+      ? {
+          name: post.author.name,
+          url: post.author.website,
+          sameAs: [post.author.linkedin].filter(Boolean),
+        }
+      : "Veterinary Business Institute",
   });
   const breadcrumbLd = breadcrumbSchema([
     { name: "Home", path: "/" },
@@ -71,7 +77,7 @@ export default async function BlogPostPage({ params }) {
           <span className="eyebrow text-accent">{post.category}</span>
           <h1>{post.title}</h1>
           <p className="blogpost-meta">
-            By <strong>Veterinary Business Institute</strong> · Updated {post.date} · {post.readMinutes} min read
+            By <strong>{post.author ? post.author.name : "Veterinary Business Institute"}</strong> · Updated {post.date} · {post.readMinutes} min read
           </p>
         </div>
       </section>
@@ -153,15 +159,41 @@ export default async function BlogPostPage({ params }) {
                 background: "var(--teal-500, #1FB6A0)",
               }}
             >
-              VBI
+              {post.author
+                ? post.author.name
+                    .split(" ")
+                    .map((w) => w[0])
+                    .join("")
+                    .slice(0, 3)
+                    .toUpperCase()
+                : "VBI"}
             </div>
             <div>
-              <p style={{ fontWeight: 700, margin: 0 }}>Written by the Veterinary Business Institute team</p>
-              <p style={{ margin: "0.35rem 0 0", fontSize: "0.92rem", color: "var(--ink-500)" }}>
-                Practical veterinary practice-growth education from the team behind the
-                Veterinary Business Podcast and Ekwa Marketing — covering marketing, leadership,
-                operations, and client experience.
+              <p style={{ fontWeight: 700, margin: 0 }}>
+                {post.author
+                  ? `Written by ${post.author.name}${post.author.title ? ` — ${post.author.title}` : ""}`
+                  : "Written by the Veterinary Business Institute team"}
               </p>
+              <p style={{ margin: "0.35rem 0 0", fontSize: "0.92rem", color: "var(--ink-500)" }}>
+                {post.author
+                  ? post.author.bio
+                  : "Practical veterinary practice-growth education from the team behind the Veterinary Business Podcast and Ekwa Marketing — covering marketing, leadership, operations, and client experience."}
+              </p>
+              {post.author && (post.author.website || post.author.linkedin) && (
+                <p style={{ margin: "0.45rem 0 0", fontSize: "0.92rem" }}>
+                  {post.author.website && (
+                    <a href={post.author.website} target="_blank" rel="noopener noreferrer">
+                      Website
+                    </a>
+                  )}
+                  {post.author.website && post.author.linkedin && <span aria-hidden="true"> · </span>}
+                  {post.author.linkedin && (
+                    <a href={post.author.linkedin} target="_blank" rel="noopener noreferrer">
+                      LinkedIn
+                    </a>
+                  )}
+                </p>
+              )}
             </div>
           </div>
 
