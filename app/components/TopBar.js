@@ -2,21 +2,34 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { fetchPodcasts, fetchEventPanels } from "../lib/sheets-client";
+import { fetchPodcasts, fetchWebinars } from "../lib/sheets-client";
 import { podcastSlug } from "../lib/sheets-core";
 
+// First webinar dated today or later (list arrives soonest-first); falls back
+// to the first row so the slot never goes empty.
+function pickUpcoming(rows) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return (
+    (rows || []).find((w) => {
+      const d = new Date(w.dateIso);
+      return !Number.isNaN(d.getTime()) && d >= today;
+    }) || (rows || [])[0]
+  );
+}
+
 /**
- * Top announcement bar — latest podcast + latest event panel, linking to their
- * dedicated pages ON THIS SITE (not external). Seeded with build-time `items`
- * for SSR, then live-refreshed from the sheet.
+ * Top announcement bar — latest podcast + next upcoming live webinar, linking
+ * to their dedicated pages ON THIS SITE (not external). Seeded with build-time
+ * `items` for SSR, then live-refreshed from the sheet.
  */
 export default function TopBar({ items = [] }) {
   const [links, setLinks] = useState(() => items.map((i) => ({ ...i, internal: i.internal ?? false })));
 
   useEffect(() => {
     let alive = true;
-    Promise.all([fetchPodcasts(), fetchEventPanels()])
-      .then(([pods, panels]) => {
+    Promise.all([fetchPodcasts(), fetchWebinars()])
+      .then(([pods, webinars]) => {
         if (!alive) return;
         const next = [];
         const ep = (pods || []).find((p) => p.appleId || p.href || p.audioUrl) || pods?.[0];
@@ -28,12 +41,12 @@ export default function TopBar({ items = [] }) {
             internal: true,
           });
         }
-        const panel = (panels || [])[0];
-        if (panel) {
+        const wb = pickUpcoming(webinars);
+        if (wb) {
           next.push({
-            label: "Latest Event Panel",
-            copy: panel.title,
-            href: `/webinars/${panel.slug}`,
+            label: "Next Live Webinar",
+            copy: `${wb.day} ${wb.monthYear}: ${wb.title}`,
+            href: "/webinars/registration",
             internal: true,
           });
         }

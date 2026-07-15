@@ -10135,12 +10135,12 @@ html[data-theme="dark"] .blog-card-cat { color: #7ed9a3 !important; }
 }
 .evt-live-speakers-row { display: flex; flex-wrap: wrap; gap: 0.9rem; }
 .evt-live-speaker {
-  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 104px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem; width: 128px; text-align: center;
   animation: evt-live-in 0.5s ease both; animation-delay: calc(0.1s * var(--i, 0) + 0.2s);
 }
 .evt-live-avatar {
-  width: 88px; height: 88px; border-radius: 50%; overflow: hidden;
-  display: grid; place-items: center; font-weight: 700; font-size: 1.55rem; color: #fff;
+  width: 112px; height: 112px; border-radius: 50%; overflow: hidden;
+  display: grid; place-items: center; font-weight: 700; font-size: 1.8rem; color: #fff;
   background: linear-gradient(150deg, var(--teal-500), #1f7a5c);
   box-shadow: 0 6px 18px rgba(31, 122, 92, 0.28);
   transition: transform 0.2s ease;
@@ -10149,8 +10149,8 @@ html[data-theme="dark"] .blog-card-cat { color: #7ed9a3 !important; }
 .evt-live-speaker:hover .evt-live-avatar { transform: scale(1.06); }
 .evt-live-speaker-name { font-size: 0.8rem; line-height: 1.3; color: var(--ink-700); }
 @media (max-width: 520px) {
-  .evt-live-speaker { width: 84px; }
-  .evt-live-avatar { width: 70px; height: 70px; font-size: 1.25rem; }
+  .evt-live-speaker { width: 96px; }
+  .evt-live-avatar { width: 82px; height: 82px; font-size: 1.4rem; }
 }
 
 html[data-theme="dark"] .evt-live-card { background: var(--card); border-color: rgba(199, 226, 207, 0.12); }
@@ -10200,6 +10200,34 @@ html[data-theme="dark"] .evt-live-speaker-name { color: rgba(234, 243, 238, 0.8)
 .evt-reg-time { font-size: 0.82rem; color: var(--teal-500); font-weight: 600; margin: 0 0 0.3rem; }
 .evt-reg-panelists { font-size: 0.82rem; color: var(--ink-700); margin: 0 0 0.9rem; }
 .evt-reg-cta { align-self: flex-start; margin-top: auto; }
+
+/* Poster variant: square event poster on top with the date badge overlaid,
+   text body underneath. Falls back to the classic date-pill row when the
+   sheet row has no banner_image. */
+.evt-reg-card.has-banner { flex-direction: column; gap: 0; padding: 0; overflow: hidden; }
+.evt-reg-poster { position: relative; }
+.evt-reg-poster img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+.evt-reg-card.has-banner:hover .evt-reg-poster img { transform: scale(1.03); }
+.evt-reg-poster-date {
+  position: absolute;
+  left: 0.9rem;
+  bottom: 0.9rem;
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 14px;
+  color: #fff;
+  background: linear-gradient(150deg, var(--teal-500), #1f7a5c);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+}
+.evt-reg-card.has-banner .evt-reg-body { padding: 1.1rem 1.25rem 1.25rem; }
 
 html[data-theme="dark"] .evt-reg-card { background: var(--card); border-color: rgba(199, 226, 207, 0.12); }
 html[data-theme="dark"] .evt-reg-body h3 { color: #eaf3ee; }

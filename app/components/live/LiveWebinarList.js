@@ -36,11 +36,22 @@ export default function LiveWebinarList({ initial = [] }) {
             </div>
             <div className="evt-reg-grid">
               {rest.map((ev, i) => (
-                <article className="evt-reg-card" key={i}>
-                  <div className="evt-reg-date">
-                    <span className="evt-reg-day">{ev.day}</span>
-                    <span className="evt-reg-month">{ev.monthYear}</span>
-                  </div>
+                <article className={`evt-reg-card${ev.bannerImage ? " has-banner" : ""}`} key={i}>
+                  {ev.bannerImage ? (
+                    <div className="evt-reg-poster">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={ev.bannerImage} alt={ev.title || "Webinar banner"} loading="lazy" />
+                      <span className="evt-reg-poster-date">
+                        <span className="evt-reg-day">{ev.day}</span>
+                        <span className="evt-reg-month">{ev.monthYear}</span>
+                      </span>
+                    </div>
+                  ) : (
+                    <div className="evt-reg-date">
+                      <span className="evt-reg-day">{ev.day}</span>
+                      <span className="evt-reg-month">{ev.monthYear}</span>
+                    </div>
+                  )}
                   <div className="evt-reg-body">
                     <h3>{ev.title}</h3>
                     {ev.time ? <p className="evt-reg-time">{ev.time}</p> : null}

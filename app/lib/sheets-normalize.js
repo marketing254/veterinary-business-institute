@@ -87,6 +87,7 @@ export function normalizeEvent(row) {
     description: pick(row, ["description", "details"]),
     registerUrl: pick(row, ["register_url", "registration_url", "register", "url"]),
     speakers: imageLines.length ? imageLines : nameOnly,
+    bannerImage: driveImageUrl(pick(row, ["banner_image", "banner", "banner_url"]), 1600),
   };
 }
 

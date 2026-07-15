@@ -2,17 +2,31 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { episodes, webinars, eventPanels } from "../lib/site-data";
+import { episodes, eventPanels, webinarsSeed } from "../lib/site-data";
 import { podcastSlug } from "../lib/sheets-core";
-import { fetchPodcasts } from "../lib/sheets-client";
+import { fetchPodcasts, fetchWebinars } from "../lib/sheets-client";
 
 const DISMISS_KEY = "vbi-whats-new-dismissed";
+
+// First webinar dated today or later (list arrives soonest-first); falls back
+// to the first row so the slot never goes empty.
+function pickUpcoming(rows) {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return (
+    (rows || []).find((w) => {
+      const d = new Date(w.dateIso);
+      return !Number.isNaN(d.getTime()) && d >= today;
+    }) || (rows || [])[0]
+  );
+}
 
 export default function WhatsNewBanner() {
   const [visible, setVisible] = useState(false);
   // Seed with the build-time newest, then swap in the LIVE newest from the sheet
   // so the popup matches the marquee (both reflect episodes added after build).
   const [latestEpisode, setLatestEpisode] = useState(episodes[0]);
+  const [nextWebinar, setNextWebinar] = useState(() => pickUpcoming(webinarsSeed));
 
   useEffect(() => {
     const dismissed = sessionStorage.getItem(DISMISS_KEY);
@@ -29,6 +43,12 @@ export default function WhatsNewBanner() {
         if (alive && rows && rows.length) setLatestEpisode(rows[0]);
       })
       .catch(() => {});
+    fetchWebinars()
+      .then((rows) => {
+        const wb = pickUpcoming(rows);
+        if (alive && wb) setNextWebinar(wb);
+      })
+      .catch(() => {});
     return () => {
       alive = false;
     };
@@ -41,7 +61,6 @@ export default function WhatsNewBanner() {
 
   if (!visible) return null;
 
-  const latestWebinar = webinars[0];
   const latestPanel = eventPanels[0];
 
   return (
@@ -96,17 +115,36 @@ export default function WhatsNewBanner() {
           {/* Divider */}
           <div className="wnb-divider" />
 
-          {/* Latest Webinar */}
+          {/* Next Live Webinar */}
           <div className="wnb-card">
             <div className="wnb-card-badge wnb-badge-webinar">
               <span className="wnb-badge-dot wnb-dot-webinar" />
-              Latest Webinar
+              Next Live Webinar
             </div>
-            <p className="wnb-event-date">{latestWebinar.date}</p>
-            <p className="wnb-event-title">{latestWebinar.title}</p>
-            <p className="wnb-event-summary">{latestWebinar.summary}</p>
-            <Link href="/webinars" onClick={handleDismiss} className="wnb-btn wnb-btn-outline">
-              Watch Replay &rarr;
+            <div className="wnb-podcast-row">
+              {nextWebinar?.bannerImage && (
+                <img
+                  src={nextWebinar.bannerImage}
+                  alt={nextWebinar.title}
+                  width={56}
+                  height={56}
+                  className="wnb-podcast-thumb"
+                />
+              )}
+              <div>
+                <p className="wnb-episode-label">
+                  {nextWebinar?.day} {nextWebinar?.monthYear}
+                  {nextWebinar?.time ? ` · ${nextWebinar.time}` : ""}
+                </p>
+                <p className="wnb-episode-title">{nextWebinar?.title}</p>
+              </div>
+            </div>
+            <Link
+              href="/webinars/registration"
+              onClick={handleDismiss}
+              className="wnb-btn wnb-btn-primary"
+            >
+              Reserve My Spot &rarr;
             </Link>
           </div>
 
