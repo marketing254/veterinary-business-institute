@@ -10201,33 +10201,32 @@ html[data-theme="dark"] .evt-live-speaker-name { color: rgba(234, 243, 238, 0.8)
 .evt-reg-panelists { font-size: 0.82rem; color: var(--ink-700); margin: 0 0 0.9rem; }
 .evt-reg-cta { align-self: flex-start; margin-top: auto; }
 
-/* Poster variant: square event poster on top with the date badge overlaid,
-   text body underneath. Falls back to the classic date-pill row when the
-   sheet row has no banner_image. */
+/* Poster variant: square event poster on top (clicks through to registration),
+   a full-width horizontal date bar under it, text body underneath. Falls back
+   to the classic date-pill row when the sheet row has no banner_image. */
 .evt-reg-card.has-banner { flex-direction: column; gap: 0; padding: 0; overflow: hidden; }
-.evt-reg-poster { position: relative; }
+.evt-reg-poster { display: block; overflow: hidden; aspect-ratio: 1 / 1; }
 .evt-reg-poster img {
   display: block;
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 100%;
   object-fit: cover;
   transition: transform 0.25s ease;
 }
 .evt-reg-card.has-banner:hover .evt-reg-poster img { transform: scale(1.03); }
-.evt-reg-poster-date {
-  position: absolute;
-  left: 0.9rem;
-  bottom: 0.9rem;
-  display: grid;
-  place-items: center;
-  width: 58px;
-  height: 58px;
-  border-radius: 14px;
+.evt-reg-datebar {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.55rem 1rem;
   color: #fff;
   background: linear-gradient(150deg, var(--teal-500), #1f7a5c);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
-.evt-reg-card.has-banner .evt-reg-body { padding: 1.1rem 1.25rem 1.25rem; }
+.evt-reg-datebar-day { font-size: 1.3rem; font-weight: 800; line-height: 1; }
+.evt-reg-datebar-month { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.04em; }
+.evt-reg-card.has-banner .evt-reg-body { padding: 1.1rem 1.25rem 1.25rem; flex: 1; }
 
 html[data-theme="dark"] .evt-reg-card { background: var(--card); border-color: rgba(199, 226, 207, 0.12); }
 html[data-theme="dark"] .evt-reg-body h3 { color: #eaf3ee; }
