@@ -38,14 +38,22 @@ export default function LiveWebinarList({ initial = [] }) {
               {rest.map((ev, i) => (
                 <article className={`evt-reg-card${ev.bannerImage ? " has-banner" : ""}`} key={i}>
                   {ev.bannerImage ? (
-                    <div className="evt-reg-poster">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={ev.bannerImage} alt={ev.title || "Webinar banner"} loading="lazy" />
-                      <span className="evt-reg-poster-date">
-                        <span className="evt-reg-day">{ev.day}</span>
-                        <span className="evt-reg-month">{ev.monthYear}</span>
-                      </span>
-                    </div>
+                    <>
+                      <a
+                        className="evt-reg-poster"
+                        href={ev.registerUrl || "#"}
+                        target="_blank"
+                        rel="noreferrer"
+                        aria-label={`Register for ${ev.title}`}
+                      >
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={ev.bannerImage} alt={ev.title || "Webinar banner"} loading="lazy" />
+                      </a>
+                      <div className="evt-reg-datebar">
+                        <span className="evt-reg-datebar-day">{ev.day}</span>
+                        <span className="evt-reg-datebar-month">{ev.monthYear}</span>
+                      </div>
+                    </>
                   ) : (
                     <div className="evt-reg-date">
                       <span className="evt-reg-day">{ev.day}</span>
@@ -66,7 +74,7 @@ export default function LiveWebinarList({ initial = [] }) {
                       target="_blank"
                       rel="noreferrer"
                     >
-                      Reserve Spot &rarr;
+                      Reserve Spot
                     </a>
                   </div>
                 </article>
