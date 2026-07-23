@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { blogPosts } from "../lib/blog-posts";
+import BlogIndexClient from "../components/BlogIndexClient";
 
 export const metadata = {
   title: "Blog & Insights | Veterinary Business Institute",
@@ -16,8 +17,15 @@ export const metadata = {
   },
 };
 
-const featured = blogPosts[0];
-const rest = blogPosts.slice(1);
+// Feature a marketing article in the hero card; the grid below lists ALL
+// posts (featured included), so nothing is missed by readers who skip the hero.
+const MARKETING_CATEGORIES = new Set([
+  "SEO & Visibility",
+  "Local Search",
+  "Social Media",
+  "Email Marketing",
+]);
+const featured = blogPosts.find((p) => MARKETING_CATEGORIES.has(p.category)) || blogPosts[0];
 
 export default function BlogPage() {
   return (
@@ -56,28 +64,8 @@ export default function BlogPage() {
         </section>
       )}
 
-      {/* ── Article grid ── */}
-      <section className="section section-muted">
-        <div className="container">
-          <div className="section-heading section-heading-centered">
-            <span className="eyebrow text-accent">All Articles</span>
-            <h2>Veterinary practice-growth guides.</h2>
-          </div>
-          <div className="blog-index-grid">
-            {rest.map((p) => (
-              <Link href={`/blog/${p.slug}`} className="blog-card" key={p.slug}>
-                <span className="blog-card-cat">{p.category}</span>
-                <h3>{p.title}</h3>
-                <p>{p.excerpt}</p>
-                <span className="blog-card-meta">
-                  {p.date} · {p.readMinutes} min read
-                </span>
-                <span className="blog-card-link">Read Guide &rarr;</span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* ── Article grid (all posts, category filters) ── */}
+      <BlogIndexClient />
 
       {/* ── CTA ── */}
       <section className="section res-next">

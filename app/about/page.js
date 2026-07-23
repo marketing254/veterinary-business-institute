@@ -60,6 +60,7 @@ const vbiTeam = [
   { name: "Chaluka Abeysinghe", role: "Marketing Executive · VET", image: withBasePath("/assets/team-chaluka.jpg") },
   { name: "Lester De Alwis", role: "Assistant Marketing Manager", image: withBasePath("/assets/team-lester.jpg") },
   { name: "Adeesha Pemananda", role: "Host & Event Presenter · Senior Marketing Executive", image: withBasePath("/assets/team-adeesha.jpg") },
+  { name: "Reshani Tamasha", role: "Partnership Consultant", image: withBasePath("/assets/reshani1.jpg") },
 ];
 
 export const metadata = {
