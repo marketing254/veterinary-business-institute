@@ -11,6 +11,8 @@ import {
   webinars,
 } from "./lib/site-data";
 import { withBasePath } from "./lib/base-path";
+import { absoluteUrl } from "./lib/seo";
+import { vimeoEmbed } from "./lib/sheets-core";
 import SignalMarquee from "./components/SignalMarquee";
 import HeroRedesign from "./components/HeroRedesign";
 import ParallaxCard from "./components/ParallaxCard";
@@ -57,9 +59,16 @@ const reverseMarqueeItems = [
   "Succession Planning",
 ];
 
+// Returns a timezone-aware ISO datetime (Google flags date-only values as
+// "missing a timezone"). Uses the parsed calendar-date components labelled as
+// UTC midnight, so the date never shifts regardless of the build machine's tz.
 function toIsoDate(value) {
-  const parsed = new Date(value);
-  return Number.isNaN(parsed.getTime()) ? undefined : parsed.toISOString().split("T")[0];
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return undefined;
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}T00:00:00+00:00`;
 }
 
 function toIsoDuration(value) {
@@ -108,9 +117,12 @@ export default function HomePage() {
       {
         "@type": "VideoObject",
         name: featuredPanel.title,
+        description: featuredPanel.summary || featuredPanel.subtitle || featuredPanel.title,
+        thumbnailUrl: featuredPanel.image ? [absoluteUrl(featuredPanel.image)] : undefined,
         url: featuredPanel.href,
         uploadDate: toIsoDate(featuredPanel.date),
         duration: toIsoDuration(featuredPanel.duration),
+        embedUrl: vimeoEmbed(featuredPanel.href) || featuredPanel.href || undefined,
       },
     ],
   };
