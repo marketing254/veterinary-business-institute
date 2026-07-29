@@ -224,6 +224,22 @@ export function parseKeyNotes(text) {
   return { paragraphs, takeaways };
 }
 
+/**
+ * Convert a "H:MM:SS" / "M:SS" duration (as stored in the sheet) into an
+ * ISO-8601 duration (e.g. "0:56:29" → "PT56M29S") for VideoObject schema.
+ * Returns undefined if it can't be parsed.
+ */
+export function isoDuration(hms) {
+  const parts = String(hms || "").trim().split(":").map((n) => parseInt(n, 10));
+  if (!parts.length || parts.some((n) => Number.isNaN(n))) return undefined;
+  let h = 0, m = 0, s = 0;
+  if (parts.length === 3) [h, m, s] = parts;
+  else if (parts.length === 2) [m, s] = parts;
+  else return undefined;
+  if (!h && !m && !s) return undefined;
+  return `PT${h ? h + "H" : ""}${m ? m + "M" : ""}${s ? s + "S" : ""}`;
+}
+
 /** Turn a Vimeo share/review URL into a player embed URL. */
 export function vimeoEmbed(url) {
   if (!url) return "";

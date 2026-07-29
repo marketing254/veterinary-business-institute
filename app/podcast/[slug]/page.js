@@ -1,4 +1,4 @@
-import { getMergedEpisodes, fetchKeyNotes } from "../../lib/podcast-data";
+import { getMergedEpisodes, fetchKeyNotes, fetchTranscriptText } from "../../lib/podcast-data";
 import { podcastSlug } from "../../lib/sheets-core";
 import EpisodeArticle from "../../components/EpisodeArticle";
 
@@ -41,8 +41,20 @@ export default async function PodcastEpisodePage({ params }) {
   const newer = idx > 0 ? eps[idx - 1] : null;
   const older = idx >= 0 && idx < eps.length - 1 ? eps[idx + 1] : null;
 
-  // Bake the key notes into the HTML so there's no flash of the short summary.
-  const initialNotes = ep?.keyNotesUrl ? await fetchKeyNotes(ep.keyNotesUrl) : null;
+  // Bake the key notes + full transcript into the HTML (no flash; crawlable +
+  // citable by AI). Both fail gracefully to the live client fetch if unavailable.
+  const [initialNotes, initialTranscript] = await Promise.all([
+    ep?.keyNotesUrl ? fetchKeyNotes(ep.keyNotesUrl) : Promise.resolve(null),
+    ep?.transcriptUrl ? fetchTranscriptText(ep.transcriptUrl) : Promise.resolve(""),
+  ]);
 
-  return <EpisodeArticle ep={ep} newer={newer} older={older} initialNotes={initialNotes} />;
+  return (
+    <EpisodeArticle
+      ep={ep}
+      newer={newer}
+      older={older}
+      initialNotes={initialNotes}
+      initialTranscript={initialTranscript}
+    />
+  );
 }

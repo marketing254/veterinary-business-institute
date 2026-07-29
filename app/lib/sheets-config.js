@@ -22,6 +22,8 @@ export const TABS = {
   eventPanels: "event-panels",
   events: "events",
   webinars: "webinars",
+  webinarReplays: "webinar-replays",
+  summitReplays: "summit-replays",
   featuredSpeakers: "featured_speakers",
   reviews: "reviews",
   experts: "experts",
