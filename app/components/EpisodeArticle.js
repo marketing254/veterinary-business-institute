@@ -19,7 +19,7 @@ function isoDate(value) {
  * rescue (not-found.js) for sheet episodes that aren't baked yet. Its data
  * children (player, key notes, transcript) fetch live in the browser either way.
  */
-export default function EpisodeArticle({ ep, newer, older, initialNotes = null }) {
+export default function EpisodeArticle({ ep, newer, older, initialNotes = null, initialTranscript = "" }) {
   if (!ep) return null;
 
   const episodeLd = podcastEpisodeSchema({
@@ -72,7 +72,7 @@ export default function EpisodeArticle({ ep, newer, older, initialNotes = null }
               <h2>About This Episode</h2>
               <PodcastKeyNotes episodeNumber={ep.number} fallbackSummary={ep.summary} initialNotes={initialNotes} />
             </div>
-            <PodcastTranscript episodeNumber={ep.number} />
+            <PodcastTranscript episodeNumber={ep.number} initialText={initialTranscript} />
           </div>
 
           <aside className="pod-detail-aside">

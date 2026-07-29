@@ -61,23 +61,50 @@ export function getMergedEpisodes() {
 }
 
 /**
- * Fetch + parse an episode's "key notes" Google Doc at BUILD time so the
- * description + Key Takeaways are baked into the HTML (no client-side flash of
- * the short summary first). The server can read docs.google.com directly — no
- * Apps Script proxy needed (that exists only to dodge browser CORS). Returns
- * null on any failure, so the page falls back to the live client fetch.
+ * Fetch a Google-Doc's plain-text export at BUILD time. The server can read
+ * docs.google.com directly (no Apps Script proxy needed — that only exists to
+ * dodge browser CORS). Hard-guarded so the build can never hang or throw:
+ *   • returns "" immediately if the URL isn't a valid Google-Doc link
+ *   • aborts after `timeoutMs` (default 15s) so one slow doc can't stall a build
+ *   • returns "" on any non-OK response, network error, or when Google serves an
+ *     HTML login/error page (i.e. the doc isn't shared publicly)
+ * Never throws — callers get "" and gracefully fall back to the live client fetch.
+ */
+async function fetchDocText(url, timeoutMs = 15000) {
+  const exportUrl = docExportUrl(url);
+  if (!exportUrl) return "";
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const res = await fetch(exportUrl, { signal: controller.signal });
+    if (!res.ok) return "";
+    const text = await res.text();
+    // A leading "<" means Google returned HTML (not-public / not a doc), not text.
+    if (!text || text.trim().startsWith("<")) return "";
+    return text;
+  } catch (_) {
+    return "";
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
+ * Fetch + parse the "key notes" Google Doc (description + Key Takeaways) so it's
+ * baked into the HTML with no client-side flash. Returns null on any failure.
  */
 export async function fetchKeyNotes(keyNotesUrl) {
-  const exportUrl = docExportUrl(keyNotesUrl);
-  if (!exportUrl) return null;
-  try {
-    const res = await fetch(exportUrl);
-    if (!res.ok) return null;
-    const text = await res.text();
-    if (!text || text.trim().startsWith("<")) return null; // HTML = not public / not a doc
-    const parsed = parseKeyNotes(text);
-    return parsed.paragraphs.length || parsed.takeaways.length ? parsed : null;
-  } catch (_) {
-    return null;
-  }
+  const text = await fetchDocText(keyNotesUrl);
+  if (!text) return null;
+  const parsed = parseKeyNotes(text);
+  return parsed.paragraphs.length || parsed.takeaways.length ? parsed : null;
+}
+
+/**
+ * Fetch the raw transcript Google-Doc text so the full transcript is baked into
+ * the server HTML (crawlable + citable by AI, indexable by Google). Returns ""
+ * on any failure, so the component falls back to the live client fetch.
+ */
+export async function fetchTranscriptText(transcriptUrl) {
+  return fetchDocText(transcriptUrl);
 }

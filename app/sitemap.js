@@ -1,12 +1,15 @@
 import { blogPosts } from "./lib/blog-posts";
 import { episodes, eventPanels } from "./lib/site-data";
+import { webinarReplaysSeed, summitReplaysSeed } from "./lib/replays-seed";
 import { podcastSlug } from "./lib/sheets-core";
 
 export const dynamic = "force-static";
 
 export default function sitemap() {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_ORIGIN || "https://www.veterinarybusinessinstitute.com";
-  const siteLastModified = "2026-05-31T00:00:00.000Z";
+  // Bump when content changes so Google/Bing prioritise a recrawl of updated
+  // pages (new replay hubs + baked transcripts landed 2026-07-28).
+  const siteLastModified = "2026-07-28T00:00:00.000Z";
 
   // Note: /thank-you, /dashboard, /resources/hub are intentionally excluded
   // (noindex / internal app pages — see robots.js).
@@ -32,6 +35,8 @@ export default function sitemap() {
     "/terms-of-service",
     "/webinars",
     "/webinars/registration",
+    "/webinar-replays",
+    "/summit-replays",
     "/resources/tools",
     "/resources/apps",
     "/resources/faq",
@@ -63,5 +68,15 @@ export default function sitemap() {
     priority: 0.6,
   }));
 
-  return [...coreRoutes, ...blogRoutes, ...episodeRoutes, ...webinarRoutes];
+  const replayRoutes = [
+    ...webinarReplaysSeed.map((r) => `/webinar-replays/${r.slug}`),
+    ...summitReplaysSeed.map((r) => `/summit-replays/${r.slug}`),
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: siteLastModified,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [...coreRoutes, ...blogRoutes, ...episodeRoutes, ...webinarRoutes, ...replayRoutes];
 }

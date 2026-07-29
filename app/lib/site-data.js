@@ -255,6 +255,16 @@ export const headerNavigation = [
         href: "/webinars/registration",
         description: "Register for the next live VBI masterclass or panel session.",
       },
+      {
+        label: "Webinar Replays",
+        href: "/webinar-replays",
+        description: "Watch full replays of our monthly veterinary business webinars.",
+      },
+      {
+        label: "Summit Replays",
+        href: "/summit-replays",
+        description: "Watch full replays of our multi-speaker veterinary summits.",
+      },
     ],
   },
   { type: "link", label: "Podcast", href: "/podcast" },

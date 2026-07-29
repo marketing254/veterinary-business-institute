@@ -39,6 +39,15 @@ export async function fetchPodcasts() {
 export async function fetchEventPanels() {
   return map(await fetchTab(TABS.eventPanels), normalizeEventPanel, (r) => r.title);
 }
+// Webinar & summit replays share the event-panels schema (Vimeo + Google-Doc
+// description/transcript + Drive thumbnail); newest first for the listing.
+const byDateDesc = (a, b) => (new Date(b.date).getTime() || 0) - (new Date(a.date).getTime() || 0);
+export async function fetchWebinarReplays() {
+  return map(await fetchTab(TABS.webinarReplays), normalizeEventPanel, (r) => r.title).sort(byDateDesc);
+}
+export async function fetchSummitReplays() {
+  return map(await fetchTab(TABS.summitReplays), normalizeEventPanel, (r) => r.title).sort(byDateDesc);
+}
 const byDateAsc = (a, b) =>
   (new Date(a.dateIso).getTime() || 0) - (new Date(b.dateIso).getTime() || 0);
 
