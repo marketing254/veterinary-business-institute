@@ -1,10 +1,14 @@
 import { withBasePath } from "./base-path";
 
-export const auditLink = "https://www.veterinarybusinessinstitute.com/msm/ryan/";
-export const contactPageLink = "https://www.veterinarybusinessinstitute.com/contact-us/";
-export const podcastHubLink = "https://www.veterinarybusinessinstitute.com/podcast-show/";
-export const webinarArchiveLink = "https://www.veterinarybusinessinstitute.com/webinar-archive/";
-export const marketingPageLink = "https://www.veterinarybusinessinstitute.com/msm/";
+// NOTE: these must point at REAL Next routes (the site is a static export — a
+// non-existent path or a stray trailing slash 404s). They feed the homepage
+// WebSite JSON-LD (hasPart) and a couple of on-page links, so broken values
+// send Google/AI crawlers to dead URLs.
+export const auditLink = "https://www.veterinarybusinessinstitute.com/msm";
+export const contactPageLink = "https://www.veterinarybusinessinstitute.com/contact";
+export const podcastHubLink = "https://www.veterinarybusinessinstitute.com/podcast";
+export const webinarArchiveLink = "https://www.veterinarybusinessinstitute.com/webinar-replays";
+export const marketingPageLink = "https://www.veterinarybusinessinstitute.com/msm";
 export const panelFolderLink = "/events";
 
 // Build-time seed for the live "Reserve My Spot" card. Mirrors the latest row of
