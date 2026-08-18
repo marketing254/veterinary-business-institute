@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { episodes, eventPanels, webinarsSeed } from "../lib/site-data";
 import { podcastSlug } from "../lib/sheets-core";
@@ -27,14 +28,18 @@ export default function WhatsNewBanner() {
   // so the popup matches the marquee (both reflect episodes added after build).
   const [latestEpisode, setLatestEpisode] = useState(episodes[0]);
   const [nextWebinar, setNextWebinar] = useState(() => pickUpcoming(webinarsSeed));
+  const pathname = usePathname();
+  // Keep the /msm booking page popup-free (it's the consultation destination).
+  const onMsm = pathname === "/msm" || pathname.startsWith("/msm/");
 
   useEffect(() => {
+    if (onMsm) return;
     const dismissed = sessionStorage.getItem(DISMISS_KEY);
     if (!dismissed) {
       const timer = setTimeout(() => setVisible(true), 1200);
       return () => clearTimeout(timer);
     }
-  }, []);
+  }, [onMsm]);
 
   useEffect(() => {
     let alive = true;
@@ -59,7 +64,7 @@ export default function WhatsNewBanner() {
     sessionStorage.setItem(DISMISS_KEY, "1");
   }
 
-  if (!visible) return null;
+  if (onMsm || !visible) return null;
 
   const latestPanel = eventPanels[0];
 
