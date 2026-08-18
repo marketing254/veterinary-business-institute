@@ -1,12 +1,18 @@
 ﻿"use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 export default function ExitIntentPopup() {
   const [show, setShow] = useState(false);
+  const pathname = usePathname();
+  // The /msm page is the booking/conversion destination — never interrupt it
+  // with a popup (this is where "Book a Free Consultation" sends people).
+  const onMsm = pathname === "/msm" || pathname.startsWith("/msm/");
 
   useEffect(() => {
+    if (onMsm) return;
     // Only trigger once per session
     if (sessionStorage.getItem("vbi-exit-intent")) return;
 
@@ -23,7 +29,7 @@ export default function ExitIntentPopup() {
     return () => {
       window.removeEventListener("mouseout", handleMouseLeave);
     };
-  }, []);
+  }, [onMsm]);
 
   useEffect(() => {
     if (!show) return undefined;
@@ -34,7 +40,7 @@ export default function ExitIntentPopup() {
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [show]);
 
-  if (!show) return null;
+  if (onMsm || !show) return null;
 
   return (
     <div
