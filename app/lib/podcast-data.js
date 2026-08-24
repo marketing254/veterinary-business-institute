@@ -21,10 +21,12 @@ async function fetchSheetEpisodes() {
     const res = await fetch(gvizUrl(TABS.podcasts));
     if (!res.ok) return [];
     const rows = parseGviz(await res.text());
+    // Require a real TITLE — number-only placeholder rows in the sheet would
+    // otherwise build ~84 thin, empty "/podcast/episode-N" pages (index bloat).
     return rows
-      .filter((r) => r.episode || r.title)
+      .filter((r) => r.title && String(r.title).trim())
       .map(normalizePodcast)
-      .filter((e) => e && (e.number || e.title));
+      .filter((e) => e && e.title && String(e.title).trim());
   } catch (_) {
     return [];
   }

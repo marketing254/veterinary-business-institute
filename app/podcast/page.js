@@ -4,6 +4,30 @@ import PlatformIcon from "../components/PlatformIcon";
 import PodcastGuestForm from "../components/PodcastGuestForm";
 import PodcastEpisodes from "../components/PodcastEpisodes";
 import LivePodcastEpisodes from "../components/live/LivePodcastEpisodes";
+import FaqSection from "../components/FaqSection";
+
+const FAQS = [
+  {
+    question: "Where can I listen to the Veterinary Business Podcast?",
+    answer:
+      "You can listen free on this website, Apple Podcasts, and YouTube Music. New episodes are released weekly, featuring veterinarians, practice owners, and industry experts.",
+  },
+  {
+    question: "Is the Veterinary Business Podcast free?",
+    answer:
+      "Yes. Every episode is completely free to stream, with no subscription, membership, or paywall required.",
+  },
+  {
+    question: "Does each episode have a transcript?",
+    answer:
+      "Yes. Every episode page includes a full, searchable transcript along with show notes and key takeaways, so you can read or reference the conversation.",
+  },
+  {
+    question: "How can I be a guest on the podcast?",
+    answer:
+      "Veterinarians, practice owners, and industry experts can apply through the Guest / Speaker page. We look for practical insights that help veterinary teams grow their practices.",
+  },
+];
 
 export const metadata = {
   title: "The Veterinary Business Podcast | Veterinary Business Institute",
@@ -121,6 +145,8 @@ export default function PodcastPage() {
           </div>
         </div>
       </section>
+
+      <FaqSection items={FAQS} heading="The Veterinary Business Podcast — FAQ" />
 
       {/* ── Be a guest ── */}
       <section className="section section-muted guest-apply">
