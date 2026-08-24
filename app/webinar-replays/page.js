@@ -1,11 +1,35 @@
 import { REPLAY_KINDS } from "../lib/replays-kinds";
 import { getReplays } from "../lib/replays-data";
 import LiveReplayList from "../components/live/LiveReplayList";
+import FaqSection from "../components/FaqSection";
 import { breadcrumbSchema, jsonLd, absoluteUrl, OG_IMAGE } from "../lib/seo";
 import { isoDuration } from "../lib/sheets-core";
 
 const KIND = "webinar";
 const cfg = REPLAY_KINDS[KIND];
+
+const FAQS = [
+  {
+    question: "Are the webinar replays free to watch?",
+    answer:
+      "Yes. Every webinar replay from the Veterinary Business Institute is free to watch on demand — no payment, membership, or sign-up required.",
+  },
+  {
+    question: "Do I need to register to watch a webinar replay?",
+    answer:
+      "No. All webinar replays play instantly in your browser. Registration is only for upcoming live webinars, where registrants also receive the replay afterward.",
+  },
+  {
+    question: "What topics do the veterinary webinars cover?",
+    answer:
+      "The monthly webinars cover practice growth, team culture, finance, marketing, technology, and leadership — practical strategies for independent veterinary practice owners and managers.",
+  },
+  {
+    question: "Is a transcript available for each webinar?",
+    answer:
+      "Yes. Every replay page includes the full session transcript next to the video, so you can read, search, or reference the discussion without watching.",
+  },
+];
 
 function isoDate(value) {
   if (!value) return undefined;
@@ -71,6 +95,8 @@ export default async function WebinarReplaysPage() {
       </section>
 
       <LiveReplayList initial={replays} kind={KIND} basePath={cfg.basePath} singleLabel={cfg.single} />
+
+      <FaqSection items={FAQS} heading="Webinar Replays — Frequently Asked Questions" />
     </>
   );
 }

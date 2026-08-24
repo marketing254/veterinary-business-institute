@@ -32,7 +32,8 @@ async function fetchTab(tab) {
 const map = (rows, fn, keep) => rows.filter(keep).map(fn).filter(Boolean);
 
 export async function fetchPodcasts() {
-  return map(await fetchTab(TABS.podcasts), normalizePodcast, (r) => r.episode || r.title).sort(
+  // Require a real title so empty/number-only sheet rows never render as cards.
+  return map(await fetchTab(TABS.podcasts), normalizePodcast, (r) => r.title && String(r.title).trim()).sort(
     (a, b) => (parseInt(b.number) || 0) - (parseInt(a.number) || 0)
   );
 }
