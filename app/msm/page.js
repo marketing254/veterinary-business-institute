@@ -7,7 +7,7 @@ import { withBasePath } from "../lib/base-path";
 export const metadata = {
   title: "Book a Free Marketing Strategy Meeting | Veterinary Business Institute",
   description:
-    "Schedule a free 60-minute marketing strategy meeting. Our team will invest 4–5 hours preparing a customised plan for your veterinary practice.",
+    "Schedule a free 60-minute marketing strategy meeting. Our team invests 4–5 hours researching your veterinary practice before the call.",
   alternates: { canonical: "/msm" },
 };
 
@@ -27,8 +27,8 @@ const processSteps = [
   {
     number: "3",
     title: "Your Strategy Session",
-    body: "A 30-minute video call with a senior Ekwa specialist. You'll leave with a clear, actionable marketing roadmap customized for your practice.",
-    tag: "30-min video call",
+    body: "A 60-minute video call with a senior Ekwa specialist. You'll leave with clear, actionable marketing advice for your practice.",
+    tag: "60-min video call",
   },
 ];
 
@@ -47,7 +47,7 @@ const learnPoints = [
   },
   {
     title: "Long-Term Growth Strategy",
-    body: "A 12-month marketing roadmap that builds sustainable client flow and practice authority in your local market.",
+    body: "Long-term marketing guidance that builds sustainable client flow and practice authority in your local market.",
   },
 ];
 
@@ -129,8 +129,8 @@ export default function ConsultationPage() {
                   <span className="consult-badge-unit">hours</span>
                 </div>
                 <p className="consult-badge-text">
-                  Lila Stone &amp; her team invest 4–5 hours preparing a
-                  customised marketing plan for your practice <strong>before</strong> the call.
+                  Lila Stone &amp; her team invest 4–5 hours researching your
+                  practice <strong>before</strong> the call.
                 </p>
               </div>
 
@@ -159,7 +159,7 @@ export default function ConsultationPage() {
         <div className="container">
           <div className="consult-process-head">
             <span className="eyebrow text-accent">Simple 3-Step Process</span>
-            <h2 className="consult-process-title">From Request to Roadmap in 48 Hours</h2>
+            <h2 className="consult-process-title">From Request to Strategy Call in 48 Hours</h2>
             <p className="consult-process-sub">
               We make it easy. Book in under 2 minutes, then let us do the
               research. You show up ready to grow.
