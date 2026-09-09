@@ -46,10 +46,6 @@ const learnPoints = [
     body: "A real breakdown of what the top-ranked practices in your area are doing — and how to outperform them.",
   },
   {
-    title: "Your 90-Day Quick-Win Plan",
-    body: "Three to five specific actions you can take in the next 90 days to start booking more appointments.",
-  },
-  {
     title: "Long-Term Growth Strategy",
     body: "A 12-month marketing roadmap that builds sustainable client flow and practice authority in your local market.",
   },
@@ -98,11 +94,6 @@ const heroPoints = [
     icon: "target",
     title: "Competitive Analysis",
     body: "We analyze your top local competitors — what keywords they rank for, how they convert, and where you have the opportunity to outrank them.",
-  },
-  {
-    icon: "barChart",
-    title: "Customized Growth Roadmap",
-    body: "You leave with a prioritized, actionable marketing plan specific to your practice area, geography, and growth stage — not a generic template.",
   },
   {
     icon: "checkCircle",
