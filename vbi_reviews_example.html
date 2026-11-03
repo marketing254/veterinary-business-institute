@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EXAMPLE – VBI Reviews: What our panelists say</title>
+<!--
+  EXAMPLE LAYOUT for veterinarybusinessinstitute.com/reviews (prepared by Chaluka for Rushda, 3 Nov 2026).
+  Style copied from the live site: Cormorant Garamond headings, Manrope body, IBM Plex Mono labels,
+  deep green ink #102320, green #2f6b45, mint #9ee1ab, soft background #eef5f1.
+
+  HOW TO USE
+  1. Upload the two "Site Cut" videos from the Drive folder to the VBI Vimeo account
+     (https://drive.google.com/drive/folders/1UDvTci0MuPsawyG-ZpSDDTDAxbgjAD7o).
+  2. Replace each Google Drive <iframe src> below with the Vimeo embed URL, e.g.
+       https://player.vimeo.com/video/VIDEO_ID?title=0&byline=0&portrait=0&dnt=1
+     The Drive previews are here only so this example plays today.
+  3. Put this section on /reviews in place of the 5 sample quotes (Sarah Mitchell, James Chen,
+     Karen Albrecht, Michael Torres, Lisa Nguyen) and keep the site's own header/footer.
+  4. No autoplay. Check it on a phone.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink-950:#102320; --ink-800:#2f4741; --ink-700:#526a64; --ink-500:#7d908a;
+    --green:#2f6b45; --mint:#9ee1ab; --bg:#eef5f1; --card:#ffffff; --line:#d6e3dc;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink-950);font-family:"Manrope",system-ui,sans-serif;line-height:1.6}
+  .note{background:#fff7d6;border-bottom:1px solid #eadb9a;color:#5b4a00;font-size:14px;padding:10px 20px;text-align:center}
+  .wrap{max-width:1120px;margin:0 auto;padding:72px 24px}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+  h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+  h1{font-size:clamp(38px,5vw,60px);margin:12px 0 16px}
+  .lead{font-size:18px;color:var(--ink-700);max-width:640px;margin:0}
+  .stats{display:flex;flex-wrap:wrap;gap:32px;margin:36px 0 0}
+  .stat b{display:block;font-family:"Cormorant Garamond",serif;font-size:36px;font-weight:700;color:var(--green)}
+  .stat span{font-size:13px;color:var(--ink-500)}
+  .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:48px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(16,35,32,.06);display:flex;flex-direction:column}
+  .video{position:relative;padding-top:56.25%;background:#0b1715}
+  .video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+  .body{padding:26px 28px 30px;display:flex;flex-direction:column;gap:14px;flex:1}
+  .stars{color:#c9a227;letter-spacing:2px;font-size:15px}
+  blockquote{margin:0;font-family:"Cormorant Garamond",serif;font-size:24px;line-height:1.3;color:var(--ink-950)}
+  .who{display:flex;align-items:center;gap:12px;margin-top:auto}
+  .avatar{width:42px;height:42px;border-radius:50%;background:var(--mint);color:var(--ink-950);display:grid;place-items:center;font-weight:700;font-size:14px}
+  .who strong{display:block;font-size:15px}
+  .who small{color:var(--ink-500);font-size:13px}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--green);background:#e3f3e8;border-radius:999px;padding:4px 10px;align-self:flex-start}
+  .cta{margin-top:56px;background:var(--ink-950);color:#eef5f1;border-radius:22px;padding:44px 36px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px}
+  .cta h2{font-size:34px;color:#fff}
+  .cta p{margin:8px 0 0;color:#c8d6d0;max-width:520px}
+  .btns{display:flex;flex-wrap:wrap;gap:12px}
+  .btn{display:inline-block;padding:14px 22px;border-radius:999px;font-weight:600;text-decoration:none;font-size:15px}
+  .btn.primary{background:var(--mint);color:#030c07}
+  .btn.ghost{border:1px solid #526a64;color:#eef5f1}
+  @media (max-width:820px){.grid{grid-template-columns:1fr}.wrap{padding:48px 18px}blockquote{font-size:21px}.cta{padding:32px 24px}}
+</style>
+</head>
+<body>
+<div class="note">EXAMPLE ONLY – layout for the VBI /reviews page. Swap the Drive players for Vimeo embeds before publishing.</div>
+
+<main class="wrap">
+  <div class="eyebrow">Reviews · VET Panels</div>
+  <h1>What our panelists say</h1>
+  <p class="lead">Veterinarians and practice leaders who joined our VET Expert Panels share what it was like, in their own words.</p>
+
+  <section class="grid">
+    <!-- Testimonial 1 -->
+    <article class="card">
+      <div class="video">
+        <!-- REPLACE with Vimeo: https://player.vimeo.com/video/VIDEO_ID?title=0&byline=0&portrait=0&dnt=1 -->
+        <iframe src="https://drive.google.com/file/d/1vvG4og7DvoHKzQdOWfTSxAUogLxBqZq1/preview" title="Emily Hoppmann, DVM – VET Panel testimonial" allow="fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+      <div class="body">
+        <span class="tag">VET Panel guest</span>
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <blockquote>“You made things go seamlessly, make me feel very comfortable… a great opportunity for people to give back.”</blockquote>
+        <div class="who">
+          <div class="avatar">EH</div>
+          <div><strong>Emily Hoppmann, DVM</strong><small>VET Expert Panel speaker</small></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Testimonial 2 -->
+    <article class="card">
+      <div class="video">
+        <!-- REPLACE with Vimeo: https://player.vimeo.com/video/VIDEO_ID?title=0&byline=0&portrait=0&dnt=1 -->
+        <iframe src="https://drive.google.com/file/d/1vGPe8DOxZrhncVvVt207MoqPnc5U82u6/preview" title="Paul Camilo, CVPM – VET Panel testimonial" allow="fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
+      <div class="body">
+        <span class="tag">VET Panel guest</span>
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <blockquote>“It was moderated wonderfully… organized and well produced. I would absolutely recommend another professional to participate.”</blockquote>
+        <div class="who">
+          <div class="avatar">PC</div>
+          <div><strong>Paul Camilo, CVPM</strong><small>VET Expert Panel speaker</small></div>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="cta">
+    <div>
+      <h2>Share your expertise on a VET Panel</h2>
+      <p>Join practice owners and managers on our next live panel, or book a free strategy call to see how your practice shows up online.</p>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="https://www.veterinarybusinessinstitute.com/guest-speaker">Apply to be a panelist</a>
+      <a class="btn ghost" href="https://www.veterinarybusinessinstitute.com/msm">Book a free strategy call</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>
