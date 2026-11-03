@@ -63,7 +63,7 @@ export default function ReviewsPage() {
         <div className="container">
           <div className="section-heading section-heading-centered">
             <span className="eyebrow text-accent">Panelist Reviews</span>
-            <h2>What our panelists say</h2>
+            <h2>Panelist video reviews</h2>
             <p>
               Hear directly from the experts who have appeared on a live VET Expert Panel with the
               Veterinary Business Institute.
