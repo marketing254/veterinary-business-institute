@@ -1,4 +1,4 @@
-import { Cormorant_Garamond, IBM_Plex_Mono, Manrope } from "next/font/google";
+import localFont from "next/font/local";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
 import CookieBanner from "./components/CookieBanner";
@@ -18,21 +18,34 @@ import {
 } from "./lib/site-data";
 import "./globals.css";
 
-const manrope = Manrope({
-  subsets: ["latin"],
+// Fonts are self-hosted from app/fonts (latin subsets republished by Fontsource
+// under the OFL). next/font/google was dropped because Google Fonts
+// intermittently returns extensionless font URLs that Turbopack cannot parse,
+// which failed Vercel builds at random (vercel/next.js#99114).
+const manrope = localFont({
+  src: "./fonts/manrope-latin-wght-normal.woff2",
+  weight: "200 800",
+  display: "swap",
   variable: "--font-manrope",
 });
 
-const cormorant = Cormorant_Garamond({
-  subsets: ["latin"],
+const cormorant = localFont({
+  src: [
+    { path: "./fonts/cormorant-garamond-latin-500-normal.woff2", weight: "500" },
+    { path: "./fonts/cormorant-garamond-latin-600-normal.woff2", weight: "600" },
+    { path: "./fonts/cormorant-garamond-latin-700-normal.woff2", weight: "700" },
+  ],
+  display: "swap",
   variable: "--font-cormorant",
-  weight: ["500", "600", "700"],
 });
 
-const plexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
+const plexMono = localFont({
+  src: [
+    { path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500" },
+    { path: "./fonts/ibm-plex-mono-latin-600-normal.woff2", weight: "600" },
+  ],
+  display: "swap",
   variable: "--font-plex-mono",
-  weight: ["500", "600"],
 });
 
 // Canonical/public host is the custom domain ROOT — intentionally NOT suffixed
